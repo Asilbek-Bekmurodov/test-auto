@@ -1,0 +1,33 @@
+.auth{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+}
+
+.auth__left{
+  height: 100%;
+  width: 60%;
+  background:  linear-gradient(#007bffa3, #007bff95),url("../../assets/images/malibu.jpg");
+  background-size: cover;
+  background-position: 62% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth__content{
+  width: 70%;
+}
+
+.auth__right{
+  border-radius: 40px 0 0 40px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+

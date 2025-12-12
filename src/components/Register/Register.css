@@ -1,0 +1,47 @@
+.register__title{
+  text-align: center;
+  font-family: 600;
+  font-size: 30px;
+  line-height: 130px;
+  letter-spacing: -1%;
+}
+
+.form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form__input{
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 18px 16px;
+  border-bottom: 2px solid #4A43EC20;
+  font-size: 16px;
+}
+
+.form__remember{
+  display: flex;
+  align-items: center;
+  align-items: center;
+  justify-content: space-between;
+   padding: 0 20px;
+   font-size: 14px;
+}
+
+label{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.or,.isAviable{
+  color: #99A0A8;
+  font-size: 14px;
+}
+
+.link{
+  color: #007BFF;
+  font-size: 14px;
+}
