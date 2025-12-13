@@ -1,13 +1,15 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import "./Button.css"
+import "./Button.css";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode;  // children optional bo‘lsa ?
+interface Props extends HTMLAttributes<HTMLButtonElement> {
+  children?: ReactNode; // children optional bo‘lsa ?
 }
 
-function Button({ children, className, ...rest } :Props) {
+function Button({ children, className, ...rest }: Props) {
   return (
-    <div className={className} {...rest}>{children}</div>
-  )
+    <button className={className} {...rest}>
+      {children}
+    </button>
+  );
 }
-export default Button
+export default Button;
