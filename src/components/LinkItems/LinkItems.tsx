@@ -23,8 +23,8 @@ const LinkItems: React.FC<LinkItemsProps> = ({
     <Link
       onClick={() => handleActive(index)}
       className={`rounded-xl  gap-4 flex items-center px-5 py-4  ${
-        active && "bg-[#F5EFEB80]"
-      }  pointer-fine border-[0.5px] border-[#F5EFEB80]`}
+        active && "bg-[#F5EFEB80] dark:bg-[#505b8999]"
+      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white bg-[#5aa2ff6a]`}
       to={"/"}
     >
       <Image name={icon} />

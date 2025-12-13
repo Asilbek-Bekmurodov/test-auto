@@ -6,4 +6,5 @@ export const images = {
   xato: new URL("./close.svg", import.meta.url).href,
   boshSahifa: new URL("./home.svg", import.meta.url).href,
   yangilik: new URL("./yangilik.svg", import.meta.url).href,
+  darkLogo: new URL("./dark-logo.svg", import.meta.url).href,
 };
