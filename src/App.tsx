@@ -11,7 +11,7 @@ function App() {
       <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
         <Route path="/auth/*" element={<Auth />} />
-        <Route path="/home/*" element={<Home />} />
+        <Route path="/*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

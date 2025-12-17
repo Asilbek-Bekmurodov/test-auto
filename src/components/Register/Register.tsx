@@ -42,6 +42,7 @@ function Register() {
       } else {
         console.log(data);
         localStorage.setItem("token", data);
+        localStorage.setItem("pre_token", data.pre_token);
         toast.success(data?.detail || "Sizga sms kod yuborildi !");
         navigate("/auth/confirm-code");
       }

@@ -7,4 +7,12 @@ export const images = {
   boshSahifa: new URL("./home.svg", import.meta.url).href,
   yangilik: new URL("./yangilik.svg", import.meta.url).href,
   darkLogo: new URL("./dark-logo.svg", import.meta.url).href,
+  mainCard: new URL("./malibu.svg", import.meta.url).href,
+  biletlar: new URL("./biletlar.svg", import.meta.url).href,
+  chalgituvchi: new URL("./chalgituvchi.svg", import.meta.url).href,
+  marafon: new URL("./marafon.svg", import.meta.url).href,
+  mavzulashtirilgan: new URL("./mavzulashtirilgan.svg", import.meta.url).href,
+  tayyorlov: new URL("./tayyorlov.png", import.meta.url).href,
+  real: new URL("./real.svg", import.meta.url).href,
+  belgilar: new URL("./belgilar.png", import.meta.url).href,
 };

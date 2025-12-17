@@ -21,7 +21,7 @@
   height: 1em;
   width: 2em;
   border-radius: 1em;
-  background-color: white;
+  background-color: rgb(169, 167, 167);
   margin-right: 0.5em;
   transition: background-color 250ms ease-in-out;
 }

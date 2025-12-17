@@ -10,6 +10,7 @@ interface LinkItemsProps {
   active: boolean;
   handleActive: (index: number) => void;
   index: number;
+  path: string;
 }
 
 const LinkItems: React.FC<LinkItemsProps> = ({
@@ -18,14 +19,15 @@ const LinkItems: React.FC<LinkItemsProps> = ({
   active,
   handleActive,
   index,
+  path,
 }) => {
   return (
     <Link
       onClick={() => handleActive(index)}
       className={`rounded-xl  gap-4 flex items-center px-5 py-4  ${
-        active && "bg-[#F5EFEB80] dark:bg-[#505b8999]"
-      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white bg-[#5aa2ff6a]`}
-      to={"/"}
+        active && "bg-[#F5EFEB80] dark:bg-[#11192D]"
+      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white dark:border-[transparent]`}
+      to={path}
     >
       <Image name={icon} />
       <span className="text-[14xp] leading-5 font-semibold"> {title}</span>
