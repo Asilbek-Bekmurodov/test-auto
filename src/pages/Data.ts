@@ -1,9 +1,32 @@
 import { images } from "../assets/images";
+
+export type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+export type TestimonialItem = {
+  id: number;
+  name: string;
+  role: string;
+  text: string;
+  image: keyof typeof images;
+};
+
 export interface CardsData {
   imgSrc: string;
   title: string;
   id: number;
+  path: string;
 }
+
+export type LessonMediaItem = {
+  id: number;
+  author: string;
+  role: string;
+  image: keyof typeof images;
+  videoUrl?: string;
+};
 
 export interface SubPages {
   icon: keyof typeof images;
@@ -11,6 +34,17 @@ export interface SubPages {
   active: boolean;
   path: string;
 }
+
+export type HowItWorksItem = {
+  id: number;
+  step: string; // "01", "02", "03"
+  title: string;
+  description: string;
+  icon: keyof typeof images; // icon component
+  iconBg: string; // tailwind bg color
+  align?: "left" | "right"; // dizayndagi joylashuv
+  highlighted?: boolean; // active / borderli holat
+};
 
 export const subPages: SubPages[] = [
   {
@@ -50,36 +84,43 @@ export const cardsData: CardsData[] = [
     id: 1,
     title: "Tayyorlov Imtihoni 20",
     imgSrc: images.mainCard,
+    path: "/test",
   },
   {
     id: 2,
     title: "Tayyorlov imtihoni 50",
     imgSrc: images.tayyorlov,
+    path: "/home/problems",
   },
   {
     id: 3,
     title: "Real imtihon",
     imgSrc: images.real,
+    path: "/home/problems",
   },
   {
     id: 4,
     title: "Biletlar",
     imgSrc: images.biletlar,
+    path: "/home/problems",
   },
   {
     id: 5,
     title: "Mavzulashtirilgan testlar",
     imgSrc: images.mavzulashtirilgan,
+    path: "/home/problems",
   },
   {
     id: 6,
     title: "Chalg’ituvchi testlar",
     imgSrc: images.chalgituvchi,
+    path: "/home/problems",
   },
   {
     id: 7,
     title: "MArafon",
     imgSrc: images.marafon,
+    path: "/home/problems",
   },
 ];
 
@@ -88,15 +129,52 @@ export const EducationCard: CardsData[] = [
     id: 1,
     title: "Yo'l harakati qoidalari",
     imgSrc: images.belgilar,
+    path: "",
   },
   {
     id: 2,
     title: "Yo'l belgilari",
     imgSrc: images.tayyorlov,
+    path: "",
   },
   {
     id: 3,
     title: "Atamalar",
     imgSrc: images.real,
+    path: "",
+  },
+];
+
+export const howItWorksData: HowItWorksItem[] = [
+  {
+    id: 1,
+    step: "01",
+    title: "Instruktor tayyorlash",
+    description:
+      "Haydovchilik guvohnomasiga ishonch bilan tayyorlaning! Bizning professional instruktorlarimiz sizni nazariy va amaliy jihatdan to‘liq tayyorlaydi.",
+    icon: "howFirst",
+    iconBg: "bg-indigo-100 text-indigo-600",
+    align: "left",
+  },
+  {
+    id: 2,
+    step: "02",
+    title: "Testga tayyorgarlik",
+    description:
+      "Har bir o‘quvchi bilan individual yondashuv, xavfsiz va samarali mashg‘ulotlar — barchasi sizning muvaffaqiyatli haydovchilik guvohnomasini qo‘lga kiritishingiz uchun!",
+    icon: "howSecond",
+    iconBg: "bg-yellow-100 text-yellow-600",
+    align: "right",
+  },
+  {
+    id: 3,
+    step: "03",
+    title: "O'z maqsadiz sari",
+    description:
+      "Tajribali instruktorlar, to‘liq dastur va individual yondashuv bilan haydovchilik guvohnomangizga ishonchli qadam tashlang!",
+    icon: "howThird",
+    iconBg: "bg-purple-100 text-purple-600",
+    align: "left",
+    highlighted: true,
   },
 ];

@@ -1,6 +1,6 @@
 import { FaChevronRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import Image from "../Image";
+import Image from "../Image/Image";
 import { images } from "../../assets/images";
 import type React from "react";
 

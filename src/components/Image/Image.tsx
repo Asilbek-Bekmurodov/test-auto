@@ -1,4 +1,4 @@
-import { images } from "../assets/images";
+import { images } from "../../assets/images";
 import type { ImgHTMLAttributes } from "react";
 
 interface Props extends ImgHTMLAttributes<HTMLImageElement> {
@@ -7,7 +7,7 @@ interface Props extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export default function Image({ name, fallback, ...rest }: Props) {
-  const src = images[name] || fallback ;
+  const src = images[name] || fallback;
 
   return <img src={src} {...rest} />;
 }

@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/home/Home";
+import Test from "./components/Test/Test";
+import Public from "./pages/public/Public";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/*" element={<Home />} />
+        <Route path="/test" element={<Test />} />
+        <Route path="/public" element={<Public />} />
       </Routes>
     </BrowserRouter>
   );

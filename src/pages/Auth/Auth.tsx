@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Image from "../../components/Image";
+import Image from "../../components/Image/Image";
 import Register from "../../components/Register/Register";
 
 import "./Auth.css";

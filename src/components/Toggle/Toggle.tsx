@@ -11,6 +11,7 @@ export const Toggle: React.FC<ToggleProps> = ({ handleChange, isChecked }) => {
       <input
         type="checkbox"
         id="check"
+        hidden
         className="toggle"
         onChange={handleChange}
         checked={isChecked}

@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/general-sans");
 @custom-variant dark (&:where(.dark, .dark *));
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -12,4 +16,71 @@
 
 body {
   font-family: "Inter", sans-serif;
+}
+
+@font-face {
+  font-family: "general";
+  src: url("./src/assets/fonts/GeneralSans-Variable.ttf") format("ttf");
+  font-weight: 400;
+}
+
+@theme {
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-slide-in: slideIn 0.5s ease-out;
+  --animate-progress: progress 5s linear;
+  --animate-accordion-down: accordionDown 0.5s ease-in;
+  --animate-accordion-up: accordionUp 0.5s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes accordionDown {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 500px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordionUp {
+    from {
+      max-height: 500px;
+      opacity: 1;
+    }
+    to {
+      max-height: 0;
+      opacity: 0;
+    }
+  }
 }
