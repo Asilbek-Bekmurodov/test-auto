@@ -10,7 +10,9 @@ export interface Prep20Question {
 }
 
 export interface StartPrep20Response {
-  session: string;
+  session: {
+    id: string;
+  };
   type: "prep20";
   duration: number; // seconds
   questions: Prep20Question[];
