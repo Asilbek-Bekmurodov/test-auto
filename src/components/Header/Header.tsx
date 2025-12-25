@@ -4,18 +4,16 @@ import Profile from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
 import { FaRegUserCircle } from "react-icons/fa";
 
-type Props = {
+type HeaderProps = {
   isDark: boolean;
-  setIsDark: (
-    value: boolean | ((prev: boolean | undefined) => boolean)
-  ) => void;
+  setIsDark: (value: boolean) => void;
 };
 
-const Header = ({ isDark, setIsDark }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Header = ({ isDark, setIsDark }: HeaderProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <header className="relative border rounded-[28px] p-2 border-[#cbc7c480] flex items-center justify-between">
+    <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between">
       <Image name="darkLogo" />
       <div className="relative flex items-center">
         <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />

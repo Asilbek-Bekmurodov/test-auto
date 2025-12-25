@@ -1,5 +1,4 @@
-type Props = {};
-const QuestionNavigation = (props: Props) => {
+const QuestionNavigation = () => {
   const questions = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return (

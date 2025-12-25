@@ -46,6 +46,32 @@ export type HowItWorksItem = {
   highlighted?: boolean; // active / borderli holat
 };
 
+export type StatItem = {
+  title: string;
+  subtitle: string;
+  value: string;
+};
+
+export type Plan = {
+  id: string;
+  label: string;
+  price: number;
+  oldPrice?: number;
+};
+
+export const stats: StatItem[] = [
+  { title: "DTM", subtitle: "Testlar soni", value: "2 849 ta" },
+  { title: "Mavzuli test", subtitle: "Testlar soni", value: "649 ta" },
+  { title: "Avto", subtitle: "Testlar soni", value: "120 ta" },
+  { title: "Milliy sertifikat", subtitle: "Testlar soni", value: "60 ta" },
+];
+
+export const plans: Plan[] = [
+  { id: "1m", label: "1 Oylik", price: 35000 },
+  { id: "3m", label: "3 Oylik", price: 79000, oldPrice: 105000 },
+  { id: "6m", label: "6 Oylik", price: 129000, oldPrice: 210000 },
+];
+
 export const subPages: SubPages[] = [
   {
     icon: "boshSahifa",

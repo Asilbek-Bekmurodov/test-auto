@@ -1,7 +1,6 @@
 import AnswerItem from "../AnswerItem/AnswerItem";
 
-type Props = {};
-const AnswerList = (props: Props) => {
+const AnswerList = () => {
   const answers = ["A javob", "B javob", "C javob", "D javob"];
 
   return (

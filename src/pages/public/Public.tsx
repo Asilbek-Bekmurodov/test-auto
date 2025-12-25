@@ -1,5 +1,6 @@
 import Carousel from "./components/Carousel/Carousel";
 import FAQ from "./components/Faq/Faq";
+import Footer from "./components/Footer/Footer";
 import Hero from "./components/Hero/Hero";
 import How from "./components/How/How";
 import PublicHeader from "./components/PublicHeader/PublicHeader";
@@ -16,6 +17,7 @@ const Public = () => {
         <TestimonialSlider />
         <FAQ />
       </main>
+      <Footer />
     </>
   );
 };
