@@ -39,7 +39,7 @@ function Login() {
         toast.error(data?.detail || "Login failed");
       } else {
         console.log(data);
-        localStorage.setItem("token", data);
+        localStorage.setItem("token", data.access);
         toast.success(data?.detail || "Muvaffaqqiyatli ro'yhatdan o'tildi");
         navigate("/home");
       }

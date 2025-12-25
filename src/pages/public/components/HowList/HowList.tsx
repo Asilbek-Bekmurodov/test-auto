@@ -5,7 +5,7 @@ const HowList = () => {
   return (
     <ul className="">
       {howItWorksData.map((item) => (
-        <HowItem data={item} />
+        <HowItem key={item.id} data={item} />
       ))}
     </ul>
   );

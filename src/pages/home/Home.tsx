@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Cards from "../../components/Cards";
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import Payment from "../../components/Payment/Payment";
+import { TicketGrid } from "../../components/TickedGrid/TickedGrid";
 
 function Home() {
   const [subPagesData, setSubPagesData] = useState<SubPages[]>(subPages);
@@ -62,6 +63,7 @@ function Home() {
           <Route path="/education" element={<Cards data={EducationCard} />} />
           <Route path="/problems" element={<Cards data={cardsData} />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/biletlar" element={<TicketGrid />} />
         </Routes>
       </div>
     </div>

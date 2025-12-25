@@ -71,6 +71,13 @@ export const plans: Plan[] = [
   { id: "3m", label: "3 Oylik", price: 79000, oldPrice: 105000 },
   { id: "6m", label: "6 Oylik", price: 129000, oldPrice: 210000 },
 ];
+export interface TicketCard {
+  id: number;
+  category: string; // "Avto test"
+  title: string; // "Bilet-1"
+  testsCount: number; // 20
+  year: string; // "Avtotest 2025"
+}
 
 export const subPages: SubPages[] = [
   {
@@ -128,7 +135,7 @@ export const cardsData: CardsData[] = [
     id: 4,
     title: "Biletlar",
     imgSrc: images.biletlar,
-    path: "/home/problems",
+    path: "/home/biletlar",
   },
   {
     id: 5,

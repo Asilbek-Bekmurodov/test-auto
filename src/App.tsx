@@ -7,6 +7,8 @@ import { ToastContainer } from "react-toastify";
 import Home from "./pages/home/Home";
 import Test from "./components/Test/Test";
 import Public from "./pages/public/Public";
+import ResultPage from "./components/ResultTest/ResultTest";
+
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +18,7 @@ function App() {
         <Route path="/*" element={<Public />} />
         <Route path="/test" element={<Test />} />
         <Route path="/home/*" element={<Home />} />
+        <Route path="/result/:sessionId" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
   );
