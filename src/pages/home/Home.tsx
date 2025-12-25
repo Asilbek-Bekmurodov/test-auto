@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Cards from "../../components/Cards";
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import Payment from "../../components/Payment/Payment";
-// qo'shil
+
 function Home() {
   const [subPagesData, setSubPagesData] = useState<SubPages[]>(subPages);
   const preference: boolean = window.matchMedia(
