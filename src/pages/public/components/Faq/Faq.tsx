@@ -13,13 +13,13 @@ const FAQ: React.FC = () => {
 
   return (
     <section className="faq">
-      <div className="container mx-auto py-30">
-        <h2 className="text-[56px] leading-[120%] text-[#1E242C] font-medium mb-10">
+      <div className="container mx-auto py-16 md:py-30 px-4">
+        <h2 className="text-3xl md:text-[56px] leading-snug md:leading-[120%] text-[#1E242C] font-medium mb-8 md:mb-10 text-center md:text-left">
           Eng ko’p beriladigan savollar
         </h2>
 
         {/* 👇 MUHIM QISM — MASONRY LAYOUT */}
-        <div className="columns-1 md:columns-2 gap-6">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 md:gap-6">
           {faqs.map((faq: FAQItem, index: number) => {
             const isOpen = activeIndex === index;
 
@@ -29,7 +29,7 @@ const FAQ: React.FC = () => {
                 layout
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className={`
-                  mb-6 break-inside-avoid rounded-xl overflow-hidden
+                  mb-4 md:mb-6 break-inside-avoid rounded-xl overflow-hidden
                   ${
                     isOpen
                       ? "bg-[#E6F0FF] border border-[#8AB9FF] shadow-[0_10px_50px_0px_#002B6B40]"
@@ -40,10 +40,10 @@ const FAQ: React.FC = () => {
                 {/* QUESTION */}
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full flex justify-between items-center p-4 text-left text-lg font-medium h-[100px]"
+                  className="w-full flex justify-between items-center p-4 md:p-6 text-left text-sm md:text-lg font-medium h-[80px] md:h-[100px]"
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="p-3 rounded-full bg-[#EDEEF0] text-sm font-medium text-[#002B6B]">
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <span className="p-2 md:p-3 rounded-full bg-[#EDEEF0] text-xs md:text-sm font-medium text-[#002B6B]">
                       0{index + 1}
                     </span>
                     {faq.question}
@@ -66,14 +66,14 @@ const FAQ: React.FC = () => {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.35, ease: "easeInOut" }}
-                      className="overflow-hidden px-4 bg-[#E6F0FF]"
+                      className="overflow-hidden px-4 md:px-6 bg-[#E6F0FF]"
                     >
                       <motion.p
                         initial={{ y: -6 }}
                         animate={{ y: 0 }}
                         exit={{ y: -6 }}
                         transition={{ duration: 0.25 }}
-                        className="text-gray-600 py-4"
+                        className="text-gray-600 py-4 text-sm md:text-base"
                       >
                         {faq.answer}
                       </motion.p>

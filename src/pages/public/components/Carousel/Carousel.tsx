@@ -7,26 +7,26 @@ const Carousel = () => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="carousel py-30">
-      <div className="container mx-auto px-2">
-        <div className="mb-10 flex items-center justify-between">
-          <h2 className="text-[56px] leading-[120%] text-[#1E242C] font-medium">
+    <section className="carousel py-20 md:py-30">
+      <div className="container mx-auto px-4">
+        <div className="mb-6 md:mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
+          <h2 className="text-[28px] md:text-[56px] leading-[1.2] text-[#1E242C] font-medium">
             Dars jarayonidan lavhalar
           </h2>
 
-          <div className="flex gap-5">
+          <div className="flex gap-3 md:gap-5">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="cursor-pointer p-4 bg-[#EDEEF0] rounded-full"
+              className="cursor-pointer p-3 md:p-4 bg-[#EDEEF0] rounded-full"
             >
-              <FaArrowLeft />
+              <FaArrowLeft size={16} md:size={20} />
             </button>
 
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="cursor-pointer p-4 bg-[#374151] rounded-full"
+              className="cursor-pointer p-3 md:p-4 bg-[#374151] rounded-full"
             >
-              <FaArrowRight color="white" />
+              <FaArrowRight color="white" size={16} md:size={20} />
             </button>
           </div>
         </div>
