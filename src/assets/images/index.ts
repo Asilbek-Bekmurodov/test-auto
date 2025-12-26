@@ -26,7 +26,7 @@ export const images = {
   carousesecond: new URL("./carouseltwo.png", import.meta.url).href,
   carousethird: new URL("./carousethird.png", import.meta.url).href,
   customerOne: new URL("./customerone.png", import.meta.url).href,
-  star: new URL("./star.svg", import.meta.url).href,
+  star: new URL("./Star.svg", import.meta.url).href,
   payme: new URL("./payme.svg", import.meta.url).href,
   paynet: new URL("./paynet.svg", import.meta.url).href,
   click: new URL("./click.svg", import.meta.url).href,
