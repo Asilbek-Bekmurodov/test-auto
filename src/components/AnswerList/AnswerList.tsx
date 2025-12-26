@@ -99,7 +99,7 @@ const AnswerList = ({
             text={`${key}: ${text}`}
             active={isSelected}
             correct={correctness}
-            onClick={() => handleClick(index, key)}
+            onClick={() => handleClick(key)}
           />
         );
       })}
