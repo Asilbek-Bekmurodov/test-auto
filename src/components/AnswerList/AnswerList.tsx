@@ -89,7 +89,7 @@ const AnswerList = ({
 
   return (
     <div className="w-[50%] col-span-2 flex flex-col gap-4">
-      {optionsArray.map(([key, text], index) => {
+      {optionsArray.map(([key, text]) => {
         const isSelected = savedAnswer?.selectedKey === key;
         const correctness = isSelected ? savedAnswer.isCorrect : undefined;
 
