@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
 
 const token = localStorage.getItem("token");
 const ResultTest = () => {
@@ -36,7 +37,12 @@ const ResultTest = () => {
     fetchResult();
   }, [sessionId, navigate]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="h-[100vh] flex items-center justify-center">
+        <BoxLoader />
+      </div>
+    );
   if (!result) return <div>Natija topilmadi</div>;
 
   const { total, correct, wrong, unanswered, percent, spent_time, questions } =

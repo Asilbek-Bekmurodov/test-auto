@@ -1,6 +1,12 @@
-import { useState, useEffect } from "react";
 import type { Prep20Question } from "../../Utilities/Services/startPrep20.ts";
 import AnswerItem from "../AnswerItem/AnswerItem";
+
+export type QuestionStatus = "unanswered" | "correct" | "wrong";
+
+export type AnswerResult = {
+  selectedKey: string;
+  isCorrect: boolean;
+};
 
 interface AnswerListProps {
   question: Prep20Question | null;
@@ -9,70 +15,94 @@ interface AnswerListProps {
   setFeedback: (message: string) => void;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   setFinished: (finished: boolean) => void;
+
+  currentIndex: number;
+  setQuestionStatus: React.Dispatch<React.SetStateAction<QuestionStatus[]>>;
+
+  answersMap: Record<number, AnswerResult>;
+  setAnswersMap: React.Dispatch<
+    React.SetStateAction<Record<number, AnswerResult>>
+  >;
 }
 
 const token = localStorage.getItem("token");
+
 const AnswerList = ({
   question,
   sessionId,
   setTimeLeft,
   setFeedback,
   setFinished,
+  currentIndex,
+  setQuestionStatus,
+  answersMap,
+  setAnswersMap,
 }: AnswerListProps) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [correctness, setCorrectness] = useState<boolean | null>(null);
-
-  // ❗ CurrentQuestion o‘zgarganda tanlovni reset qilish
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSelectedIndex(null);
-      setCorrectness(null);
-    }, 0);
-    return () => clearTimeout(timeout);
-  }, [question]);
-
   if (!question || !question.options) return null;
 
   const optionsArray = Object.entries(question.options);
 
+  const savedAnswer = answersMap[currentIndex];
+
   const handleClick = async (index: number, key: string) => {
-    if (selectedIndex !== null) return; // javob allaqachon tanlangan
+    if (savedAnswer) return; // Javob allaqachon berilgan
 
-    setSelectedIndex(index);
+    try {
+      const res = await fetch(
+        `https://imtihongatayyorlov.pythonanywhere.com/tests/during/${sessionId}/answer/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            question_id: question.id,
+            selected_option: key,
+          }),
+        }
+      ).then((r) => r.json());
 
-    const res = await fetch(
-      `https://imtihongatayyorlov.pythonanywhere.com/tests/during/${sessionId}/answer/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          question_id: question.id,
-          selected_option: key,
-        }),
-      }
-    ).then((r) => r.json());
+      // Javob feedback
+      setFeedback(res.is_correct ? "To'g'ri!" : "Noto'g'ri!");
+      setTimeLeft(res.remaining_seconds);
 
-    setCorrectness(res.is_correct);
-    setFeedback(res.is_correct ? "To'g'ri!" : "Noto'g'ri!");
-    setTimeLeft(res.remaining_seconds);
+      // Navigation rangini yangilash
+      setQuestionStatus((prev) => {
+        const updated = [...prev];
+        updated[currentIndex] = res.is_correct ? "correct" : "wrong";
+        return updated;
+      });
 
-    if (res.finished) setFinished(true);
+      // Variantni saqlash
+      setAnswersMap((prev) => ({
+        ...prev,
+        [currentIndex]: { selectedKey: key, isCorrect: res.is_correct },
+      }));
+
+      // Test tugadi
+      if (res.finished) setFinished(true);
+    } catch (err) {
+      console.error("Javob yuborishda xatolik:", err);
+    }
   };
 
   return (
     <div className="w-[50%] col-span-2 flex flex-col gap-4">
-      {optionsArray.map(([key, text], index) => (
-        <AnswerItem
-          key={key}
-          text={`${key}: ${text}`}
-          active={selectedIndex === index}
-          correct={selectedIndex === index ? correctness : undefined}
-          onClick={() => handleClick(index, key)}
-        />
-      ))}
+      {optionsArray.map(([key, text], index) => {
+        const isSelected = savedAnswer?.selectedKey === key;
+        const correctness = isSelected ? savedAnswer.isCorrect : undefined;
+
+        return (
+          <AnswerItem
+            key={key}
+            text={`${key}: ${text}`}
+            active={isSelected}
+            correct={correctness}
+            onClick={() => handleClick(index, key)}
+          />
+        );
+      })}
     </div>
   );
 };

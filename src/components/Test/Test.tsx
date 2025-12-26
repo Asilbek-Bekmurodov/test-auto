@@ -10,36 +10,57 @@ import {
 } from "../../Utilities/Services/startPrep20.ts";
 import AnswerList from "../AnswerList/AnswerList.tsx";
 import QuestionCard from "../QuestionCard/QuestionCard.tsx";
+import BoxLoader from "../Loaders/BoxLoader/BoxLoader.tsx";
+
+export type AnswerResult = {
+  selectedKey: string;
+  isCorrect: boolean;
+};
+
+export type QuestionStatus = "unanswered" | "correct" | "wrong";
+
+const DEFAULT_DURATION = 20 * 60; // 20 daqiqa
 
 const Test = () => {
   const navigate = useNavigate();
+
+  // Dark mode
   const preference: boolean = window.matchMedia(
     "(prefers-color-scheme: dark)"
   ).matches;
   const [isDark, setIsDark] = useLocalStorage<boolean>("isdark", preference);
 
+  // State
   const [questions, setQuestions] = useState<Prep20Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<number>(DEFAULT_DURATION);
   const [loading, setLoading] = useState(true);
   const [sessionId, setSessionId] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
   const [finished, setFinished] = useState(false);
+  const [questionStatus, setQuestionStatus] = useState<QuestionStatus[]>([]);
+  const [answersMap, setAnswersMap] = useState<Record<number, AnswerResult>>(
+    {}
+  );
 
-  // Dark mode
+  // Dark mode effect
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
-  // Backenddan ma'lumot olish
+  // Backend fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data: StartPrep20Response = await startPrep20("uz");
 
         setQuestions(data.questions);
-        setTimeLeft(data.duration);
-        setSessionId(data.session.id); // session_id saqlaymiz
+        setSessionId(data.session.id);
+
+        setQuestionStatus(Array(data.questions.length).fill("unanswered"));
+
+        // Backenddan kelgan duration bilan yangilash
+        if (data.duration) setTimeLeft(data.duration);
       } catch (err) {
         console.error("Xatolik:", err);
       } finally {
@@ -50,21 +71,28 @@ const Test = () => {
     fetchData();
   }, []);
 
-  // Timer
+  // Timer: sahifaga kirishi bilan ishlashni boshlaydi
   useEffect(() => {
-    if (timeLeft <= 0) return;
-    const interval = setInterval(() => setTimeLeft((t) => t - 1), 1000);
-    return () => clearInterval(interval);
-  }, [timeLeft]);
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
 
-  // Test tugaganda natija sahifasiga navigate qilish
+    return () => clearInterval(interval);
+  }, []);
+
+  // Test tugagach result sahifaga navigate qilish
   useEffect(() => {
     if (finished) {
       navigate(`/result/${sessionId}`);
     }
   }, [finished, navigate, sessionId]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading || !questions.length)
+    return (
+      <div className="h-[100vh] flex items-center justify-center">
+        <BoxLoader />
+      </div>
+    );
 
   const currentQuestion = questions[currentIndex];
 
@@ -85,14 +113,14 @@ const Test = () => {
             <div className="text-center mb-2 font-semibold">{feedback}</div>
           )}
 
-          {/* Savol */}
+          {/* Question */}
           <div className="h-30 p-5 rounded-2xl bg-[#f7f7f7] mb-6">
             <h3 className="text-[24px]">
               {currentIndex + 1}. Savol: {currentQuestion?.text}
             </h3>
           </div>
 
-          {/* Javoblar */}
+          {/* Answers */}
           <div className="flex gap-4 items-start">
             <QuestionCard question={currentQuestion} />
             <AnswerList
@@ -102,13 +130,19 @@ const Test = () => {
               setFeedback={setFeedback}
               setCurrentIndex={setCurrentIndex}
               setFinished={setFinished}
+              currentIndex={currentIndex}
+              setQuestionStatus={setQuestionStatus}
+              answersMap={answersMap}
+              setAnswersMap={setAnswersMap}
             />
           </div>
 
+          {/* Navigation */}
           <QuestionNavigation
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             total={questions.length}
+            questionStatus={questionStatus}
           />
         </div>
       </div>

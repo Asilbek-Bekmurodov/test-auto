@@ -1,34 +1,44 @@
 import type { Dispatch, SetStateAction } from "react";
 
+type QuestionStatus = "unanswered" | "correct" | "wrong";
+
 interface QuestionNavigationProps {
   currentIndex: number;
   setCurrentIndex: Dispatch<SetStateAction<number>>;
   total: number;
+  questionStatus: QuestionStatus[];
 }
 
 const QuestionNavigation = ({
   currentIndex,
   setCurrentIndex,
   total,
+  questionStatus,
 }: QuestionNavigationProps) => {
-  const questions = Array.from({ length: total }, (_, i) => i);
-
+  console.log("NAV STATUS:", questionStatus);
   return (
     <div className="mt-6 flex flex-wrap gap-2 justify-center">
-      {questions.map((index) => (
-        <button
-          key={index}
-          onClick={() => setCurrentIndex(index)}
-          className={`w-8 h-8 text-sm rounded transition
-            ${
-              index === currentIndex
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 hover:bg-blue-500 hover:text-white"
-            }`}
-        >
-          {index + 1}
-        </button>
-      ))}
+      {Array.from({ length: total }).map((_, index) => {
+        const status: QuestionStatus = questionStatus?.[index] ?? "unanswered";
+        let color = "bg-gray-200 text-gray-700";
+
+        if (status === "correct") color = "bg-green-500 text-white";
+        else if (status === "wrong") color = "bg-red-500 text-white";
+
+        if (index === currentIndex) {
+          color += " ring-2 ring-blue-500";
+        }
+
+        return (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-8 h-8 text-sm rounded transition ${color}`}
+          >
+            {index + 1}
+          </button>
+        );
+      })}
     </div>
   );
 };
