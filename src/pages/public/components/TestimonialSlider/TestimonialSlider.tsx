@@ -65,14 +65,14 @@ const TestimonialSlider = () => {
                 onClick={prev}
                 className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition"
               >
-                <FaArrowLeft size={14} md:size={16} />
+                <FaArrowLeft size={14} />
               </button>
 
               <button
                 onClick={next}
                 className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-indigo-700 flex items-center justify-center hover:scale-105 transition"
               >
-                <FaArrowRight size={14} md:size={16} />
+                <FaArrowRight size={14} />
               </button>
             </div>
             {/* Progress */}

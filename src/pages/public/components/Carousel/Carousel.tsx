@@ -19,14 +19,14 @@ const Carousel = () => {
               onClick={() => swiperRef.current?.slidePrev()}
               className="cursor-pointer p-3 md:p-4 bg-[#EDEEF0] rounded-full"
             >
-              <FaArrowLeft size={16} md:size={20} />
+              <FaArrowLeft size={16} />
             </button>
 
             <button
               onClick={() => swiperRef.current?.slideNext()}
               className="cursor-pointer p-3 md:p-4 bg-[#374151] rounded-full"
             >
-              <FaArrowRight color="white" size={16} md:size={20} />
+              <FaArrowRight color="white" size={16} />
             </button>
           </div>
         </div>

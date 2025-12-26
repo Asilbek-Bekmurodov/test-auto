@@ -1,8 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import "./Button.css";
 
-interface Props extends HTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode; // children optional bo‘lsa ?
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: ReactNode;
 }
 
 function Button({ children, className, ...rest }: Props) {
@@ -12,4 +12,5 @@ function Button({ children, className, ...rest }: Props) {
     </button>
   );
 }
+
 export default Button;
