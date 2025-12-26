@@ -41,7 +41,7 @@ function Register() {
         toast.error(data?.detail || "Register failed");
       } else {
         console.log(data);
-        localStorage.setItem("token", data);
+        localStorage.setItem("token", data.access);
         localStorage.setItem("pre_token", data.pre_token);
         toast.success(data?.detail || "Sizga sms kod yuborildi !");
         navigate("/auth/confirm-code");

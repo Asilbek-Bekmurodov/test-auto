@@ -77,6 +77,8 @@ export interface TicketCard {
   title: string; // "Bilet-1"
   testsCount: number; // 20
   year: string; // "Avtotest 2025"
+  locked?: boolean;
+  path: string;
 }
 
 export const subPages: SubPages[] = [

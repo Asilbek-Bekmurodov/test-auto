@@ -3,9 +3,9 @@ import Image from "../../../../components/Image/Image";
 
 const PublicHeader = () => {
   return (
-    <header className="header p-5">
+    <header className="fixed top-0 w-full bg-white header p-5 ">
       <div className="container mx-auto px-4">
-        <div className="relative border rounded-[28px] p-[24px] border-[#cbc7c480] flex items-center justify-between">
+        <div className="relative rounded-[28px] p-[8px] flex items-center justify-between">
           <Image name="darkLogo" />
           <div className="relative flex items-center gap-3">
             <Link
@@ -24,7 +24,6 @@ const PublicHeader = () => {
         </div>
       </div>
     </header>
-    
   );
 };
 export default PublicHeader;

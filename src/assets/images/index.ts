@@ -30,4 +30,5 @@ export const images = {
   payme: new URL("./payme.svg", import.meta.url).href,
   paynet: new URL("./paynet.svg", import.meta.url).href,
   click: new URL("./click.svg", import.meta.url).href,
+  cobalt: new URL("./cobalt.jpg", import.meta.url).href,
 };

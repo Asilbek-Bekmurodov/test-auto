@@ -38,8 +38,9 @@ function Login() {
       if (!res.ok) {
         toast.error(data?.detail || "Login failed");
       } else {
-        console.log(data);
         localStorage.setItem("token", data.access);
+        console.log(data);
+
         toast.success(data?.detail || "Muvaffaqqiyatli ro'yhatdan o'tildi");
         navigate("/home");
       }
@@ -63,7 +64,6 @@ function Login() {
       >
         <input
           type="text"
-          defaultValue={"+998914530909"}
           required
           onChange={getData}
           name="phone_number"
@@ -73,7 +73,6 @@ function Login() {
         <input
           type="text"
           required
-          defaultValue={"123"}
           onChange={getData}
           name="password"
           placeholder="Parol"
@@ -88,7 +87,7 @@ function Login() {
             Parolni tiklash
           </Link>
         </div>
-        <Button className="btn">Ro'yxatdan o'tish</Button>
+        <Button className="btn">Kirish</Button>
 
         <span className="text-[#99A0A8] text-[14px]">yoki</span>
 

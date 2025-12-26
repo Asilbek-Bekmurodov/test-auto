@@ -27,7 +27,7 @@ const Hero = () => {
           </p>
           <Link
             className="mt-[60px] bg-gradient-to-r from-[#3597F9] to-[#462F8F] text-white p-[20px_35px] rounded-[30px]"
-            to={"/test"}
+            to={"/example"}
           >
             Testni boshlash
           </Link>

@@ -20,6 +20,7 @@ export interface StartPrep20Response {
 
 const token = localStorage.getItem("token");
 
+
 console.log(token);
 
 /**

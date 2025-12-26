@@ -63,7 +63,7 @@ const AnswerList = ({
   };
 
   return (
-    <div className="col-span-2 flex flex-col gap-4">
+    <div className="w-[50%] col-span-2 flex flex-col gap-4">
       {optionsArray.map(([key, text], index) => (
         <AnswerItem
           key={key}

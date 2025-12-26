@@ -8,6 +8,7 @@ import Home from "./pages/home/Home";
 import Test from "./components/Test/Test";
 import Public from "./pages/public/Public";
 import ResultPage from "./components/ResultTest/ResultTest";
+import Example from "./pages/example/Example";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/home/*" element={<Home />} />
         <Route path="/result/:sessionId" element={<ResultPage />} />
+        <Route path="/example" element={<Example />} />
       </Routes>
     </BrowserRouter>
   );

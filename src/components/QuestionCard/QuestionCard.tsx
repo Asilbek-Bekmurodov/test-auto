@@ -1,4 +1,5 @@
 import type { Prep20Question } from "../../Utilities/Services/startPrep20.ts";
+import Image from "../Image/Image.tsx";
 
 interface QuestionCardProps {
   question: Prep20Question | null;
@@ -7,15 +8,19 @@ interface QuestionCardProps {
 const QuestionCard = ({ question }: QuestionCardProps) => {
   if (!question) return null;
 
+  console.log(question.image_url);
+
   return (
-    <div className="w-[50%] col-span-1 bg-green-600 rounded-xl p-6 text-white flex items-center justify-center text-lg font-semibold">
-      {/* Agar savol text bo‘lsa */}
-      <img
-       
-        src={question.image_url}
-        alt="Savol rasmi"
-        className="w-[100%] rounded-lg"
-      />
+    <div className="w-[50%] h-[400px] col-span-1 rounded-xl  text-white flex justify-center text-lg font-semibold">
+      {question.image_url === null ? (
+        <Image name="cobalt" className="rounded-lg" />
+      ) : (
+        <img
+          src={question.image_url}
+          alt="Savol rasmi"
+          className="w-[100%] rounded-lg"
+        />
+      )}
     </div>
   );
 };

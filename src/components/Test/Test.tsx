@@ -86,14 +86,14 @@ const Test = () => {
           )}
 
           {/* Savol */}
-          <div className="h-30 p-5 rounded-2xl bg-amber-200 mb-6">
-            <h3>
+          <div className="h-30 p-5 rounded-2xl bg-[#f7f7f7] mb-6">
+            <h3 className="text-[24px]">
               {currentIndex + 1}. Savol: {currentQuestion?.text}
             </h3>
           </div>
 
           {/* Javoblar */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-start">
             <QuestionCard question={currentQuestion} />
             <AnswerList
               question={currentQuestion}
