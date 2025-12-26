@@ -8,7 +8,7 @@ const data: TicketCard[] = Array.from({ length: 20 }).map((_, i) => ({
   testsCount: 20,
   year: "Avtotest 2025",
   locked: i !== 0,
-  path: i === 0 && "/test",
+  path: i === 0 ? "/test" : "",
 }));
 
 export const TicketGrid = () => {

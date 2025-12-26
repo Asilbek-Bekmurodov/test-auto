@@ -44,7 +44,7 @@ const AnswerList = ({
 
   const savedAnswer = answersMap[currentIndex];
 
-  const handleClick = async (index: number, key: string) => {
+  const handleClick = async (key: string) => {
     if (savedAnswer) return; // Javob allaqachon berilgan
 
     try {

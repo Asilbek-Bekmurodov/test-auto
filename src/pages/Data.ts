@@ -81,6 +81,7 @@ export interface TicketCard {
   path: string;
 }
 
+
 export const subPages: SubPages[] = [
   {
     icon: "boshSahifa",
