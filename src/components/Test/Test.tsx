@@ -12,9 +12,12 @@ import type {
   Question,
   StartTestResponse,
 } from "../../Utilities/Services/types";
+import { isTestType } from "../../Utilities/Services/testConfig";
 import type { TestType } from "../../Utilities/Services/testConfig";
-import type { Prep20Question } from "../../Utilities/Services/startPrep20";
+
 import useLocalStorage from "use-local-storage";
+
+/* ================= TYPES ================= */
 
 export type AnswerResult = {
   selectedKey: string;
@@ -23,70 +26,88 @@ export type AnswerResult = {
 
 export type QuestionStatus = "unanswered" | "correct" | "wrong";
 
+/* ================= CONSTANTS ================= */
+
 const DEFAULT_DURATION = 20 * 60; // 20 daqiqa
+
+/* ================= COMPONENT ================= */
 
 const Test = () => {
   const navigate = useNavigate();
-  const { type, slug, number } = useParams<{
-    type: TestType;
+
+  const params = useParams<{
+    type?: string;
     slug?: string;
     number?: string;
   }>();
 
-  // Dark mode
-  const preference: boolean = window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  ).matches;
+  /* ================= VALIDATION ================= */
+
+  if (!isTestType(params.type)) {
+    throw new Error("Invalid test type in URL");
+  }
+
+  const testType: TestType = params.type;
+
+  /* ================= DARK MODE ================= */
+
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   const [isDark, setIsDark] = useLocalStorage<boolean>("isdark", preference);
 
-  // State
-  const [questions, setQuestions] = useState<Prep20Question[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  /* ================= STATE ================= */
+
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(DEFAULT_DURATION);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
-  const [finished, setFinished] = useState(false);
+  const [finished, setFinished] = useState<boolean>(false);
   const [questionStatus, setQuestionStatus] = useState<QuestionStatus[]>([]);
   const [answersMap, setAnswersMap] = useState<Record<number, AnswerResult>>(
     {}
   );
   const [fontScale, setFontScale] = useLocalStorage<number>("fontScale", 1);
 
-  // Dark mode effect
+  /* ================= EFFECTS ================= */
+
+  // Dark mode
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
-  // Backend fetch
+  // Fetch test data
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data: StartTestResponse = await startTest({
-          type: type as any,
-          slug,
-          number: number ? Number(number) : undefined,
+          type: testType,
+          slug: params.slug,
+          number: params.number ? Number(params.number) : undefined,
           language: "uz",
         });
 
-        console.log(data);
-
         setQuestions(data.questions);
         setSessionId(data.session.id);
-        setQuestionStatus(Array(data.questions.length).fill("unanswered"));
+        setQuestionStatus(
+          Array<QuestionStatus>(data.questions.length).fill("unanswered")
+        );
 
-        if (data.duration) setTimeLeft(data.duration);
-      } catch (err) {
-        console.error(err);
+        if (data.duration) {
+          setTimeLeft(data.duration);
+        }
+      } catch (error) {
+        console.error("Test start error:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [testType, params.slug, params.number]);
 
-  // Timer: sahifaga kirishi bilan ishlashni boshlaydi
+  // Timer
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
@@ -94,23 +115,20 @@ const Test = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Font scale
   useEffect(() => {
     document.documentElement.style.fontSize = `${fontScale * 16}px`;
   }, [fontScale]);
 
-  // Test tugagach result sahifaga navigate qilish
+  // Finish test
   useEffect(() => {
     if (finished) {
       navigate(`/result/${sessionId}`);
     }
   }, [finished, navigate, sessionId]);
 
-  if (loading || !questions.length)
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <BoxLoader />
-      </div>
-    );
+  /* ================= HELPERS ================= */
 
   const increaseFont = () =>
     setFontScale((prev = 1) => Math.min(prev + 0.1, 1.8));
@@ -118,7 +136,17 @@ const Test = () => {
   const decreaseFont = () =>
     setFontScale((prev = 1) => Math.max(prev - 0.1, 0.8));
 
-  const currentQuestion = questions[currentIndex];
+  /* ================= RENDER ================= */
+
+  if (loading || questions.length === 0) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <BoxLoader />
+      </div>
+    );
+  }
+
+  const currentQuestion: Question = questions[currentIndex];
 
   return (
     <>
@@ -132,21 +160,19 @@ const Test = () => {
 
       <div className="h-[90vh] bg-gray-100 flex justify-center items-center p-6">
         <div className="w-full max-w-6xl bg-white rounded-2xl p-6 shadow-lg">
-          {/* Feedback */}
           {feedback && (
             <div className="text-center mb-2 font-semibold">{feedback}</div>
           )}
 
-          {/* Question */}
-          <div className="h-30 p-5 rounded-2xl bg-[#f7f7f7] mb-6">
+          <div className="p-5 rounded-2xl bg-[#f7f7f7] mb-6">
             <h3 className="text-[1.5rem]">
-              {currentIndex + 1}. Savol: {currentQuestion?.text}
+              {currentIndex + 1}. Savol: {currentQuestion.text}
             </h3>
           </div>
 
-          {/* Answers */}
           <div className="flex gap-4 items-start">
             <QuestionCard question={currentQuestion} />
+
             <AnswerList
               question={currentQuestion}
               sessionId={sessionId}
@@ -161,7 +187,6 @@ const Test = () => {
             />
           </div>
 
-          {/* Navigation */}
           <QuestionNavigation
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}

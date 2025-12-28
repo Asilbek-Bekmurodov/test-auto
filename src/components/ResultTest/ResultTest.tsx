@@ -2,16 +2,45 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
 
-const token = localStorage.getItem("token");
+/* =======================
+   TYPES
+======================= */
+
+type QuestionResult = {
+  id: number;
+  text: string;
+  image_url?: string | null;
+  selected_option: string | null;
+  correct_option: string;
+  is_correct: boolean;
+};
+
+type TestResult = {
+  total: number;
+  correct: number;
+  wrong: number;
+  unanswered: number;
+  percent: number;
+  spent_time: string;
+  questions: QuestionResult[];
+};
+
+/* =======================
+   COMPONENT
+======================= */
+
 const ResultTest = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
-  const [result, setResult] = useState<any>();
-  const [loading, setLoading] = useState(true);
+
+  const [result, setResult] = useState<TestResult | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (!sessionId) {
-      navigate("/"); // agar sessionId bo'lmasa bosh sahifaga yo'naltir
+      navigate("/");
       return;
     }
 
@@ -25,69 +54,124 @@ const ResultTest = () => {
             },
           }
         );
-        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error("Natijani olishda xatolik");
+        }
+
+        const data: TestResult = await res.json();
         setResult(data);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error("Result fetch error:", error);
+        setResult(null);
       } finally {
         setLoading(false);
       }
     };
 
     fetchResult();
-  }, [sessionId, navigate]);
+  }, [sessionId, navigate, token]);
 
-  if (loading)
+  /* =======================
+     RENDER STATES
+  ======================= */
+
+  if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
         <BoxLoader />
       </div>
     );
-  if (!result) return <div>Natija topilmadi</div>;
+  }
+
+  if (!result) {
+    return (
+      <div className="h-screen flex items-center justify-center text-lg font-semibold">
+        Natija topilmadi
+      </div>
+    );
+  }
 
   const { total, correct, wrong, unanswered, percent, spent_time, questions } =
     result;
 
-  return (
-    <div className=" min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100">
-      <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-3xl">
-        <Link to={"/home"} className="text-blue-500">
-          Asosiy sahifa
-        </Link>
-        <h1 className="text-2xl font-bold mb-4">Test Natijasi</h1>
+  /* =======================
+     UI
+  ======================= */
 
-        <div className="mb-4">
-          <p>Jami savollar: {total}</p>
-          <p>To'g'ri javoblar: {correct}</p>
-          <p>Noto'g'ri javoblar: {wrong}</p>
-          <p>Javobsiz: {unanswered}</p>
-          <p>Natija: {percent}%</p>
-          <p>Sarflangan vaqt: {spent_time}</p>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+      <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
+        <Link to="/home" className="text-blue-500 hover:underline">
+          ← Asosiy sahifa
+        </Link>
+
+        <h1 className="text-2xl font-bold my-4">Test Natijasi</h1>
+
+        <div className="grid grid-cols-2 gap-2 mb-6">
+          <p>
+            📊 Jami savollar: <b>{total}</b>
+          </p>
+          <p>
+            ✅ To‘g‘ri: <b>{correct}</b>
+          </p>
+          <p>
+            ❌ Noto‘g‘ri: <b>{wrong}</b>
+          </p>
+          <p>
+            ➖ Javobsiz: <b>{unanswered}</b>
+          </p>
+          <p>
+            🎯 Natija: <b>{percent}%</b>
+          </p>
+          <p>
+            ⏱ Sarflangan vaqt: <b>{spent_time}</b>
+          </p>
         </div>
 
-        <h2 className="text-xl font-semibold mb-2">Savollar va javoblar:</h2>
-        <div className="flex flex-col gap-4 ">
-          {questions.map((q: any, index: number) => (
-            <div key={q.id} className="p-3 border rounded-lg bg-gray-50">
-              <p>
+        <h2 className="text-xl font-semibold mb-3">Savollar va javoblar</h2>
+
+        <div className="flex flex-col gap-4">
+          {questions.map((q, index) => (
+            <div
+              key={q.id}
+              className={`p-4 rounded-lg border ${
+                q.is_correct
+                  ? "border-green-400 bg-green-50"
+                  : "border-red-400 bg-red-50"
+              }`}
+            >
+              <p className="font-medium mb-1">
                 {index + 1}. {q.text}
               </p>
+
               {q.image_url && (
                 <img
                   src={q.image_url}
                   alt={`question-${q.id}`}
-                  className="my-2 max-h-40 object-contain"
+                  className="my-2 max-h-40 object-contain rounded"
                 />
               )}
+
               <p>
-                Siz tanlagan javob: <b>{q.selected_option}</b>{" "}
+                Siz tanlagan javob: <b>{q.selected_option ?? "Tanlanmagan"}</b>{" "}
                 {q.is_correct ? (
-                  <span className="text-green-600 font-semibold">To'g'ri</span>
+                  <span className="ml-2 text-green-700 font-semibold">
+                    To‘g‘ri
+                  </span>
                 ) : (
-                  <span className="text-red-600 font-semibold">Noto'g'ri</span>
+                  <span className="ml-2 text-red-700 font-semibold">
+                    Noto‘g‘ri
+                  </span>
                 )}
               </p>
-              <p>To'g'ri javob: {q.correct_option}</p>
+
+              {!q.is_correct && (
+                <p className="mt-1">
+                  To‘g‘ri javob:{" "}
+                  <b className="text-green-700">{q.correct_option}</b>
+                </p>
+              )}
             </div>
           ))}
         </div>

@@ -36,7 +36,7 @@ function Home() {
           : "flex p-3 gap-3"
       }
     >
-      <div className="w-75 h-[94vh] border border-[#cbc7c480]  mb-5 p-[24px] rounded-[28px] relative dark:bg-[#040A17] transition-colors duration-500 dark:border-[silver]">
+      <div className="w-100 h-[94vh] border border-[#cbc7c480]  mb-5 p-[24px] rounded-[28px] relative dark:bg-[#040A17] transition-colors duration-500 dark:border-[silver]">
         <h3 className="mb-12.25 text-[14px] font-semibold leading-[20px] dark:text-white">
           Sahifalar
         </h3>

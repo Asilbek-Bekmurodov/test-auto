@@ -1,8 +1,8 @@
-import type { Prep20Question } from "../../Utilities/Services/startPrep20.ts";
+import type { Question } from "../../Utilities/Services/types.ts";
 import Image from "../Image/Image.tsx";
 
 interface QuestionCardProps {
-  question: Prep20Question | null;
+  question: Question | null;
 }
 
 const QuestionCard = ({ question }: QuestionCardProps) => {

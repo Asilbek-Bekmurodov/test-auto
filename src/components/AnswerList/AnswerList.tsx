@@ -1,4 +1,4 @@
-import type { Prep20Question } from "../../Utilities/Services/startPrep20.ts";
+import type { Question } from "../../Utilities/Services/types";
 import AnswerItem from "../AnswerItem/AnswerItem";
 
 export type QuestionStatus = "unanswered" | "correct" | "wrong";
@@ -9,7 +9,7 @@ export type AnswerResult = {
 };
 
 interface AnswerListProps {
-  question: Prep20Question | null;
+  question: Question | null;
   sessionId: string;
   setTimeLeft: (seconds: number) => void;
   setFeedback: (message: string) => void;

@@ -1,3 +1,5 @@
+// Utilities/Services/testConfig.ts
+
 export type TestType =
   | "prep20"
   | "prep50"
@@ -17,4 +19,18 @@ export const TEST_ENDPOINTS: Record<TestType, string> = {
   tricky: "/tests/tricky/start/",
   topic: "/tests/topics", // slug qo‘shiladi
   ticket: "/tests/tickets", // number qo‘shiladi
+};
+
+/* ✅ TYPE GUARD */
+export const isTestType = (value: unknown): value is TestType => {
+  return (
+    value === "prep20" ||
+    value === "prep50" ||
+    value === "real" ||
+    value === "marathon" ||
+    value === "mistakes" ||
+    value === "tricky" ||
+    value === "topic" ||
+    value === "ticket"
+  );
 };

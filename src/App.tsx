@@ -22,7 +22,14 @@ function App() {
         <Route path="/test/topic/:slug" element={<Test />} />
         <Route path="/test/ticket/:number" element={<Test />} />
 
-        <Route path="/home/*" element={<Home />} />
+        <Route
+          path="/home/*"
+          element={
+            <div className="">
+              <Home />
+            </div>
+          }
+        />
         <Route path="/result/:sessionId" element={<ResultPage />} />
         <Route path="/example" element={<Example />} />
         <Route path="*" element={<NotFound />} />
