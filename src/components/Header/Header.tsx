@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 type HeaderProps = {
   isDark: boolean;
   setIsDark: (value: boolean) => void;
-  timeLeft: number;
-  increaseFont: () => void;
-  decreaseFont: () => void;
+  timeLeft?: number;
+  increaseFont?: () => void;
+  decreaseFont?: () => void;
 };
 
 const Header = ({
