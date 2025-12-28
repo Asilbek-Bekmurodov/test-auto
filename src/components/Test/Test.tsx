@@ -62,7 +62,6 @@ const Test = () => {
   const [timeLeft, setTimeLeft] = useState<number>(TOTAL_DURATION);
   const [loading, setLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
-  const [feedback, setFeedback] = useState<string>("");
   const [finished, setFinished] = useState<boolean>(false);
   const [questionStatus, setQuestionStatus] = useState<QuestionStatus[]>([]);
   const [answersMap, setAnswersMap] = useState<Record<number, AnswerResult>>(
@@ -223,7 +222,6 @@ const Test = () => {
               question={currentQuestion}
               sessionId={sessionId}
               setTimeLeft={setTimeLeft}
-              setFeedback={setFeedback}
               setCurrentIndex={setCurrentIndex}
               setFinished={setFinished}
               currentIndex={currentIndex}

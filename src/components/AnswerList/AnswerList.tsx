@@ -13,7 +13,6 @@ interface AnswerListProps {
   question: Question | null;
   sessionId: string;
   setTimeLeft: (seconds: number) => void;
-  // setFeedback: (message: string) => void;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   setFinished: (finished: boolean) => void;
   currentIndex: number;
@@ -32,7 +31,6 @@ const AnswerList = ({
   question,
   sessionId,
   setTimeLeft,
-  // setFeedback,
   setFinished,
   currentIndex,
   setQuestionStatus,
