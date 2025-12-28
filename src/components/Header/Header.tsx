@@ -1,9 +1,10 @@
+// Header.tsx
 import { useState } from "react";
+import { FaRegUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Image from "../Image/Image";
 import Profile from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
-import { FaRegUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 type HeaderProps = {
   isDark: boolean;
@@ -34,38 +35,44 @@ const Header = ({
           ⏱ {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
         </div>
       )}
-      <div className="flex gap-3">
-        {decreaseFont && <div className="flex gap-3">
-          <button
-            onClick={decreaseFont}
-            className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
-          >
-            A-
-          </button>
 
-          <button
-            onClick={increaseFont}
-            className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
-          >
-            A+
-          </button>
-        </div>}
-        {/* Right controls */}
+      <div className="flex gap-3 items-center">
+        {/* Font Size Controls */}
+        {decreaseFont && increaseFont && (
+          <div className="flex gap-2">
+            <button
+              onClick={decreaseFont}
+              className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
+            >
+              A-
+            </button>
+            <button
+              onClick={increaseFont}
+              className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
+            >
+              A+
+            </button>
+          </div>
+        )}
+
+        {/* Right Controls */}
         <div className="relative flex items-center gap-3">
-          {/* Accessibility */}
-
-          {/* Dark mode */}
+          {/* Dark Mode Toggle */}
           <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
 
-          {/* Profile */}
+          {/* Profile Icon */}
           <FaRegUserCircle
             size={26}
-            className="cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
+            className="cursor-pointer z-50"
+            onClick={(e) => {
+              e.stopPropagation(); 
+              setIsOpen((prev) => !prev);
+            }}
           />
-        </div>
 
-        <Profile isOpen={isOpen} setIsOpen={setIsOpen} />
+          {/* Profile Dropdown */}
+          <Profile isOpen={isOpen} setIsOpen={setIsOpen} />
+        </div>
       </div>
     </header>
   );

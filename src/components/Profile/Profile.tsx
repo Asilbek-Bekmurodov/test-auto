@@ -1,3 +1,4 @@
+// Profile.tsx
 import { Link } from "react-router-dom";
 import { images } from "../../assets/images";
 import SelectInput from "../SelectInput/SelectInput";
@@ -5,14 +6,13 @@ import { useEffect, useRef } from "react";
 
 type Props = {
   isOpen: boolean;
-  setIsOpen: (
-    value: boolean | ((prev: boolean | undefined) => boolean)
-  ) => void;
+  setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 };
 
 const Profile = ({ isOpen, setIsOpen }: Props) => {
   const profileRef = useRef<HTMLDivElement>(null);
 
+  // Outside click handler
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -24,11 +24,11 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
     };
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen, setIsOpen]);
 
@@ -37,28 +37,38 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
   return (
     <div
       ref={profileRef}
-      className={
-        isOpen
-          ? "absolute top-19.25 shadow-[0_0_10px_silver] bg-[white] right-3 z-10 w-100 p-10 rounded-3xl dark:bg-[#1F2937] dark:text-white "
-          : "hidden"
-      }
+      className="absolute top-[60px] right-3 z-40 w-64 p-4 rounded-3xl shadow-lg bg-white dark:bg-[#1F2937] dark:text-white"
     >
-      <div className="flex items-center gap-1.5">
-        <img src={images.profile} alt="" />
-
+      {/* User Info */}
+      <div className="flex items-center gap-2 mb-3">
+        <img
+          src={images.profile}
+          alt="Profile"
+          className="w-10 h-10 rounded-full"
+        />
         <div>
-          <h3>Your name</h3>
-          <p>+998914572614</p>
+          <h3 className="font-semibold">Your name</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-300">
+            +998914572614
+          </p>
         </div>
       </div>
-      <div className="h-0.5 bg-[#E5E7EB] w-full"></div>
-      <div className="flex items-center justify-between my-[24px]">
-        <label>Tilni tanlang</label>
+
+      <hr className="border-gray-200 dark:border-gray-600 mb-3" />
+
+      {/* Language Select */}
+      <div className="flex items-center justify-between mb-3">
+        <label className="text-sm">Tilni tanlang</label>
         <SelectInput />
       </div>
-      <div className="h-0.5 bg-[#E5E7EB] w-full"></div>
-      <div className="my-6">
-        <Link to={""}>Qo'llab quvvatlash bo'limi</Link>
+
+      <hr className="border-gray-200 dark:border-gray-600 mb-3" />
+
+      {/* Support Link */}
+      <div className="mb-2">
+        <Link to={""} className="text-sm text-blue-500 hover:underline">
+          Qo'llab quvvatlash bo'limi
+        </Link>
       </div>
     </div>
   );
