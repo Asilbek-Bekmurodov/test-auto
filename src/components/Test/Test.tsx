@@ -42,6 +42,7 @@ const Test = () => {
   const [answersMap, setAnswersMap] = useState<Record<number, AnswerResult>>(
     {}
   );
+  const [fontScale, setFontScale] = useLocalStorage<number>("fontScale", 1);
 
   // Dark mode effect
   useEffect(() => {
@@ -79,6 +80,9 @@ const Test = () => {
 
     return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${fontScale * 16}px`;
+  }, [fontScale]);
 
   // Test tugagach result sahifaga navigate qilish
   useEffect(() => {
@@ -89,25 +93,31 @@ const Test = () => {
 
   if (loading || !questions.length)
     return (
-      <div className="h-[100vh] flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center">
         <BoxLoader />
       </div>
     );
+
+  const increaseFont = () =>
+    setFontScale((prev = 1) => Math.min(prev + 0.1, 1.8));
+
+  const decreaseFont = () =>
+    setFontScale((prev = 1) => Math.max(prev - 0.1, 0.8));
 
   const currentQuestion = questions[currentIndex];
 
   return (
     <>
-      <Header isDark={isDark} setIsDark={setIsDark} />
+      <Header
+        timeLeft={timeLeft}
+        isDark={isDark}
+        setIsDark={setIsDark}
+        increaseFont={increaseFont}
+        decreaseFont={decreaseFont}
+      />
 
-      <div className="min-h-screen bg-gray-100 flex justify-center items-center p-6">
+      <div className="h-[90vh] bg-gray-100 flex justify-center items-center p-6">
         <div className="w-full max-w-6xl bg-white rounded-2xl p-6 shadow-lg">
-          {/* Timer */}
-          <div className="text-right text-lg font-semibold mb-2">
-            ⏱ {Math.floor(timeLeft / 60)}:
-            {String(timeLeft % 60).padStart(2, "0")}
-          </div>
-
           {/* Feedback */}
           {feedback && (
             <div className="text-center mb-2 font-semibold">{feedback}</div>
@@ -115,7 +125,7 @@ const Test = () => {
 
           {/* Question */}
           <div className="h-30 p-5 rounded-2xl bg-[#f7f7f7] mb-6">
-            <h3 className="text-[24px]">
+            <h3 className="text-[1.5rem]">
               {currentIndex + 1}. Savol: {currentQuestion?.text}
             </h3>
           </div>

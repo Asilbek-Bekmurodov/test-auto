@@ -29,13 +29,11 @@ const Header = ({
       </Link>
 
       {/* Timer */}
-      {timeLeft && (
-        <div className="text-right text-lg font-semibold">
-          ⏱ {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
-        </div>
-      )}
+      <div className="text-right text-lg font-semibold">
+        ⏱ {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+      </div>
       <div className="flex gap-3">
-        {decreaseFont && <div className="flex gap-3">
+        <div className="flex gap-3">
           <button
             onClick={decreaseFont}
             className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
@@ -49,7 +47,7 @@ const Header = ({
           >
             A+
           </button>
-        </div>}
+        </div>
         {/* Right controls */}
         <div className="relative flex items-center gap-3">
           {/* Accessibility */}

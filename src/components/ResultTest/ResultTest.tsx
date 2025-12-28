@@ -39,7 +39,7 @@ const ResultTest = () => {
 
   if (loading)
     return (
-      <div className="h-[100vh] flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center">
         <BoxLoader />
       </div>
     );
@@ -49,9 +49,11 @@ const ResultTest = () => {
     result;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100">
+    <div className=" min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100">
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-3xl">
-        <Link to={"/home"}>Asosiy sahifa</Link>
+        <Link to={"/home"} className="text-blue-500">
+          Asosiy sahifa
+        </Link>
         <h1 className="text-2xl font-bold mb-4">Test Natijasi</h1>
 
         <div className="mb-4">
@@ -64,7 +66,7 @@ const ResultTest = () => {
         </div>
 
         <h2 className="text-xl font-semibold mb-2">Savollar va javoblar:</h2>
-        <div className="flex flex-col gap-4 max-h-[500px] overflow-y-auto">
+        <div className="flex flex-col gap-4 ">
           {questions.map((q: any, index: number) => (
             <div key={q.id} className="p-3 border rounded-lg bg-gray-50">
               <p>
