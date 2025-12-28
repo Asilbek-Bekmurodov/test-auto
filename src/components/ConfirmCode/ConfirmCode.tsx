@@ -91,7 +91,8 @@ function ConfirmCode() {
         toast.error(data?.detail || "Qayta yuborib bo‘lmadi");
         return;
       }
-
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
       toast.success("Kod qayta yuborildi 📩");
       setTimeLeft(60); // timer reset
     } catch {

@@ -6,7 +6,7 @@ const token = localStorage.getItem("token");
 const ResultTest = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

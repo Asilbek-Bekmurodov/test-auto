@@ -81,7 +81,6 @@ export interface TicketCard {
   path: string;
 }
 
-
 export const subPages: SubPages[] = [
   {
     icon: "boshSahifa",
@@ -120,19 +119,19 @@ export const cardsData: CardsData[] = [
     id: 1,
     title: "Tayyorlov Imtihoni 20",
     imgSrc: images.mainCard,
-    path: "/test",
+    path: "/test/prep20",
   },
   {
     id: 2,
     title: "Tayyorlov imtihoni 50",
     imgSrc: images.tayyorlov,
-    path: "/home/problems",
+    path: "/test/prep50",
   },
   {
     id: 3,
     title: "Real imtihon",
     imgSrc: images.real,
-    path: "/home/problems",
+    path: "/test/real",
   },
   {
     id: 4,
@@ -150,13 +149,13 @@ export const cardsData: CardsData[] = [
     id: 6,
     title: "Chalg’ituvchi testlar",
     imgSrc: images.chalgituvchi,
-    path: "/home/problems",
+    path: "/test/tricky",
   },
   {
     id: 7,
     title: "MArafon",
     imgSrc: images.marafon,
-    path: "/home/problems",
+    path: "/test/marathon",
   },
 ];
 

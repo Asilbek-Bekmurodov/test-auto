@@ -9,6 +9,7 @@ import Test from "./components/Test/Test";
 import Public from "./pages/public/Public";
 import ResultPage from "./components/ResultTest/ResultTest";
 import Example from "./pages/example/Example";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -16,11 +17,15 @@ function App() {
       <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
         <Route path="/auth/*" element={<Auth />} />
-        <Route path="/*" element={<Public />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/" element={<Public />} />
+        <Route path="/test/:type" element={<Test />} />
+        <Route path="/test/topic/:slug" element={<Test />} />
+        <Route path="/test/ticket/:number" element={<Test />} />
+
         <Route path="/home/*" element={<Home />} />
         <Route path="/result/:sessionId" element={<ResultPage />} />
         <Route path="/example" element={<Example />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

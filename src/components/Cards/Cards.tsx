@@ -12,7 +12,7 @@ const Cards: React.FC<CardsDataProps> = ({ data }) => {
         <Link to={el.path}>
           <li
             key={el.id}
-            className="cursor-pointer h-50 bg-auto bg-no-repeat bg-position-[90%_90%] p-8 shadow-[0_4px_4px_#00000040] hover:shadow-[0_4px_8px_#00000060] border border-[silver] rounded-[28px] dark:bg-[#0B142D]"
+            className="cursor-pointer h-50 bg-auto bg-no-repeat bg-position-[90%_90%] p-8  hover:shadow-[0_4px_8px_#3597F98F] border border-[#F2F2F3] rounded-[28px] dark:bg-[#0B142D]"
             style={{ backgroundImage: `url(${el.imgSrc})` }}
           >
             <h3 className="w-[300px] text-[24px] leading-5 font-medium uppercase leading-[30px] dark:text-white ">

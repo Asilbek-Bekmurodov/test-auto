@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import useLocalStorage from "use-local-storage";
+import { useNavigate, useParams } from "react-router-dom";
+
 import Header from "../Header/Header";
 import QuestionNavigation from "../QuestioinNavigation/QuestionNavigation";
-import {
-  type StartPrep20Response,
-  type Prep20Question,
-  startPrep20,
-} from "../../Utilities/Services/startPrep20.ts";
-import AnswerList from "../AnswerList/AnswerList.tsx";
-import QuestionCard from "../QuestionCard/QuestionCard.tsx";
-import BoxLoader from "../Loaders/BoxLoader/BoxLoader.tsx";
+import AnswerList from "../AnswerList/AnswerList";
+import QuestionCard from "../QuestionCard/QuestionCard";
+import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
+
+import { startTest } from "../../Utilities/Services/startTest";
+import type {
+  Question,
+  StartTestResponse,
+} from "../../Utilities/Services/types";
+import type { TestType } from "../../Utilities/Services/testConfig";
+import type { Prep20Question } from "../../Utilities/Services/startPrep20";
+import useLocalStorage from "use-local-storage";
 
 export type AnswerResult = {
   selectedKey: string;
@@ -23,6 +27,11 @@ const DEFAULT_DURATION = 20 * 60; // 20 daqiqa
 
 const Test = () => {
   const navigate = useNavigate();
+  const { type, slug, number } = useParams<{
+    type: TestType;
+    slug?: string;
+    number?: string;
+  }>();
 
   // Dark mode
   const preference: boolean = window.matchMedia(
@@ -53,17 +62,22 @@ const Test = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: StartPrep20Response = await startPrep20("uz");
+        const data: StartTestResponse = await startTest({
+          type: type as any,
+          slug,
+          number: number ? Number(number) : undefined,
+          language: "uz",
+        });
+
+        console.log(data);
 
         setQuestions(data.questions);
         setSessionId(data.session.id);
-
         setQuestionStatus(Array(data.questions.length).fill("unanswered"));
 
-        // Backenddan kelgan duration bilan yangilash
         if (data.duration) setTimeLeft(data.duration);
       } catch (err) {
-        console.error("Xatolik:", err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
