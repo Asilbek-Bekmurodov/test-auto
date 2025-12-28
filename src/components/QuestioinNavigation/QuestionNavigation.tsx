@@ -20,13 +20,16 @@ const QuestionNavigation = ({
     <div className="mt-6 flex flex-wrap gap-2 justify-center">
       {Array.from({ length: total }).map((_, index) => {
         const status: QuestionStatus = questionStatus?.[index] ?? "unanswered";
+
         let color = "bg-gray-200 text-gray-700";
 
+        // 1️⃣ Avval status ranglari
         if (status === "correct") color = "bg-green-500 text-white";
         else if (status === "wrong") color = "bg-red-500 text-white";
 
+        // 2️⃣ ACTIVE har doim ustun bo‘lsin
         if (index === currentIndex) {
-          color += " ring-2 ring-blue-500";
+          color = "bg-blue-600 text-white";
         }
 
         return (

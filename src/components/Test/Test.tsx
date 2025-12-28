@@ -28,7 +28,8 @@ export type QuestionStatus = "unanswered" | "correct" | "wrong";
 
 /* ================= CONSTANTS ================= */
 
-const DEFAULT_DURATION = 20 * 60; // 20 daqiqa
+const TOTAL_DURATION = 60 * 20; // 1 soat
+const MAX_WRONG = 3;
 
 /* ================= COMPONENT ================= */
 
@@ -52,14 +53,13 @@ const Test = () => {
   /* ================= DARK MODE ================= */
 
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
   const [isDark, setIsDark] = useLocalStorage<boolean>("isdark", preference);
 
   /* ================= STATE ================= */
 
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState<number>(DEFAULT_DURATION);
+  const [timeLeft, setTimeLeft] = useState<number>(TOTAL_DURATION);
   const [loading, setLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
@@ -94,9 +94,8 @@ const Test = () => {
           Array<QuestionStatus>(data.questions.length).fill("unanswered")
         );
 
-        if (data.duration) {
-          setTimeLeft(data.duration);
-        }
+        // ✅ duration bo‘lsa uni ishlat, yo‘q bo‘lsa har bir savolga 60s
+        setTimeLeft(data.duration ?? data.questions.length * 60);
       } catch (error) {
         console.error("Test start error:", error);
       } finally {
@@ -110,7 +109,11 @@ const Test = () => {
   // Timer
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      setTimeLeft((prev) => {
+        if (prev > 0) return prev - 1;
+        setFinished(true);
+        return 0;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
@@ -128,7 +131,45 @@ const Test = () => {
     }
   }, [finished, navigate, sessionId]);
 
+  // 3 TA XATO BO'LSA TO'XTATISH
+
+  useEffect(() => {
+    // ❌ faqat REAL imtihon uchun
+    if (testType !== "real") return;
+
+    const wrongCount = questionStatus.filter(
+      (status) => status === "wrong"
+    ).length;
+
+    if (wrongCount >= MAX_WRONG && !finished) {
+      alert("❌ 3 ta xato qilindi. Real imtihon yakunlandi!");
+      setFinished(true);
+    }
+  }, [questionStatus, finished, testType]);
+
   /* ================= HELPERS ================= */
+
+  const goToNextUnanswered = () => {
+    setCurrentIndex((prev) => {
+      // 1️⃣ avval keyingi indexlardan qidiramiz
+      for (let i = prev + 1; i < questionStatus.length; i++) {
+        if (questionStatus[i] === "unanswered") {
+          return i;
+        }
+      }
+
+      // 2️⃣ topilmasa, boshidan qidiramiz
+      for (let i = 0; i < questionStatus.length; i++) {
+        if (questionStatus[i] === "unanswered") {
+          return i;
+        }
+      }
+
+      // 3️⃣ unanswered yo‘q → test tugadi
+      setFinished(true);
+      return prev;
+    });
+  };
 
   const increaseFont = () =>
     setFontScale((prev = 1) => Math.min(prev + 0.1, 1.8));
@@ -156,13 +197,18 @@ const Test = () => {
         setIsDark={setIsDark}
         increaseFont={increaseFont}
         decreaseFont={decreaseFont}
+        onFinish={() => {
+          if (confirm("Testni yakunlamoqchimisiz?")) {
+            setFinished(true);
+          }
+        }}
       />
 
       <div className="h-[90vh] bg-gray-100 flex justify-center items-center p-6">
         <div className="w-full max-w-6xl bg-white rounded-2xl p-6 shadow-lg">
-          {feedback && (
+          {/* {feedback && (
             <div className="text-center mb-2 font-semibold">{feedback}</div>
-          )}
+          )} */}
 
           <div className="p-5 rounded-2xl bg-[#f7f7f7] mb-6">
             <h3 className="text-[1.5rem]">
@@ -184,6 +230,8 @@ const Test = () => {
               setQuestionStatus={setQuestionStatus}
               answersMap={answersMap}
               setAnswersMap={setAnswersMap}
+              finished={finished}
+              onAnswered={goToNextUnanswered}
             />
           </div>
 

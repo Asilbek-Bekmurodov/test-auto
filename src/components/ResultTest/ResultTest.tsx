@@ -95,14 +95,13 @@ const ResultTest = () => {
   const { total, correct, wrong, unanswered, percent, spent_time, questions } =
     result;
 
-  /* =======================
-     UI
-  ======================= */
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
-        <Link to="/home" className="text-blue-500 hover:underline">
+        <Link
+          to="/home"
+          className="inline-block  mt-4 md:mt-15 bg-linear-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 md:px-[35px] rounded-[30px] text-lg md:text-[18px] font-semibold transition-transform transform hover:scale-105"
+        >
           ← Asosiy sahifa
         </Link>
 

@@ -5,6 +5,8 @@ import type { StartTestResponse } from "./types";
 const BASE_URL = "https://imtihongatayyorlov.pythonanywhere.com";
 const token = localStorage.getItem("token");
 
+
+console.log(token)
 type StartTestParams = {
   type: TestType;
   language?: "uz" | "ru" | "en";

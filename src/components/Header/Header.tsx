@@ -12,6 +12,7 @@ type HeaderProps = {
   timeLeft?: number;
   increaseFont?: () => void;
   decreaseFont?: () => void;
+  onFinish?: () => void; // 👈 YANGI
 };
 
 const Header = ({
@@ -20,6 +21,7 @@ const Header = ({
   timeLeft,
   increaseFont,
   decreaseFont,
+  onFinish,
 }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -30,11 +32,22 @@ const Header = ({
       </Link>
 
       {/* Timer */}
-      {timeLeft && (
-        <div className="text-right text-lg font-semibold">
-          ⏱ {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
-        </div>
-      )}
+      <div className="flex gap-3 items-center">
+        {timeLeft && (
+          <div className="text-right text-lg font-semibold">
+            ⏱ {Math.floor(timeLeft / 60)}:
+            {String(timeLeft % 60).padStart(2, "0")}
+          </div>
+        )}
+        {onFinish && (
+          <button
+            onClick={onFinish}
+            className="bg-red-600 curpo hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"
+          >
+            Yakunlash
+          </button>
+        )}
+      </div>
 
       <div className="flex gap-3 items-center">
         {/* Font Size Controls */}
@@ -56,7 +69,10 @@ const Header = ({
         )}
 
         {/* Right Controls */}
+        {/* Right Controls */}
         <div className="relative flex items-center gap-3">
+          {/* YAKUNLASH BUTTON */}
+
           {/* Dark Mode Toggle */}
           <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
 
@@ -65,7 +81,7 @@ const Header = ({
             size={26}
             className="cursor-pointer z-50"
             onClick={(e) => {
-              e.stopPropagation(); 
+              e.stopPropagation();
               setIsOpen((prev) => !prev);
             }}
           />

@@ -8,21 +8,22 @@ export type AnswerResult = {
   isCorrect: boolean;
 };
 
+
 interface AnswerListProps {
   question: Question | null;
   sessionId: string;
   setTimeLeft: (seconds: number) => void;
-  setFeedback: (message: string) => void;
+  // setFeedback: (message: string) => void;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   setFinished: (finished: boolean) => void;
-
   currentIndex: number;
   setQuestionStatus: React.Dispatch<React.SetStateAction<QuestionStatus[]>>;
-
   answersMap: Record<number, AnswerResult>;
   setAnswersMap: React.Dispatch<
     React.SetStateAction<Record<number, AnswerResult>>
   >;
+  finished: boolean;
+  onAnswered: () => void;
 }
 
 const token = localStorage.getItem("token");
@@ -31,12 +32,14 @@ const AnswerList = ({
   question,
   sessionId,
   setTimeLeft,
-  setFeedback,
+  // setFeedback,
   setFinished,
   currentIndex,
   setQuestionStatus,
   answersMap,
   setAnswersMap,
+  finished,
+  onAnswered,
 }: AnswerListProps) => {
   if (!question || !question.options) return null;
 
@@ -44,9 +47,10 @@ const AnswerList = ({
 
   const savedAnswer = answersMap[currentIndex];
 
+
   const handleClick = async (key: string) => {
     if (savedAnswer) return; // Javob allaqachon berilgan
-
+    if (finished) return; // 👈 TEST TUGAGAN
     try {
       const res = await fetch(
         `https://imtihongatayyorlov.pythonanywhere.com/tests/during/${sessionId}/answer/`,
@@ -64,7 +68,7 @@ const AnswerList = ({
       ).then((r) => r.json());
 
       // Javob feedback
-      setFeedback(res.is_correct ? "To'g'ri!" : "Noto'g'ri!");
+      // setFeedback(res.is_correct ? "To'g'ri!" : "Noto'g'ri!");
       setTimeLeft(res.remaining_seconds);
 
       // Navigation rangini yangilash
@@ -80,8 +84,17 @@ const AnswerList = ({
         [currentIndex]: { selectedKey: key, isCorrect: res.is_correct },
       }));
 
-      // Test tugadi
-      if (res.finished) setFinished(true);
+      // Agar backend testni tugatgan bo‘lsa
+      if (res.finished) {
+        setFinished(true);
+        return;
+      }
+
+      // ⏭️ 1.5 sekunddan keyin keyingi savolga o‘tish
+      setTimeout(() => {
+        onAnswered();
+      }, 700);
+
     } catch (err) {
       console.error("Javob yuborishda xatolik:", err);
     }
