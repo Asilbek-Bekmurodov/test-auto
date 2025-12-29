@@ -1,6 +1,7 @@
 import type { Question } from "../../Utilities/Services/types";
 import AnswerItem from "../AnswerItem/AnswerItem";
-import type { QuestionStatus, AnswerResult } from "./TestTypes";
+import type { AnswerResult, QuestionStatus } from "../Test/Test";
+
 
 interface AnswerListProps {
   question: Question | null;
@@ -22,7 +23,6 @@ const AnswerList = ({
   question,
   sessionId,
   setTimeLeft,
-  setCurrentIndex,
   setFinished,
   currentIndex,
   setQuestionStatus,
