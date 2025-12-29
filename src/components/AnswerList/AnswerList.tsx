@@ -58,7 +58,12 @@ const AnswerList = ({
         }
       ).then((r) => r.json());
 
-      setTimeLeft(res.remaining_seconds);
+      if (
+        typeof res.remaining_seconds === "number" &&
+        res.remaining_seconds > 0
+      ) {
+        setTimeLeft(res.remaining_seconds);
+      }
 
       // Question status update
       setQuestionStatus((prev) => {

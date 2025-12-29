@@ -13,6 +13,7 @@ type QuestionResult = {
   selected_option: string | null;
   correct_option: string;
   is_correct: boolean;
+  options: never;
 };
 
 type TestResult = {
@@ -23,6 +24,7 @@ type TestResult = {
   percent: number;
   spent_time: string;
   questions: QuestionResult[];
+  options: [];
 };
 
 /* =======================
@@ -60,6 +62,8 @@ const ResultTest = () => {
         }
 
         const data: TestResult = await res.json();
+        console.log(data);
+
         setResult(data);
       } catch (error) {
         console.error("Result fetch error:", error);
@@ -168,7 +172,9 @@ const ResultTest = () => {
               {!q.is_correct && (
                 <p className="mt-1">
                   To‘g‘ri javob:{" "}
-                  <b className="text-green-700">{q.correct_option}</b>
+                  <b className="text-green-700">
+                    {q.correct_option} {q.options[q.correct_option]}
+                  </b>
                 </p>
               )}
             </div>

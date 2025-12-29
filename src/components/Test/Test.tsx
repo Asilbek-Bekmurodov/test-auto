@@ -130,14 +130,6 @@ const Test = () => {
     }
   }, [finished, navigate, sessionId]);
 
-  // 3 TA XATO BO'LSA TO'XTATISH
-
-  useEffect(() => {
-    if (finished) {
-      navigate(`/result/${sessionId}`);
-    }
-  }, [finished, navigate, sessionId]);
-
   // 3 ta xato qoidasini ishlash
   useEffect(() => {
     if (testType !== "real") return;
@@ -151,6 +143,19 @@ const Test = () => {
     }
   }, [answersMap, finished, testType]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue =
+        "Sahifani yangilasangiz test boshidan boshlanadi. Davom etasizmi?";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
   /* ================= HELPERS ================= */
 
   const goToNextUnanswered = () => {
