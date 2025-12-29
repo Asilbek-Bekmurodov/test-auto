@@ -133,38 +133,34 @@ const Test = () => {
   // 3 TA XATO BO'LSA TO'XTATISH
 
   useEffect(() => {
-    // ❌ faqat REAL imtihon uchun
+    if (finished) {
+      navigate(`/result/${sessionId}`);
+    }
+  }, [finished, navigate, sessionId]);
+
+  // 3 ta xato qoidasini ishlash
+  useEffect(() => {
     if (testType !== "real") return;
 
-    const wrongCount = questionStatus.filter(
-      (status) => status === "wrong"
+    const wrongCount = Object.values(answersMap).filter(
+      (a) => !a.isCorrect
     ).length;
-
     if (wrongCount >= MAX_WRONG && !finished) {
       alert("❌ 3 ta xato qilindi. Real imtihon yakunlandi!");
       setFinished(true);
     }
-  }, [questionStatus, finished, testType]);
+  }, [answersMap, finished, testType]);
 
   /* ================= HELPERS ================= */
 
   const goToNextUnanswered = () => {
     setCurrentIndex((prev) => {
-      // 1️⃣ avval keyingi indexlardan qidiramiz
-      for (let i = prev + 1; i < questionStatus.length; i++) {
-        if (questionStatus[i] === "unanswered") {
-          return i;
-        }
+      for (let i = prev + 1; i < questions.length; i++) {
+        if (!answersMap[i]) return i;
       }
-
-      // 2️⃣ topilmasa, boshidan qidiramiz
-      for (let i = 0; i < questionStatus.length; i++) {
-        if (questionStatus[i] === "unanswered") {
-          return i;
-        }
+      for (let i = 0; i < questions.length; i++) {
+        if (!answersMap[i]) return i;
       }
-
-      // 3️⃣ unanswered yo‘q → test tugadi
       setFinished(true);
       return prev;
     });

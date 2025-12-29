@@ -1,13 +1,6 @@
 import type { Question } from "../../Utilities/Services/types";
 import AnswerItem from "../AnswerItem/AnswerItem";
-
-export type QuestionStatus = "unanswered" | "correct" | "wrong";
-
-export type AnswerResult = {
-  selectedKey: string;
-  isCorrect: boolean;
-};
-
+import type { QuestionStatus, AnswerResult } from "./TestTypes";
 
 interface AnswerListProps {
   question: Question | null;
@@ -25,12 +18,11 @@ interface AnswerListProps {
   onAnswered: () => void;
 }
 
-const token = localStorage.getItem("token");
-
 const AnswerList = ({
   question,
   sessionId,
   setTimeLeft,
+  setCurrentIndex,
   setFinished,
   currentIndex,
   setQuestionStatus,
@@ -42,14 +34,15 @@ const AnswerList = ({
   if (!question || !question.options) return null;
 
   const optionsArray = Object.entries(question.options);
-
   const savedAnswer = answersMap[currentIndex];
 
-
   const handleClick = async (key: string) => {
-    if (savedAnswer) return; // Javob allaqachon berilgan
-    if (finished) return; // 👈 TEST TUGAGAN
+    if (savedAnswer || finished) return;
+
     try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("User is not authenticated");
+
       const res = await fetch(
         `https://imtihongatayyorlov.pythonanywhere.com/tests/during/${sessionId}/answer/`,
         {
@@ -65,34 +58,28 @@ const AnswerList = ({
         }
       ).then((r) => r.json());
 
-      // Javob feedback
-      // setFeedback(res.is_correct ? "To'g'ri!" : "Noto'g'ri!");
       setTimeLeft(res.remaining_seconds);
 
-      // Navigation rangini yangilash
+      // Question status update
       setQuestionStatus((prev) => {
         const updated = [...prev];
         updated[currentIndex] = res.is_correct ? "correct" : "wrong";
         return updated;
       });
 
-      // Variantni saqlash
+      // Save answer
       setAnswersMap((prev) => ({
         ...prev,
         [currentIndex]: { selectedKey: key, isCorrect: res.is_correct },
       }));
 
-      // Agar backend testni tugatgan bo‘lsa
-      if (res.finished) {
+      // Oxirgi savolni backend tugatgan bo‘lsa, frontend ham tugatsin
+      if (res.finished && currentIndex === Object.keys(answersMap).length) {
         setFinished(true);
-        return;
       }
 
-      // ⏭️ 1.5 sekunddan keyin keyingi savolga o‘tish
-      setTimeout(() => {
-        onAnswered();
-      }, 700);
-
+      // Next question
+      setTimeout(() => onAnswered(), 700);
     } catch (err) {
       console.error("Javob yuborishda xatolik:", err);
     }
