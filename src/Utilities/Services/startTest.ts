@@ -1,12 +1,10 @@
+import { toast } from "react-toastify";
 import { TEST_ENDPOINTS } from "./testConfig";
 import type { TestType } from "./testConfig";
 import type { StartTestResponse } from "./types";
 
 const BASE_URL = "https://imtihongatayyorlov.pythonanywhere.com";
-const token = localStorage.getItem("token");
 
-
-console.log(token)
 type StartTestParams = {
   type: TestType;
   language?: "uz" | "ru" | "en";
@@ -21,11 +19,17 @@ export const startTest = async ({
   number,
 }: StartTestParams): Promise<StartTestResponse> => {
   let endpoint = TEST_ENDPOINTS[type];
+  const token = localStorage.getItem("token"); // ✅ bu yerda
+
+  if (!token) {
+    toast.error("User is not authenticated");
+
+    throw new Error("User is not authenticated");
+  }
 
   if (type === "topic" && slug) {
     endpoint = `/tests/topics/${slug}/start/`;
   }
-
 
   if (type === "ticket" && number) {
     endpoint = `/tests/tickets/${number}/start/`;
@@ -41,7 +45,9 @@ export const startTest = async ({
   });
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    const errorText = await res.text();
+    // toast.error(errorText || "Server xatosi"); // avval toast
+    throw new Error(errorText);
   }
 
   return res.json();
