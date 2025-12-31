@@ -1,20 +1,38 @@
+import { useEffect, useState } from "react";
 import type { TicketCard } from "../../pages/Data";
 import { TicketCardItem } from "../TicketCard/TicketCard";
 
-const data: TicketCard[] = Array.from({ length: 20 }).map((_, i) => ({
-  id: i + 1,
-  category: "Avto test",
-  title: i === 0 ? "Bilet-1" : "Bilet-2",
-  testsCount: 20,
-  year: "Avtotest 2025",
-  locked: i !== 0,
-  path: i === 0 ? "/test" : "",
-}));
-
 export const TicketGrid = () => {
+  const [tickets, setTickets] = useState<TicketCard[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const res = await fetch(
+          "https://imtihongatayyorlov.pythonanywhere.com/tests/tickets/"
+        );
+        if (!res.ok) throw new Error("Tickets not found");
+
+        const data: TicketCard[] = await res.json();
+        setTickets(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTickets();
+  }, []);
+
+  if (loading) {
+    return <p className="p-4">Yuklanmoqda...</p>;
+  }
+
   return (
     <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-      {data.map((item) => (
+      {tickets.map((item) => (
         <TicketCardItem key={item.id} item={item} />
       ))}
     </div>

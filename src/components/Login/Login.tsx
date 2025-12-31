@@ -54,7 +54,7 @@ function Login() {
 
     try {
       const res = await fetch(
-        "https://imtihongatayyorlov.pythonanywhere.com/login/",
+        "https://imtihongatayyorlov.pythonanywhere.com/auth/login/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

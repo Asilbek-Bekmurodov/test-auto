@@ -36,7 +36,7 @@ function ConfirmCode() {
       setLoading(true);
 
       const res = await fetch(
-        "https://imtihongatayyorlov.pythonanywhere.com/verify-phone-number/",
+        "https://imtihongatayyorlov.pythonanywhere.com/auth/verify-phone-number/",
         {
           method: "POST",
           headers: {
@@ -76,7 +76,7 @@ function ConfirmCode() {
       setLoading(true);
 
       const res = await fetch(
-        "https://imtihongatayyorlov.pythonanywhere.com/resend-phone-number/",
+        "https://imtihongatayyorlov.pythonanywhere.com/auth/resend-phone-number/",
         {
           method: "POST",
           headers: {

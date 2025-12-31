@@ -61,7 +61,7 @@ function Register() {
 
     try {
       const res = await fetch(
-        "https://imtihongatayyorlov.pythonanywhere.com/register/",
+        "https://imtihongatayyorlov.pythonanywhere.com/auth/register/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
