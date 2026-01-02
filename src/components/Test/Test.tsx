@@ -42,13 +42,17 @@ const Test = () => {
     number?: string;
   }>();
 
-  /* ================= VALIDATION ================= */
+  let testType: TestType;
 
-  if (!isTestType(params.type)) {
-    throw new Error("Invalid test type in URL");
+  if (params.type && isTestType(params.type)) {
+    testType = params.type;
+  } else if (params.slug) {
+    testType = "topic";
+  } else if (params.number) {
+    testType = "ticket";
+  } else {
+    throw new Error("Invalid test route");
   }
-
-  const testType: TestType = params.type;
 
   /* ================= DARK MODE ================= */
 

@@ -2,7 +2,6 @@ import type { Question } from "../../Utilities/Services/types";
 import AnswerItem from "../AnswerItem/AnswerItem";
 import type { AnswerResult, QuestionStatus } from "../Test/Test";
 
-
 interface AnswerListProps {
   question: Question | null;
   sessionId: string;
@@ -41,45 +40,58 @@ const AnswerList = ({
 
     try {
       const token = localStorage.getItem("token");
-      if (!token) throw new Error("User is not authenticated");
+
+      const headers: HeadersInit = {
+        "Content-Type": "application/json",
+      };
+
+      // token bo‘lsa qo‘shamiz, bo‘lmasa yo‘q
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
 
       const res = await fetch(
         `https://imtihongatayyorlov.pythonanywhere.com/tests/during/${sessionId}/answer/`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers,
           body: JSON.stringify({
             question_id: question.id,
             selected_option: key,
           }),
         }
-      ).then((r) => r.json());
+      );
+
+      if (!res.ok) {
+        throw new Error("Answer submit failed");
+      }
+
+      const data = await res.json();
 
       if (
-        typeof res.remaining_seconds === "number" &&
-        res.remaining_seconds > 0
+        typeof data.remaining_seconds === "number" &&
+        data.remaining_seconds > 0
       ) {
-        setTimeLeft(res.remaining_seconds);
+        setTimeLeft(data.remaining_seconds);
       }
 
       // Question status update
       setQuestionStatus((prev) => {
         const updated = [...prev];
-        updated[currentIndex] = res.is_correct ? "correct" : "wrong";
+        updated[currentIndex] = data.is_correct ? "correct" : "wrong";
         return updated;
       });
 
       // Save answer
       setAnswersMap((prev) => ({
         ...prev,
-        [currentIndex]: { selectedKey: key, isCorrect: res.is_correct },
+        [currentIndex]: {
+          selectedKey: key,
+          isCorrect: data.is_correct,
+        },
       }));
 
-      // Oxirgi savolni backend tugatgan bo‘lsa, frontend ham tugatsin
-      if (res.finished && currentIndex === Object.keys(answersMap).length) {
+      if (data.finished) {
         setFinished(true);
       }
 

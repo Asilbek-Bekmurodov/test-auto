@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import type { TicketCard } from "../../pages/Data";
 import { TicketCardItem } from "../TicketCard/TicketCard";
+
+type TicketCard = {
+  number: number;
+  question_count: number;
+  title: string;
+};
+
+type TicketsResponse = {
+  tickets: TicketCard[];
+};
 
 export const TicketGrid = () => {
   const [tickets, setTickets] = useState<TicketCard[]>([]);
@@ -9,13 +18,21 @@ export const TicketGrid = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
+        const token = localStorage.getItem("token");
+
         const res = await fetch(
-          "https://imtihongatayyorlov.pythonanywhere.com/tests/tickets/"
+          "https://imtihongatayyorlov.pythonanywhere.com/tests/tickets/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
+
         if (!res.ok) throw new Error("Tickets not found");
 
-        const data: TicketCard[] = await res.json();
-        setTickets(data);
+        const data: TicketsResponse = await res.json();
+        setTickets(data.tickets);
       } catch (error) {
         console.error(error);
       } finally {
@@ -33,7 +50,7 @@ export const TicketGrid = () => {
   return (
     <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {tickets.map((item) => (
-        <TicketCardItem key={item.id} item={item} />
+        <TicketCardItem key={item.number} item={item} />
       ))}
     </div>
   );

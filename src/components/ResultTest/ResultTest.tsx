@@ -13,7 +13,7 @@ type QuestionResult = {
   selected_option: string | null;
   correct_option: string;
   is_correct: boolean;
-  options: never;
+  options: Record<string, string>;
 };
 
 type TestResult = {
@@ -24,7 +24,6 @@ type TestResult = {
   percent: number;
   spent_time: string;
   questions: QuestionResult[];
-  options: [];
 };
 
 /* =======================
@@ -38,8 +37,6 @@ const ResultTest = () => {
   const [result, setResult] = useState<TestResult | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     if (!sessionId) {
       navigate("/");
@@ -48,13 +45,18 @@ const ResultTest = () => {
 
     const fetchResult = async () => {
       try {
+        const token = localStorage.getItem("token");
+
+        const headers: HeadersInit = {};
+
+        // token bo‘lsa qo‘shiladi, bo‘lmasa yo‘q
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+
         const res = await fetch(
           `https://imtihongatayyorlov.pythonanywhere.com/tests/sessions/${sessionId}/result/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { headers }
         );
 
         if (!res.ok) {
@@ -62,8 +64,6 @@ const ResultTest = () => {
         }
 
         const data: TestResult = await res.json();
-        console.log(data);
-
         setResult(data);
       } catch (error) {
         console.error("Result fetch error:", error);
@@ -74,7 +74,7 @@ const ResultTest = () => {
     };
 
     fetchResult();
-  }, [sessionId, navigate, token]);
+  }, [sessionId, navigate]);
 
   /* =======================
      RENDER STATES
@@ -104,7 +104,7 @@ const ResultTest = () => {
       <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
         <Link
           to="/home"
-          className="inline-block  mt-4 md:mt-15 bg-linear-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 md:px-[35px] rounded-[30px] text-lg md:text-[18px] font-semibold transition-transform transform hover:scale-105"
+          className="inline-block mt-4 bg-linear-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 rounded-[30px] text-lg font-semibold hover:scale-105 transition"
         >
           ← Asosiy sahifa
         </Link>
@@ -157,23 +157,14 @@ const ResultTest = () => {
               )}
 
               <p>
-                Siz tanlagan javob: <b>{q.selected_option ?? "Tanlanmagan"}</b>{" "}
-                {q.is_correct ? (
-                  <span className="ml-2 text-green-700 font-semibold">
-                    To‘g‘ri
-                  </span>
-                ) : (
-                  <span className="ml-2 text-red-700 font-semibold">
-                    Noto‘g‘ri
-                  </span>
-                )}
+                Siz tanlagan javob: <b>{q.selected_option ?? "Tanlanmagan"}</b>
               </p>
 
               {!q.is_correct && (
                 <p className="mt-1">
                   To‘g‘ri javob:{" "}
                   <b className="text-green-700">
-                    {q.correct_option} {q.options[q.correct_option]}
+                    {q.correct_option} — {q.options[q.correct_option]}
                   </b>
                 </p>
               )}

@@ -1,25 +1,30 @@
 import { FileText, Lock } from "lucide-react";
-import type { TicketCard } from "../../pages/Data";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
-  item: TicketCard;
+  item: {
+    number: number;
+    question_count: number;
+    title: string;
+  };
 }
 
 export const TicketCardItem: React.FC<Props> = ({ item }) => {
+  const [locked] = useState(false);
   return (
     <Link
-      to={item.path}
+      to={`/test/ticket/${item.number}`}
       className={`relative rounded-xl border-2 border-dashed p-4 transition
         ${
-          item.locked
+          locked
             ? "border-blue-300 bg-white/70"
             : "border-blue-400 bg-white hover:shadow-md"
         }
       `}
     >
       {/* Overlay (LOCK holati) */}
-      {item.locked && (
+      {locked && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-xl bg-white/80 backdrop-blur-[1px]">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
             <Lock className="h-6 w-6 text-gray-600" />
@@ -31,14 +36,14 @@ export const TicketCardItem: React.FC<Props> = ({ item }) => {
       )}
 
       {/* Badge */}
-      <span className="inline-block rounded-md bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+      {/* <span className="inline-block rounded-md bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
         {item.category}
-      </span>
+      </span> */}
 
       {/* Title */}
       <h3
         className={`mt-4 text-center text-xl font-semibold italic ${
-          item.locked ? "text-gray-400" : "text-black"
+          locked ? "text-gray-400" : "text-black"
         }`}
       >
         {item.title}
@@ -48,9 +53,9 @@ export const TicketCardItem: React.FC<Props> = ({ item }) => {
       <div className="mt-6 flex items-center justify-between text-sm text-gray-600">
         <div className="flex items-center gap-2">
           <FileText className="h-4 w-4 text-indigo-500" />
-          <span>{item.testsCount} test</span>
+          <span>{item.question_count} test</span>
         </div>
-        <span>{item.year}</span>
+        <span>2026</span>
       </div>
     </Link>
   );

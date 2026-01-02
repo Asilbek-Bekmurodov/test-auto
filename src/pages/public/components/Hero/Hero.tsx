@@ -22,7 +22,7 @@ const Hero = () => {
             quis pariatur ullam animi accusamus?
           </p>
           <Link
-            to="/auth/login"
+            to="/test/ticket/1"
             className="inline-block mt-4 md:mt-[60px] bg-gradient-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 md:px-[35px] rounded-[30px] text-lg md:text-[18px] font-semibold transition-transform transform hover:scale-105"
           >
             Testni boshlash

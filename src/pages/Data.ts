@@ -71,15 +71,15 @@ export const plans: Plan[] = [
   { id: "3m", label: "3 Oylik", price: 79000, oldPrice: 105000 },
   { id: "6m", label: "6 Oylik", price: 129000, oldPrice: 210000 },
 ];
-export interface TicketCard {
-  id: number;
-  category: string; // "Avto test"
-  title: string; // "Bilet-1"
-  testsCount: number; // 20
-  year: string; // "Avtotest 2025"
-  locked?: boolean;
-  path: string;
-}
+// export interface TicketCard {
+//   id: number;
+//   category: string; // "Avto test"
+//   title: string; // "Bilet-1"
+//   testsCount: number; // 20
+//   year: string; // "Avtotest 2025"
+//   locked?: boolean;
+//   path: string;
+// }
 
 export const subPages: SubPages[] = [
   {

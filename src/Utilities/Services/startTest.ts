@@ -19,13 +19,18 @@ export const startTest = async ({
   number,
 }: StartTestParams): Promise<StartTestResponse> => {
   let endpoint = TEST_ENDPOINTS[type];
-  const token = localStorage.getItem("token"); // ✅ bu yerda
+  const token = localStorage.getItem("token");
 
-  if (!token) {
-    toast.error("User is not authenticated");
+  /* ================= AUTH CHECK ================= */
 
+  const isFreeTicket = type === "ticket" && number === 1;
+
+  if (!token && !isFreeTicket) {
+    toast.error("Iltimos, tizimga kiring");
     throw new Error("User is not authenticated");
   }
+
+  /* ================= ENDPOINT ================= */
 
   if (type === "topic" && slug) {
     endpoint = `/tests/topics/${slug}/start/`;
@@ -35,19 +40,27 @@ export const startTest = async ({
     endpoint = `/tests/tickets/${number}/start/`;
   }
 
+  /* ================= HEADERS ================= */
+
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  /* ================= REQUEST ================= */
+
   const res = await fetch(BASE_URL + endpoint, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers,
     body: JSON.stringify({ language }),
   });
 
   if (!res.ok) {
     const errorText = await res.text();
-    // toast.error(errorText || "Server xatosi"); // avval toast
-    throw new Error(errorText);
+    throw new Error(errorText || "Server xatosi");
   }
 
   return res.json();
