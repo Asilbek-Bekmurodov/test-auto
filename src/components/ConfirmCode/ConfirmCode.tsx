@@ -108,9 +108,9 @@ function ConfirmCode() {
       <h2 className="text-base mb-2">Tasdiqlash</h2>
 
       <form onSubmit={handleSendCode} className="form">
-        <OTPInput length={6} onChange={setOtp} />
+        <OTPInput  length={6} onChange={setOtp} />
 
-        <Button className="btn" disabled={loading}>
+        <Button className="btn mt-6" disabled={loading}>
           Tasdiqlash
         </Button>
       </form>
