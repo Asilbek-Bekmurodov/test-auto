@@ -118,7 +118,7 @@ function Register() {
 
   return (
     <div className=" flex items-center justify-center px-4 sm:px-6">
-      <div className="w-full max-w-md sm:max-w-lg bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+      <div className="w-full max-w-md sm:max-w-lg bg-white rounded-2xl  p-6 sm:p-8">
         <h2 className="text-center font-semibold text-2xl sm:text-3xl mb-8">
           Ro'yxatdan o'tish
         </h2>
@@ -172,11 +172,11 @@ function Register() {
 
           {/* Phone */}
           <div className="relative">
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 pl-2 text-gray-600 font-medium">
+            <span className="absolute pb-4.5 left-0 top-1/2 -translate-y-1/2 pl-2 text-gray-600 font-medium">
               +998
             </span>
             <input
-              className={`${inputClass} pl-14`}
+              className={`${inputClass} pl-13`}
               onChange={getData}
               name="phone_number"
               type="text"
