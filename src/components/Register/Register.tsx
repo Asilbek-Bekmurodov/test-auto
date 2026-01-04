@@ -4,6 +4,7 @@ import "./Register.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 /* =====================
    TYPES
@@ -197,27 +198,11 @@ function Register() {
           </div>
 
           {/* Password */}
-          <div>
-            <input
-              className={inputClass}
-              onChange={getData}
-              name="password"
-              type="password"
-              placeholder="Parol"
-            />
-            <AnimatePresence>
-              {errors.password && (
-                <motion.p
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  className="text-red-500 text-sm mt-1"
-                >
-                  {errors.password}
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+          <PasswordInput
+            errors={errors}
+            getData={getData}
+            inputClass={inputClass}
+          />
 
           {/* Remember + Forgot */}
           <div className="flex flex-col sm:flex-row gap-2 sm:justify-between text-sm">

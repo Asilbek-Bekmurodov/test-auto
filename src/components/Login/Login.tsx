@@ -4,6 +4,7 @@ import "./Login.css";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 interface LoginData {
   phone_number: string; // faqat +998 dan keyingi qism
@@ -123,28 +124,11 @@ function Login() {
         </div>
 
         {/* Password */}
-        <div className="w-full">
-          <input
-            className={inputClass}
-            onChange={getData}
-            name="password"
-            type="password"
-            placeholder="Parol"
-            value={userData.password}
-          />
-          <AnimatePresence>
-            {errors.password && (
-              <motion.p
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                className="text-red-500 text-sm mt-1"
-              >
-                {errors.password}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
+        <PasswordInput
+          errors={errors}
+          getData={getData}
+          inputClass={inputClass}
+        />
 
         <div className="flex justify-between w-full">
           <label htmlFor="checkbox">
