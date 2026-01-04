@@ -7,7 +7,7 @@ import Cards from "../../components/Cards";
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import Payment from "../../components/Payment/Payment";
 import { TicketGrid } from "../../components/TickedGrid/TickedGrid";
-import { useTheme } from "../../context/themeContext";
+import { useTheme } from "../../context/ThemeContext";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useState } from "react";
 

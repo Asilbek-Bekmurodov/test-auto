@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { plans, stats, type Plan } from "../../pages/Data";
 import Image from "../Image/Image";
-import { useTheme } from "../../context/themeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Payment() {
   const [selected, setSelected] = useState<Plan>(plans[0]);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useLocalStorage from "use-local-storage";
-import { ThemeContext } from "./themeContext";
+import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
