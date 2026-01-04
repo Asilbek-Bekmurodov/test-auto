@@ -11,6 +11,9 @@ interface LinkItemsProps {
   handleActive: (index: number) => void;
   index: number;
   path: string;
+  isDark: boolean;
+  darkIcon: keyof typeof images;
+  toggle: boolean;
 }
 
 const LinkItems: React.FC<LinkItemsProps> = ({
@@ -20,13 +23,18 @@ const LinkItems: React.FC<LinkItemsProps> = ({
   handleActive,
   index,
   path,
+  isDark,
+  darkIcon,
+  toggle,
 }) => {
   return (
     <Link
       onClick={() => handleActive(index)}
-      className={`rounded-xl gap-4 flex items-center px-5 py-4 ${
+      className={`rounded-xl  items-center gap-3 p-2 md:p-4 ${
         active && "bg-[#FAFCFF]  dark:bg-[#11192D]"
-      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white dark:border-transparent `}
+      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white dark:border-transparent ${
+        toggle ? "flex" : "flex justify-center"
+      }`}
       to={path}
       style={
         active
@@ -40,9 +48,11 @@ const LinkItems: React.FC<LinkItemsProps> = ({
           : undefined
       }
     >
-      <Image name={icon} />
-      <span className="text-[14xp] leading-5 font-semibold"> {title}</span>
-      {active && <FaChevronRight />}
+      <Image name={isDark ? darkIcon : icon} />
+      {toggle && (
+        <span className="text-[14xp] leading-5 font-semibold"> {title}</span>
+      )}
+      {active && toggle && <FaChevronRight />}
     </Link>
   );
 };

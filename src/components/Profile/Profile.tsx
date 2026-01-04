@@ -3,16 +3,32 @@ import { Link } from "react-router-dom";
 import { images } from "../../assets/images";
 import SelectInput from "../SelectInput/SelectInput";
 import { useEffect, useRef } from "react";
+import { jwtDecode } from "jwt-decode";
+
+/* =====================
+   TYPES
+===================== */
 
 type Props = {
   isOpen: boolean;
   setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 };
 
+interface JwtPayload {
+  user_id: number;
+  exp: number;
+}
+
+/* =====================
+   COMPONENT
+===================== */
+
 const Profile = ({ isOpen, setIsOpen }: Props) => {
   const profileRef = useRef<HTMLDivElement>(null);
 
-  // Outside click handler
+  /* =====================
+     OUTSIDE CLICK
+  ===================== */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -32,6 +48,52 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
     };
   }, [isOpen, setIsOpen]);
 
+  /* =====================
+     TOKEN → DECODE → API
+  ===================== */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.warn("Token topilmadi");
+      return;
+    }
+
+    try {
+      // 1️⃣ Decode token
+      const decoded = jwtDecode<JwtPayload>(token);
+      console.log("Decoded token:", decoded);
+
+      const userId = decoded.user_id;
+
+      // 2️⃣ API request (Bearer token bilan)
+      fetch(
+        `https://imtihongatayyorlov.pythonanywhere.com/users/users/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("User olishda xatolik");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log("USER DATA:", data);
+        })
+        .catch((err) => {
+          console.error("API error:", err);
+        });
+    } catch (error) {
+      console.error("Token decode xatosi:", error);
+    }
+  }, []);
+
   if (!isOpen) return null;
 
   return (
@@ -49,7 +111,7 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
         <div>
           <h3 className="font-semibold">Your name</h3>
           <p className="text-sm text-gray-500 dark:text-gray-300">
-            +998914572614
+            +998*********
           </p>
         </div>
       </div>
@@ -64,9 +126,9 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
 
       <hr className="border-gray-200 dark:border-gray-600 mb-3" />
 
-      {/* Support Link */}
+      {/* Support */}
       <div className="mb-2">
-        <Link to={""} className="text-sm text-blue-500 hover:underline">
+        <Link to="" className="text-sm text-blue-500 hover:underline">
           Qo'llab quvvatlash bo'limi
         </Link>
       </div>

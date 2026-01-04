@@ -26,11 +26,14 @@ const Cards: React.FC<CardsDataProps> = ({ data }) => {
       {data.map((el) => (
         <li
           key={el.id}
-          className="cursor-pointer h-50 bg-auto bg-no-repeat bg-position-[90%_90%] p-8 hover:shadow-[0_4px_8px_#3597F98F] border border-[#F2F2F3] rounded-[28px] dark:bg-[#0B142D] bg-[#FAFCFF]"
-          style={{ backgroundImage: `url(${el.imgSrc})` }}
+          className="cursor-pointer h-35 lg:h-50 p-4 lg:p-8 bg-auto bg-no-repeat bg-position-[110%_120%]  hover:shadow-[0_4px_8px_#3597F98F] border border-[#F2F2F3] rounded-[28px] dark:bg-[#0B142D] bg-[#FAFCFF]"
+          style={{
+            backgroundImage: `url(${el.imgSrc})`,
+            backgroundSize: "60% 80%",
+          }}
           onClick={() => handleClick(el.path)}
         >
-          <h3 className="w-[300px] text-[24px] leading-5 font-medium uppercase leading-[30px] dark:text-white">
+          <h3 className="text-[13px] sm:text-[13px]  md:text-[20px] lg:text-[24px] leading-5 font-medium uppercase leading-[30px] dark:text-white">
             {el.title}
           </h3>
         </li>

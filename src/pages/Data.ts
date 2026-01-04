@@ -33,6 +33,7 @@ export interface SubPages {
   title: string;
   active: boolean;
   path: string;
+  darkIcon: keyof typeof images;
 }
 
 export type HowItWorksItem = {
@@ -64,6 +65,8 @@ export const stats: StatItem[] = [
   { title: "Mavzuli test", subtitle: "Testlar soni", value: "649 ta" },
   { title: "Avto", subtitle: "Testlar soni", value: "120 ta" },
   { title: "Milliy sertifikat", subtitle: "Testlar soni", value: "60 ta" },
+  // { title: "Xatolar ustida ishlash", subtitle: "Barchasiga", value: "60 ta" },
+  // { title: "Kurslarga chegirma", subtitle: "Barchasiga", value: "60 ta" },
 ];
 
 export const plans: Plan[] = [
@@ -84,30 +87,35 @@ export const plans: Plan[] = [
 export const subPages: SubPages[] = [
   {
     icon: "boshSahifa",
+    darkIcon: "darkHome",
     title: "Bosh sahifa",
     active: true,
     path: "/home/",
   },
   {
     icon: "talim",
+    darkIcon: "darkTalim",
     title: "Ta'lim",
     active: false,
     path: "/home/education",
   },
   {
     icon: "tolov",
+    darkIcon: "darkTolov",
     title: "To’lovlar",
     active: false,
     path: "/home/payment",
   },
   {
     icon: "yangilik",
+    darkIcon: "darkYangilik",
     title: "Yangiliklar",
     active: false,
     path: "/home/news",
   },
   {
     icon: "xato",
+    darkIcon: "darkXatolar",
     title: "Xatoliklar",
     active: false,
     path: "/home/problems",
