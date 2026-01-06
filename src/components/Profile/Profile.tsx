@@ -1,29 +1,28 @@
 import { Link } from "react-router-dom";
 import { images } from "../../assets/images";
 import SelectInput from "../SelectInput/SelectInput";
-import { useEffect, useRef } from "react";
-import { jwtDecode } from "jwt-decode";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   isOpen: boolean;
   setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 };
 
-interface JwtPayload {
-  user_id: number;
-  exp: number;
-}
-
+type UserData = {
+  id: number;
+  first_name: string;
+  phone_number: string;
+  last_name: string;
+};
 /* =====================
   COMPONENT
 ===================== */
 
 const Profile = ({ isOpen, setIsOpen }: Props) => {
   const profileRef = useRef<HTMLDivElement>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  console.log(userData);
 
-  /* =====================
-    OUTSIDE CLICK
-  ===================== */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -55,23 +54,14 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
     }
 
     try {
-      // 1️⃣ Decode token
-      const decoded = jwtDecode<JwtPayload>(token);
-      console.log("Decoded token:", decoded);
-
-      const userId = decoded.user_id;
-
       // 2️⃣ API request (Bearer token bilan)
-      fetch(
-        `https://imtihongatayyorlov.pythonanywhere.com/users/users/${userId}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(`https://imtihongatayyorlov.pythonanywhere.com/auth/me/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
         .then((res) => {
           if (!res.ok) {
             throw new Error("User olishda xatolik");
@@ -79,7 +69,7 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
           return res.json();
         })
         .then((data) => {
-          console.log("USER DATA:", data);
+          setUserData(data.user);
         })
         .catch((err) => {
           console.error("API error:", err);
@@ -104,9 +94,14 @@ const Profile = ({ isOpen, setIsOpen }: Props) => {
           className="w-10 h-10 rounded-full"
         />
         <div>
-          <h3 className="font-semibold">Your name</h3>
+          <h3 className="font-semibold">
+            {userData?.first_name ? userData?.first_name : "User"}
+          </h3>
+          <h3 className="font-semibold">
+            {userData?.last_name ? userData.last_name : ""}
+          </h3>
           <p className="text-sm text-gray-500 dark:text-gray-300">
-            +998*********
+            {userData?.phone_number ? userData?.phone_number : "+998---------"}
           </p>
         </div>
       </div>

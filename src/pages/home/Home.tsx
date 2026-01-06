@@ -10,6 +10,7 @@ import { TicketGrid } from "../../components/TickedGrid/TickedGrid";
 import { useTheme } from "../../context/ThemeContext";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useState } from "react";
+import { NewsGrid } from "../../components/News/NewsGrid";
 
 function Home() {
   const [subPagesData, setSubPagesData] = useState<SubPages[]>(subPages);
@@ -89,6 +90,7 @@ function Home() {
           <Route path="/problems" element={<Cards data={cardsData} />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/biletlar" element={<TicketGrid />} />
+          <Route path="/news" element={<NewsGrid />} />
         </Routes>
       </div>
     </div>
