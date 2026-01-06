@@ -40,11 +40,11 @@ function Home() {
         animate={{ width: toggle ? 300 : 120 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className={`relative h-[94vh] border border-[#cbc7c480] mb-5 p-[12px] md:p-[24px] rounded-[28px] 
-        dark:bg-[#040A17] transition-colors duration-500 dark:border-[silver]`}
+        dark:bg-[#0B142D] transition-colors duration-500 dark:border-[silver]`}
       >
         <button
           onClick={() => setToggle(!toggle)}
-          className="absolute -right-4 top-20 p-2 border border-[#cbc7c480] bg-white rounded-full dark:bg-[#040A17]"
+          className="absolute -right-4 top-23 p-2 border border-[#cbc7c480] bg-white rounded-full dark:bg-[#040A17]"
         >
           {toggle ? (
             <FaChevronRight className="text-gray-800 dark:text-white cursor-pointer z-10" />

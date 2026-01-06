@@ -82,7 +82,7 @@ const ResultTest = () => {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center dark:bg-[#0B142D] dark:text-white">
         <BoxLoader />
       </div>
     );
@@ -90,7 +90,7 @@ const ResultTest = () => {
 
   if (!result) {
     return (
-      <div className="h-screen flex items-center justify-center text-lg font-semibold">
+      <div className="h-screen flex items-center justify-center text-lg font-semibold ">
         Natija topilmadi
       </div>
     );
@@ -100,8 +100,8 @@ const ResultTest = () => {
     result;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
+    <div className="dark:bg-[#050C1D]   min-h-screen flex items-center justify-center bg-gray-100 p-6">
+      <div className="bg-white dark:bg-[#0B142D] dark:text-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
         <Link
           to="/home"
           className="inline-block mt-4 bg-linear-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 rounded-[30px] text-lg font-semibold hover:scale-105 transition"
@@ -138,10 +138,10 @@ const ResultTest = () => {
           {questions.map((q, index) => (
             <div
               key={q.id}
-              className={`p-4 rounded-lg border ${
+              className={`p-4 rounded-lg border  ${
                 q.is_correct
-                  ? "border-green-400 bg-green-50"
-                  : "border-red-400 bg-red-50"
+                  ? "border-green-400 bg-green-50 dark:bg-green-600"
+                  : "border-red-400 bg-red-50 dark:bg-red-800"
               }`}
             >
               <p className="font-medium mb-1">
@@ -163,7 +163,7 @@ const ResultTest = () => {
               {!q.is_correct && (
                 <p className="mt-1">
                   To‘g‘ri javob:{" "}
-                  <b className="text-green-700">
+                  <b className="text-green-700 dark:text-green-200">
                     {q.correct_option} — {q.options[q.correct_option]}
                   </b>
                 </p>

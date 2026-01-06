@@ -6,13 +6,13 @@ type Props = {
 };
 
 const AnswerItem = ({ text, active, correct, onClick }: Props) => {
-  let bgClass = "bg-white"; // default
+  let bgClass = "bg-white dark:bg-[#0B142D] dark:text-white"; // default
   let hoverClass = "hover:bg-blue-300"; // default hover
 
   if (active) {
     if (correct === true) bgClass = "bg-green-500 text-white";
     else if (correct === false) bgClass = "bg-red-500 text-white";
-    else bgClass = "bg-gray-200";
+    else bgClass = "bg-gray-200 ";
 
     hoverClass = ""; // tanlangan javobda hover yo‘q
   }
@@ -20,7 +20,7 @@ const AnswerItem = ({ text, active, correct, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`cursor-pointer w-full py-4 px-6 rounded-lg border text-left transition ${bgClass} ${hoverClass} border-gray-300`}
+      className={`cursor-pointer w-full py-4 px-6 rounded-lg border text-left transition ${bgClass} ${hoverClass} border-gray-300 `}
     >
       {text}
     </button>

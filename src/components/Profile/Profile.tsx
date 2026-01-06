@@ -1,13 +1,8 @@
-// Profile.tsx
 import { Link } from "react-router-dom";
 import { images } from "../../assets/images";
 import SelectInput from "../SelectInput/SelectInput";
 import { useEffect, useRef } from "react";
 import { jwtDecode } from "jwt-decode";
-
-/* =====================
-   TYPES
-===================== */
 
 type Props = {
   isOpen: boolean;
@@ -20,14 +15,14 @@ interface JwtPayload {
 }
 
 /* =====================
-   COMPONENT
+  COMPONENT
 ===================== */
 
 const Profile = ({ isOpen, setIsOpen }: Props) => {
   const profileRef = useRef<HTMLDivElement>(null);
 
   /* =====================
-     OUTSIDE CLICK
+    OUTSIDE CLICK
   ===================== */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

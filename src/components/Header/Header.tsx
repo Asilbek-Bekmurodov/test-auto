@@ -26,15 +26,15 @@ const Header = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between">
-      <Link to={"/home"}>
-        <Image name="darkLogo" />
+    <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D] ">
+      <Link className="hidden md:inline-block" to={"/home"}>
+        <Image name={isDark ? "logoWhite" : "darkLogo"} />
       </Link>
 
       {/* Timer */}
       <div className="flex gap-3 items-center">
         {timeLeft && (
-          <div className="text-right text-lg font-semibold">
+          <div className="text-right text-lg font-semibold dark:text-white">
             ⏱ {Math.floor(timeLeft / 60)}:
             {String(timeLeft % 60).padStart(2, "0")}
           </div>
@@ -52,7 +52,7 @@ const Header = ({
       <div className="flex gap-3 items-center">
         {/* Font Size Controls */}
         {decreaseFont && increaseFont && (
-          <div className="flex gap-2">
+          <div className="flex gap-2 dark:text-white">
             <button
               onClick={decreaseFont}
               className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
@@ -79,7 +79,7 @@ const Header = ({
           {/* Profile Icon */}
           <FaRegUserCircle
             size={26}
-            className="cursor-pointer z-50"
+            className="cursor-pointer z-50 text-black dark:text-white"
             onClick={(e) => {
               e.stopPropagation();
               setIsOpen((prev) => !prev);

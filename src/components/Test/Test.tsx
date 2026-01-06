@@ -194,33 +194,28 @@ const Test = () => {
   const currentQuestion: Question = questions[currentIndex];
 
   return (
-    <>
-      <Header
-        timeLeft={timeLeft}
-        isDark={isDark}
-        setIsDark={setIsDark}
-        increaseFont={increaseFont}
-        decreaseFont={decreaseFont}
-        onFinish={() => {
-          if (confirm("Testni yakunlamoqchimisiz?")) {
-            setFinished(true);
-          }
-        }}
-      />
-
-      <div className="h-[90vh] bg-gray-100 flex justify-center items-center p-6">
-        <div className="w-full max-w-6xl bg-white rounded-2xl p-6 shadow-lg">
-          {/* {feedback && (
-            <div className="text-center mb-2 font-semibold">{feedback}</div>
-          )} */}
-
-          <div className="p-5 rounded-2xl bg-[#f7f7f7] mb-6">
-            <h3 className="text-[1.5rem]">
+    <div className="min-h-screen bg-gray-100 flex justify-center items-start sm:items-center p-3 sm:p-6 dark:bg-[#303a52]">
+      <div className="flex flex-col gap-4">
+        <Header
+          timeLeft={timeLeft}
+          isDark={isDark}
+          setIsDark={setIsDark}
+          increaseFont={increaseFont}
+          decreaseFont={decreaseFont}
+          onFinish={() => {
+            if (confirm("Testni yakunlamoqchimisiz?")) {
+              setFinished(true);
+            }
+          }}
+        />
+        <div className="w-full max-w-6xl bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg dark:bg-[#050C1D]">
+          <div className="dark:bg-[#0B142D] dark:border dark:border-gray-300 dark:text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#f7f7f7] mb-4 sm:mb-6">
+            <h3 className="text-base sm:text-lg md:text-xl font-medium ">
               {currentIndex + 1}. Savol: {currentQuestion.text}
             </h3>
           </div>
 
-          <div className="flex gap-4 items-start">
+          <div className="flex flex-col md:flex-row gap-4 items-stretch">
             <QuestionCard question={currentQuestion} />
 
             <AnswerList
@@ -238,15 +233,17 @@ const Test = () => {
             />
           </div>
 
-          <QuestionNavigation
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            total={questions.length}
-            questionStatus={questionStatus}
-          />
+          <div className="overflow-x-auto mt-4">
+            <QuestionNavigation
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              total={questions.length}
+              questionStatus={questionStatus}
+            />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -58,8 +58,7 @@ const Header = ({
           {/* Profile */}
           <FaRegUserCircle
             size={26}
-            color="red"
-            className="cursor-pointer"
+            className="cursor-pointer text-red-500 dark:text-white"
             onClick={() => setIsOpen(!isOpen)}
           />
         </div>
