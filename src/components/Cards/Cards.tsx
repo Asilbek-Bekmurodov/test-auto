@@ -26,7 +26,7 @@ const Cards: React.FC<CardsDataProps> = ({ data }) => {
       {data.map((el) => (
         <li
           key={el.id}
-          className="cursor-pointer h-35 lg:h-50 p-4 lg:p-8 bg-auto bg-no-repeat bg-position-[110%_120%]  hover:shadow-[0_4px_8px_#3597F98F] border border-[#F2F2F3] rounded-[28px] dark:bg-[#0B142D] bg-[#FAFCFF]"
+          className="cursor-pointer h-35 lg:h-50 p-4 lg:p-8 bg-auto bg-no-repeat bg-position-[110%_120%]  hover:shadow-[0_4px_8px_#3597F98F]  rounded-[28px] dark:bg-[#0B142D] bg-[#FAFCFF]"
           style={{
             backgroundImage: `url(${el.imgSrc})`,
             backgroundSize: "60% 80%",

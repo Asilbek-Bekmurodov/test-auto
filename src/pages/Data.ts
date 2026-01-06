@@ -161,9 +161,15 @@ export const cardsData: CardsData[] = [
   },
   {
     id: 7,
-    title: "MArafon",
+    title: "Marafon",
     imgSrc: images.marafon,
     path: "/test/marathon",
+  },
+  {
+    id: 8,
+    title: "Mistakes",
+    imgSrc: images.marafon,
+    path: "/test/mistakes",
   },
 ];
 

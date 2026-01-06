@@ -21,7 +21,7 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
         <img
           src={question.image_url}
           alt="Savol rasmi"
-          className="w-[100%] rounded-lg object-contain lg:object-cover"
+          className=" rounded-lg object-contain "
         />
       )}
     </div>
