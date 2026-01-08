@@ -16,7 +16,7 @@ export const Toggle: React.FC<ToggleProps> = ({ handleChange, isChecked }) => {
         onChange={handleChange}
         checked={isChecked}
       />
-      <label htmlFor="check"></label>
+      <label htmlFor="check" className="relative"></label>
     </div>
   );
 };

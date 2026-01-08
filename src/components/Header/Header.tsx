@@ -1,7 +1,8 @@
-// Header.tsx
 import { useState } from "react";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+
 import Image from "../Image/Image";
 import Profile from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
@@ -12,7 +13,7 @@ type HeaderProps = {
   timeLeft?: number;
   increaseFont?: () => void;
   decreaseFont?: () => void;
-  onFinish?: () => void; // 👈 YANGI
+  onFinish?: () => void;
 };
 
 const Header = ({
@@ -23,74 +24,146 @@ const Header = ({
   decreaseFont,
   onFinish,
 }: HeaderProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D] ">
-      <Link className="hidden md:inline-block" to={"/home"}>
-        <Image name={isDark ? "logoWhite" : "darkLogo"} />
-      </Link>
-
-      {/* Timer */}
-      <div className="flex gap-3 items-center">
-        {timeLeft && (
-          <div className="text-right text-lg font-semibold dark:text-white">
-            ⏱ {Math.floor(timeLeft / 60)}:
-            {String(timeLeft % 60).padStart(2, "0")}
-          </div>
-        )}
-        {onFinish && (
+    <>
+      <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D]">
+        {/* ================= LEFT ================= */}
+        <div className="flex items-center gap-3">
+          {/* BURGER (SM) */}
           <button
-            onClick={onFinish}
-            className="bg-red-600 curpo hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"
+            onClick={() => setIsMobileMenuOpen((p) => !p)}
+            className="md:hidden text-xl text-black dark:text-white"
           >
-            Yakunlash
+            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
-        )}
-      </div>
 
-      <div className="flex gap-3 items-center">
-        {/* Font Size Controls */}
-        {decreaseFont && increaseFont && (
-          <div className="flex gap-2 dark:text-white">
+          {/* LOGO */}
+          <Link to="/home" className="w-28">
+            <Image name={isDark ? "logoWhite" : "darkLogo"} />
+          </Link>
+        </div>
+
+        {/* ================= CENTER ================= */}
+        <div className="flex gap-3 items-center">
+          {timeLeft !== undefined && (
+            <div className="text-lg font-semibold dark:text-white">
+              ⏱ {Math.floor(timeLeft / 60)}:
+              {String(timeLeft % 60).padStart(2, "0")}
+            </div>
+          )}
+
+          {onFinish && (
             <button
-              onClick={decreaseFont}
-              className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
+              onClick={onFinish}
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"
             >
-              A-
+              Yakunlash
             </button>
-            <button
-              onClick={increaseFont}
-              className="px-2 py-1 text-sm border rounded hover:bg-gray-100"
-            >
-              A+
-            </button>
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* Right Controls */}
-        {/* Right Controls */}
-        <div className="relative flex items-center gap-3">
-          {/* YAKUNLASH BUTTON */}
+        {/* ================= RIGHT (DESKTOP) ================= */}
+        <div className="hidden md:flex items-center gap-3">
+          {decreaseFont && increaseFont && (
+            <div className="flex gap-2 dark:text-white">
+              <button
+                onClick={decreaseFont}
+                className="px-2 py-1 border rounded"
+              >
+                A-
+              </button>
+              <button
+                onClick={increaseFont}
+                className="px-2 py-1 border rounded"
+              >
+                A+
+              </button>
+            </div>
+          )}
 
-          {/* Dark Mode Toggle */}
           <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
 
-          {/* Profile Icon */}
           <FaRegUserCircle
             size={26}
-            className="cursor-pointer z-50 text-black dark:text-white"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsOpen((prev) => !prev);
-            }}
+            className="cursor-pointer dark:text-white"
+            onClick={() => setIsProfileOpen((p) => !p)}
           />
 
-          {/* Profile Dropdown */}
-          <Profile isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Profile isOpen={isProfileOpen} setIsOpen={setIsProfileOpen} />
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* ================= MOBILE MENU (ANIMATED) ================= */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* OVERLAY */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 z-40 md:hidden"
+            />
+
+            {/* PANEL */}
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed top-20 left-4 right-4 z-50 md:hidden
+              bg-white dark:bg-[#0B142D] border border-[#cbc7c480]
+              rounded-2xl p-4 flex flex-col gap-4"
+            >
+              {/* FONT SIZE */}
+              {decreaseFont && increaseFont && (
+                <div className="flex justify-between items-center dark:text-white">
+                  <span>Font size</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={decreaseFont}
+                      className="px-3 py-1 border rounded"
+                    >
+                      A-
+                    </button>
+                    <button
+                      onClick={increaseFont}
+                      className="px-3 py-1 border rounded"
+                    >
+                      A+
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* DARK MODE */}
+              <div className="flex justify-between items-center dark:text-white">
+                <span>Dark mode</span>
+                <Toggle
+                  isChecked={isDark}
+                  handleChange={() => setIsDark(!isDark)}
+                />
+              </div>
+
+              {/* PROFILE */}
+              <button
+                onClick={() => setIsProfileOpen(true)}
+                className="flex items-center gap-3 text-left dark:text-white"
+              >
+                <FaRegUserCircle size={22} />
+                <span>Profile</span>
+              </button>
+
+              <Profile isOpen={isProfileOpen} setIsOpen={setIsProfileOpen} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
