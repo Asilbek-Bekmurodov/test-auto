@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TicketCardItem } from "../TicketCard/TicketCard";
+import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
 
 type TicketCard = {
   number: number;
@@ -44,7 +45,14 @@ export const TicketGrid = () => {
   }, []);
 
   if (loading) {
-    return <p className="p-4">Yuklanmoqda...</p>;
+    return (
+      <div
+        style={{ height: "calc(100vh - 120px)" }}
+        className="bg-white dark:bg-[#0B142D] flex items-center justify-center rounded-xl p-6 shadow"
+      >
+        <BoxLoader />
+      </div>
+    );
   }
 
   return (
