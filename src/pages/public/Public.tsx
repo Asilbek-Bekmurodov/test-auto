@@ -7,6 +7,7 @@ import How from "./components/How/How";
 import PublicHeader from "./components/PublicHeader/PublicHeader";
 import TestimonialSlider from "./components/TestimonialSlider/TestimonialSlider";
 import BoxLoader from "../../components/Loaders/BoxLoader/BoxLoader"; // loader component
+import ParticlesCanvas from "../../components/ParticlesCanvas/ParticlesCanvas";
 
 const Public = () => {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,9 @@ const Public = () => {
 
   return (
     <>
+      <div>
+        <ParticlesCanvas />
+      </div>
       <PublicHeader />
       <main>
         <Hero />

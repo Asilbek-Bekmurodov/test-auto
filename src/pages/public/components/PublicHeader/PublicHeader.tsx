@@ -6,7 +6,7 @@ const PublicHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full bg-white shadow-md z-50">
+    <header className=" w-full  z-50">
       <div className="container mx-auto px-4">
         <div className="relative flex items-center justify-between py-4 md:py-5 rounded-[28px] px-3 md:px-8">
           {/* Logo */}
