@@ -13,13 +13,13 @@ type Mouse = {
 
 const CONFIG = {
   DOT_COUNT: 200,
-  DOT_RADIUS: 1,
+  DOT_RADIUS: 0.4,
   DOT_SPEED: 0.5,
   LINK_DISTANCE_CAP: 200,
   LINK_THICKNESS: 0.2,
   BACKGROUND_COLOR: "#ffffff",
-  DOT_COLOR: "#000000",
-  LINK_COLOR: "#1d1aca",
+  DOT_COLOR: "#16149a",
+  LINK_COLOR: "#16149a",
 } as const;
 
 const TAU = Math.PI * 2;
