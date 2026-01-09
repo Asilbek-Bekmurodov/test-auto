@@ -12,7 +12,7 @@ type Mouse = {
 };
 
 const CONFIG = {
-  DOT_COUNT: 200,
+  DOT_COUNT: 190,
   DOT_RADIUS: 0.4,
   DOT_SPEED: 0.5,
   LINK_DISTANCE_CAP: 200,
