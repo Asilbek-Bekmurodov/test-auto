@@ -12,9 +12,9 @@ type Mouse = {
 };
 
 const CONFIG = {
-  DOT_COUNT: 190,
+  DOT_COUNT: 200,
   DOT_RADIUS: 0.4,
-  DOT_SPEED: 0.5,
+  DOT_SPEED: 0.2,
   LINK_DISTANCE_CAP: 200,
   LINK_THICKNESS: 0.2,
   BACKGROUND_COLOR: "#ffffff",
