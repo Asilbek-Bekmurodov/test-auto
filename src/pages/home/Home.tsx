@@ -20,6 +20,7 @@ import ShowProblems from "../../components/Problems/ShowProblems";
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import NotFound from "../../components/NotFound/NotFound";
 
 function Home() {
   const { isDark, setIsDark } = useTheme();
@@ -93,6 +94,7 @@ function Home() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/biletlar" element={<TicketGrid />} />
           <Route path="/news" element={<NewsGrid />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
 
