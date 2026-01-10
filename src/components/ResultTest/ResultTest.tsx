@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
-
-/* =======================
-   TYPES
-======================= */
 
 type QuestionResult = {
   id: number;
@@ -26,16 +23,13 @@ type TestResult = {
   questions: QuestionResult[];
 };
 
-/* =======================
-   COMPONENT
-======================= */
-
 const ResultTest = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [result, setResult] = useState<TestResult | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!sessionId) {
@@ -46,27 +40,20 @@ const ResultTest = () => {
     const fetchResult = async () => {
       try {
         const token = localStorage.getItem("token");
-
         const headers: HeadersInit = {};
 
-        // token bo‘lsa qo‘shiladi, bo‘lmasa yo‘q
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
+        if (token) headers.Authorization = `Bearer ${token}`;
 
         const res = await fetch(
           `https://imtihongatayyorlov.pythonanywhere.com/tests/sessions/${sessionId}/result/`,
           { headers }
         );
 
-        if (!res.ok) {
-          throw new Error("Natijani olishda xatolik");
-        }
+        if (!res.ok) throw new Error(t("resultTest.error"));
 
         const data: TestResult = await res.json();
         setResult(data);
-      } catch (error) {
-        console.error("Result fetch error:", error);
+      } catch {
         setResult(null);
       } finally {
         setLoading(false);
@@ -74,15 +61,11 @@ const ResultTest = () => {
     };
 
     fetchResult();
-  }, [sessionId, navigate]);
-
-  /* =======================
-     RENDER STATES
-  ======================= */
+  }, [sessionId, navigate, t]);
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center dark:bg-[#0B142D] dark:text-white">
+      <div className="h-screen flex items-center justify-center dark:bg-[#0B142D]">
         <BoxLoader />
       </div>
     );
@@ -90,8 +73,8 @@ const ResultTest = () => {
 
   if (!result) {
     return (
-      <div className="h-screen flex items-center justify-center text-lg font-semibold ">
-        Natija topilmadi
+      <div className="h-screen flex items-center justify-center text-lg font-semibold">
+        {t("resultTest.notFound")}
       </div>
     );
   }
@@ -100,45 +83,47 @@ const ResultTest = () => {
     result;
 
   return (
-    <div className="dark:bg-[#050C1D]   min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div className="dark:bg-[#050C1D] min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="bg-white dark:bg-[#0B142D] dark:text-white shadow-xl rounded-xl p-6 w-full max-w-3xl">
         <Link
           to="/home"
           className="inline-block mt-4 bg-linear-to-r from-[#3597F9] to-[#462F8F] text-white py-4 px-8 rounded-[30px] text-lg font-semibold hover:scale-105 transition"
         >
-          ← Asosiy sahifa
+          {t("resultTest.home")}
         </Link>
 
-        <h1 className="text-2xl font-bold my-4">Test Natijasi</h1>
+        <h1 className="text-2xl font-bold my-4">{t("resultTest.title")}</h1>
 
         <div className="grid grid-cols-2 gap-2 mb-6">
           <p>
-            📊 Jami savollar: <b>{total}</b>
+            {t("resultTest.total")}: <b>{total}</b>
           </p>
           <p>
-            ✅ To‘g‘ri: <b>{correct}</b>
+            {t("resultTest.correct")}: <b>{correct}</b>
           </p>
           <p>
-            ❌ Noto‘g‘ri: <b>{wrong}</b>
+            {t("resultTest.wrong")}: <b>{wrong}</b>
           </p>
           <p>
-            ➖ Javobsiz: <b>{unanswered}</b>
+            {t("resultTest.unanswered")}: <b>{unanswered}</b>
           </p>
           <p>
-            🎯 Natija: <b>{percent}%</b>
+            {t("resultTest.percent")}: <b>{percent}%</b>
           </p>
           <p>
-            ⏱ Sarflangan vaqt: <b>{spent_time}</b>
+            {t("resultTest.time")}: <b>{spent_time}</b>
           </p>
         </div>
 
-        <h2 className="text-xl font-semibold mb-3">Savollar va javoblar</h2>
+        <h2 className="text-xl font-semibold mb-3">
+          {t("resultTest.questions")}
+        </h2>
 
         <div className="flex flex-col gap-4">
           {questions.map((q, index) => (
             <div
               key={q.id}
-              className={`p-4 rounded-lg border  ${
+              className={`p-4 rounded-lg border ${
                 q.is_correct
                   ? "border-green-400 bg-green-50 dark:bg-green-600"
                   : "border-red-400 bg-red-50 dark:bg-red-800"
@@ -151,18 +136,19 @@ const ResultTest = () => {
               {q.image_url && (
                 <img
                   src={q.image_url}
-                  alt={`question-${q.id}`}
+                  alt=""
                   className="my-2 max-h-40 object-contain rounded"
                 />
               )}
 
               <p>
-                Siz tanlagan javob: <b>{q.selected_option ?? "Tanlanmagan"}</b>
+                {t("resultTest.yourAnswer")}:{" "}
+                <b>{q.selected_option ?? t("resultTest.notSelected")}</b>
               </p>
 
               {!q.is_correct && (
                 <p className="mt-1">
-                  To‘g‘ri javob:{" "}
+                  {t("resultTest.correctAnswer")}:{" "}
                   <b className="text-green-700 dark:text-green-200">
                     {q.correct_option} — {q.options[q.correct_option]}
                   </b>

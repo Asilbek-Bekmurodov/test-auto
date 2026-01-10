@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { CardsData } from "../../pages/Data";
+import { useTranslation } from "react-i18next";
 
 interface CardsDataProps {
   data: CardsData[];
@@ -7,6 +8,7 @@ interface CardsDataProps {
 
 const Cards: React.FC<CardsDataProps> = ({ data }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClick = (path: string) => {
     const token = localStorage.getItem("token");
@@ -34,7 +36,7 @@ const Cards: React.FC<CardsDataProps> = ({ data }) => {
           onClick={() => handleClick(el.path)}
         >
           <h3 className="text-[13px] sm:text-[13px]  md:text-[20px] lg:text-[24px] leading-5 font-medium uppercase leading-[30px] dark:text-white">
-            {el.title}
+            {t(el.title)}
           </h3>
         </li>
       ))}

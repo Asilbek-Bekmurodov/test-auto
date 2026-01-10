@@ -1,0 +1,66 @@
+{
+  "menu": {
+    "home": "Bas bet",
+    "education": "Taʼlim",
+    "payment": "Tólewler",
+    "news": "Jańalıqlar",
+    "mistakes": "Qátelikler",
+    "pages": "Sayfalar"
+  },
+  "cards": {
+    "prep20": "Dáyarlıq imtihanı 20",
+    "prep50": "Dáyarlıq imtihanı 50",
+    "real": "Naqtı imtihan",
+    "tickets": "Biletler",
+    "topicTests": "Temalı testler",
+    "tricky": "Chalgıtıwshı testler",
+    "marathon": "Marafon",
+    "mistakes": "Qátelikler"
+  },
+  "education": {
+    "rules": "Jol qáǵıydaları",
+    "signs": "Jol belgileri",
+    "terms": "Atamalar"
+  },
+  "problems": {
+    "title": "Qátelikler",
+    "description": "Sizde {{count}} dana qáte isleńgen soraw bar",
+    "view": "Qáteliklerdi kóriw",
+    "retry": "Qayta islew"
+  },
+  "payment": {
+    "phone": "+998 Telefon nomeri",
+    "currency": "som",
+    "pay": "Tólew etiw:",
+    "all": "Barshasına",
+    "mistakes": "Qáteler ústinde islew",
+    "stats": {
+      "testsCount": "Testler sani",
+      "dtm": "DTM",
+      "topic": "Temalı testler",
+      "auto": "Avto",
+      "certificate": "Milliy sertifikat"
+    },
+    "plans": {
+      "1m": "1 ay",
+      "3m": "3 ay",
+      "6m": "6 ay"
+    }
+  },
+  "resultTest": {
+    "home": "← Home",
+    "title": "Test Result",
+    "total": "Total questions",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "unanswered": "Unanswered",
+    "percent": "Result",
+    "time": "Time spent",
+    "questions": "Questions and answers",
+    "yourAnswer": "Your answer",
+    "notSelected": "Not selected",
+    "correctAnswer": "Correct answer",
+    "notFound": "Result not found",
+    "error": "Error while fetching result"
+  }
+}

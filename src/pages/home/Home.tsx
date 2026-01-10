@@ -19,11 +19,12 @@ import ShowProblems from "../../components/Problems/ShowProblems";
 
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const { isDark, setIsDark } = useTheme();
   const [subPagesData, setSubPagesData] = useState<SubPages[]>(subPages);
-
+  const { t } = useTranslation();
   // sidebar holati (localStorage)
   const [toggle, setToggle] = useLocalStorage<boolean>("sidebarToggle", false);
 
@@ -62,7 +63,7 @@ function Home() {
         </button>
 
         <h3 className="mb-12 text-[14px] font-semibold dark:text-white">
-          Sahifalar
+          {t("menu.pages")}
         </h3>
 
         <div className="h-[0.5px] bg-[#c0c0c0] absolute left-0 top-[68px] w-full" />

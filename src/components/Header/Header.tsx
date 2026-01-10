@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaRegUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -27,29 +27,30 @@ const Header = ({
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // 🔴 FAQAT SHU QO‘SHILDI
+  const profileIconRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D]">
-        {/* ================= LEFT ================= */}
-        <div className="flex items-center gap-3">
-          {/* BURGER (SM) */}
+        {/* LEFT */}
+        <div className="w-full flex items-center justify-between flex-row-reverse md:flex-row gap-3">
           <button
             onClick={() => setIsMobileMenuOpen((p) => !p)}
-            className="md:hidden text-xl text-black dark:text-white"
+            className="md:hidden text-xl dark:text-white"
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* LOGO */}
           <Link to="/home" className="w-28">
             <Image name={isDark ? "logoWhite" : "darkLogo"} />
           </Link>
         </div>
 
-        {/* ================= CENTER ================= */}
-        <div className="flex gap-3 items-center">
+        {/* CENTER */}
+        <div className="flex items-center gap-3">
           {timeLeft !== undefined && (
-            <div className="text-lg font-semibold dark:text-white">
+            <div className="font-semibold dark:text-white">
               ⏱ {Math.floor(timeLeft / 60)}:
               {String(timeLeft % 60).padStart(2, "0")}
             </div>
@@ -58,16 +59,16 @@ const Header = ({
           {onFinish && (
             <button
               onClick={onFinish}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold"
             >
               Yakunlash
             </button>
           )}
         </div>
 
-        {/* ================= RIGHT (DESKTOP) ================= */}
+        {/* RIGHT (DESKTOP) */}
         <div className="hidden md:flex items-center gap-3">
-          {decreaseFont && increaseFont && (
+          {increaseFont && decreaseFont && (
             <div className="flex gap-2 dark:text-white">
               <button
                 onClick={decreaseFont}
@@ -86,41 +87,36 @@ const Header = ({
 
           <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
 
-          <FaRegUserCircle
-            size={26}
-            className="cursor-pointer dark:text-white"
-            onClick={() => setIsProfileOpen((p) => !p)}
-          />
-
-          <Profile isOpen={isProfileOpen} setIsOpen={setIsProfileOpen} />
+          {/* 🔴 FAQAT ICON QISMI O‘ZGARDI */}
+          <div ref={profileIconRef}>
+            <FaRegUserCircle
+              size={26}
+              className="cursor-pointer dark:text-white"
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+            />
+          </div>
         </div>
       </header>
 
-      {/* ================= MOBILE MENU (ANIMATED) ================= */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* OVERLAY */}
             <motion.div
+              className="fixed inset-0 bg-black/40 z-40 md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/40 z-40 md:hidden"
             />
 
-            {/* PANEL */}
             <motion.div
+              className="fixed top-20 left-4 right-4 z-50 md:hidden bg-white dark:bg-[#0B142D] border rounded-2xl p-4 flex flex-col gap-4"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed top-20 left-4 right-4 z-50 md:hidden
-              bg-white dark:bg-[#0B142D] border border-[#cbc7c480]
-              rounded-2xl p-4 flex flex-col gap-4"
             >
-              {/* FONT SIZE */}
-              {decreaseFont && increaseFont && (
+              {increaseFont && decreaseFont && (
                 <div className="flex justify-between items-center dark:text-white">
                   <span>Font size</span>
                   <div className="flex gap-2">
@@ -140,7 +136,6 @@ const Header = ({
                 </div>
               )}
 
-              {/* DARK MODE */}
               <div className="flex justify-between items-center dark:text-white">
                 <span>Dark mode</span>
                 <Toggle
@@ -149,20 +144,28 @@ const Header = ({
                 />
               </div>
 
-              {/* PROFILE */}
+              {/* 🔴 FAQAT SHU JOY */}
               <button
-                onClick={() => setIsProfileOpen(true)}
-                className="flex items-center gap-3 text-left dark:text-white"
+                onClick={() => {
+                  setIsProfileOpen((prev) => !prev);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-3 dark:text-white"
               >
                 <FaRegUserCircle size={22} />
                 <span>Profile</span>
               </button>
-
-              <Profile isOpen={isProfileOpen} setIsOpen={setIsProfileOpen} />
             </motion.div>
           </>
         )}
       </AnimatePresence>
+
+      {/* PROFILE */}
+      <Profile
+        isOpen={isProfileOpen}
+        setIsOpen={setIsProfileOpen}
+        triggerRef={profileIconRef}
+      />
     </>
   );
 };

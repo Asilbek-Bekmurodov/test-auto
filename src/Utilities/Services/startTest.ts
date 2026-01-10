@@ -7,7 +7,7 @@ const BASE_URL = "https://imtihongatayyorlov.pythonanywhere.com";
 
 type StartTestParams = {
   type: TestType;
-  language?: "uz" | "ru" | "en";
+  language?: "uz" | "ru" | "krill" | "kaa";
   slug?: string;
   number?: number;
 };

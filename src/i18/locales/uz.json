@@ -1,0 +1,66 @@
+{
+  "menu": {
+    "home": "Bosh sahifa",
+    "education": "Ta'lim",
+    "payment": "To‘lovlar",
+    "news": "Yangiliklar",
+    "mistakes": "Xatoliklar",
+    "pages": "Sahifalar"
+  },
+  "cards": {
+    "prep20": "Tayyorlov imtihoni 20",
+    "prep50": "Tayyorlov imtihoni 50",
+    "real": "Real imtihon",
+    "tickets": "Biletlar",
+    "topicTests": "Mavzulashtirilgan testlar",
+    "tricky": "Chalg‘ituvchi testlar",
+    "marathon": "Marafon",
+    "mistakes": "Mistakes"
+  },
+  "education": {
+    "rules": "Yo‘l harakati qoidalari",
+    "signs": "Yo‘l belgilari",
+    "terms": "Atamalar"
+  },
+  "problems": {
+    "title": "Xatoliklar",
+    "description": "Sizda {{count}} ta xato ishlangan savol mavjud",
+    "view": "Xatolarni ko‘rish",
+    "retry": "Qayta ishlash"
+  },
+  "payment": {
+    "phone": "+998 Telefon raqam",
+    "currency": "so'm",
+    "pay": "To‘lov qilish:",
+    "all": "Barchasiga",
+    "mistakes": "Xatolar ustida ishlash",
+    "stats": {
+      "testsCount": "Testlar soni",
+      "dtm": "DTM",
+      "topic": "Mavzuli test",
+      "auto": "Avto",
+      "certificate": "Milliy sertifikat"
+    },
+    "plans": {
+      "1m": "1 oylik",
+      "3m": "3 oylik",
+      "6m": "6 oylik"
+    }
+  },
+  "resultTest": {
+    "home": "← Asosiy sahifa",
+    "title": "Test natijasi",
+    "total": "Jami savollar",
+    "correct": "To‘g‘ri",
+    "wrong": "Noto‘g‘ri",
+    "unanswered": "Javobsiz",
+    "percent": "Natija",
+    "time": "Sarflangan vaqt",
+    "questions": "Savollar va javoblar",
+    "yourAnswer": "Siz tanlagan javob",
+    "notSelected": "Tanlanmagan",
+    "correctAnswer": "To‘g‘ri javob",
+    "notFound": "Natija topilmadi",
+    "error": "Natijani olishda xatolik"
+  }
+}

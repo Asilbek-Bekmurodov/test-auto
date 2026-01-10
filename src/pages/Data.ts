@@ -30,7 +30,7 @@ export type LessonMediaItem = {
 
 export interface SubPages {
   icon: keyof typeof images;
-  title: string;
+  titleKey: string;
   active: boolean;
   path: string;
   darkIcon: keyof typeof images;
@@ -48,75 +48,94 @@ export type HowItWorksItem = {
 };
 
 export type StatItem = {
-  title: string;
-  subtitle: string;
+  title: string; // i18n key
+  subtitle: string; // i18n key
   value: string;
 };
 
+export const stats: StatItem[] = [
+  {
+    title: "payment.stats.dtm",
+    subtitle: "payment.stats.testsCount",
+    value: "2 849",
+  },
+  {
+    title: "payment.stats.topic",
+    subtitle: "payment.stats.testsCount",
+    value: "649",
+  },
+  {
+    title: "payment.stats.auto",
+    subtitle: "payment.stats.testsCount",
+    value: "120",
+  },
+  {
+    title: "payment.stats.certificate",
+    subtitle: "payment.stats.testsCount",
+    value: "60",
+  },
+];
+
 export type Plan = {
   id: string;
-  label: string;
+  label: string; // i18n key
   price: number;
   oldPrice?: number;
 };
 
-export const stats: StatItem[] = [
-  { title: "DTM", subtitle: "Testlar soni", value: "2 849 ta" },
-  { title: "Mavzuli test", subtitle: "Testlar soni", value: "649 ta" },
-  { title: "Avto", subtitle: "Testlar soni", value: "120 ta" },
-  { title: "Milliy sertifikat", subtitle: "Testlar soni", value: "60 ta" },
-  // { title: "Xatolar ustida ishlash", subtitle: "Barchasiga", value: "60 ta" },
-  // { title: "Kurslarga chegirma", subtitle: "Barchasiga", value: "60 ta" },
-];
-
 export const plans: Plan[] = [
-  { id: "1m", label: "1 Oylik", price: 35000 },
-  { id: "3m", label: "3 Oylik", price: 79000, oldPrice: 105000 },
-  { id: "6m", label: "6 Oylik", price: 129000, oldPrice: 210000 },
+  {
+    id: "1m",
+    label: "payment.plans.1m",
+    price: 35000,
+  },
+  {
+    id: "3m",
+    label: "payment.plans.3m",
+    price: 79000,
+    oldPrice: 105000,
+  },
+  {
+    id: "6m",
+    label: "payment.plans.6m",
+    price: 129000,
+    oldPrice: 210000,
+  },
 ];
-// export interface TicketCard {
-//   id: number;
-//   category: string; // "Avto test"
-//   title: string; // "Bilet-1"
-//   testsCount: number; // 20
-//   year: string; // "Avtotest 2025"
-//   locked?: boolean;
-//   path: string;
-// }
 
 export const subPages: SubPages[] = [
   {
     icon: "boshSahifa",
     darkIcon: "darkHome",
-    title: "Bosh sahifa",
+    titleKey: "menu.home",
     active: true,
     path: "/home/",
   },
   {
     icon: "talim",
     darkIcon: "darkTalim",
-    title: "Ta'lim",
+    titleKey: "menu.education",
     active: false,
     path: "/home/education",
   },
   {
     icon: "tolov",
     darkIcon: "darkTolov",
-    title: "To’lovlar",
+    titleKey: "menu.payment",
     active: false,
     path: "/home/payment",
   },
   {
     icon: "yangilik",
     darkIcon: "darkYangilik",
-    title: "Yangiliklar",
+    titleKey: "menu.news",
     active: false,
     path: "/home/news",
   },
   {
     icon: "xato",
     darkIcon: "darkXatolar",
-    title: "Xatoliklar",
+    titleKey: "menu.mistakes",
     active: false,
     path: "/home/problems",
   },
@@ -125,49 +144,49 @@ export const subPages: SubPages[] = [
 export const cardsData: CardsData[] = [
   {
     id: 1,
-    title: "Tayyorlov Imtihoni 20",
+    title: "cards.prep20",
     imgSrc: images.mainCard,
     path: "/test/prep20",
   },
   {
     id: 2,
-    title: "Tayyorlov imtihoni 50",
+    title: "cards.prep50",
     imgSrc: images.tayyorlov,
     path: "/test/prep50",
   },
   {
     id: 3,
-    title: "Real imtihon",
+    title: "cards.real",
     imgSrc: images.real,
     path: "/test/real",
   },
   {
     id: 4,
-    title: "Biletlar",
+    title: "cards.tickets",
     imgSrc: images.biletlar,
     path: "/home/biletlar",
   },
   {
     id: 5,
-    title: "Mavzulashtirilgan testlar",
+    title: "cards.topicTests",
     imgSrc: images.mavzulashtirilgan,
     path: "/home/problems",
   },
   {
     id: 6,
-    title: "Chalg’ituvchi testlar",
+    title: "cards.tricky",
     imgSrc: images.chalgituvchi,
     path: "/test/tricky",
   },
   {
     id: 7,
-    title: "Marafon",
+    title: "cards.marathon",
     imgSrc: images.marafon,
     path: "/test/marathon",
   },
   {
     id: 8,
-    title: "Mistakes",
+    title: "cards.mistakes",
     imgSrc: images.marafon,
     path: "/test/mistakes",
   },
@@ -176,19 +195,19 @@ export const cardsData: CardsData[] = [
 export const EducationCard: CardsData[] = [
   {
     id: 1,
-    title: "Yo'l harakati qoidalari",
+    title: "education.rules",
     imgSrc: images.belgilar,
     path: "",
   },
   {
     id: 2,
-    title: "Yo'l belgilari",
+    title: "education.signs",
     imgSrc: images.tayyorlov,
     path: "",
   },
   {
     id: 3,
-    title: "Atamalar",
+    title: "education.terms",
     imgSrc: images.real,
     path: "",
   },

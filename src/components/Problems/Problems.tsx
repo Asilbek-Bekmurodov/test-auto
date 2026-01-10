@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
 
 /* =======================
@@ -20,6 +21,7 @@ type MistakeQuestion = {
 
 const Problems = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [mistakes, setMistakes] = useState<MistakeQuestion[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,10 +72,10 @@ const Problems = () => {
 
   return (
     <div className="bg-white dark:bg-[#0B142D] dark:text-white rounded-2xl shadow-xl p-6 mt-8">
-      <h2 className="text-xl font-bold mb-2">❗ Problems</h2>
+      <h2 className="text-xl font-bold mb-2">❗ {t("problems.title")}</h2>
 
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Sizda <b>{mistakes.length}</b> ta xato ishlangan test mavjud
+        {t("problems.description", { count: mistakes.length })}
       </p>
 
       <div className="flex gap-4">
@@ -82,7 +84,7 @@ const Problems = () => {
           onClick={() => navigate("/home/problems/show")}
           className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition"
         >
-          Xatolarni ko‘rish
+          {t("problems.view")}
         </button>
 
         {/* RETAKE */}
@@ -91,7 +93,7 @@ const Problems = () => {
           disabled={mistakes.length === 0}
           className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white py-3 rounded-xl font-semibold transition"
         >
-          Qayta ishlash
+          {t("problems.retry")}
         </button>
       </div>
     </div>

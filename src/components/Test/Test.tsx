@@ -16,6 +16,7 @@ import { isTestType } from "../../Utilities/Services/testConfig";
 import type { TestType } from "../../Utilities/Services/testConfig";
 
 import useLocalStorage from "use-local-storage";
+import { useTranslation } from "react-i18next";
 
 /* ================= TYPES ================= */
 
@@ -32,9 +33,16 @@ const TOTAL_DURATION = 60 * 20; // 1 soat
 const MAX_WRONG = 3;
 
 /* ================= COMPONENT ================= */
+type Language = "uz" | "ru" | "krill" | "kaa";
 
+const normalizeLanguage = (lng?: string): Language => {
+  if (lng === "ru" || lng === "ru" || lng === "krill" || lng === "kaa")
+    return lng;
+  return "uz";
+};
 const Test = () => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const params = useParams<{
     type?: string;
@@ -80,6 +88,8 @@ const Test = () => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
+  const language = normalizeLanguage(i18n.resolvedLanguage);
+
   // Fetch test data
   useEffect(() => {
     const fetchData = async () => {
@@ -88,7 +98,7 @@ const Test = () => {
           type: testType,
           slug: params.slug,
           number: params.number ? Number(params.number) : undefined,
-          language: "uz",
+          language: language,
         });
 
         setQuestions(data.questions);

@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import Image from "../Image/Image";
 import { images } from "../../assets/images";
 import type React from "react";
+import { useTranslation } from "react-i18next";
 
 interface LinkItemsProps {
   icon: keyof typeof images;
-  title: string;
+  titleKey: string;
   active: boolean;
   handleActive: (index: number) => void;
   index: number;
@@ -18,7 +19,7 @@ interface LinkItemsProps {
 
 const LinkItems: React.FC<LinkItemsProps> = ({
   icon,
-  title,
+  titleKey,
   active,
   handleActive,
   index,
@@ -27,12 +28,14 @@ const LinkItems: React.FC<LinkItemsProps> = ({
   darkIcon,
   toggle,
 }) => {
+  const { t } = useTranslation(); // ✅ SHU YERDA
+
   return (
     <Link
       onClick={() => handleActive(index)}
-      className={`rounded-xl  items-center gap-3 p-2 md:p-4 ${
-        active && "bg-[#FAFCFF]  dark:bg-[#11192D]"
-      }  pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white dark:border-transparent ${
+      className={`rounded-xl items-center gap-3 p-2 md:p-4 ${
+        active && "bg-[#FAFCFF] dark:bg-[#11192D]"
+      } pointer-fine border-[0.5px] border-[#F5EFEB80] dark:text-white dark:border-transparent ${
         toggle ? "flex" : "flex justify-center"
       }`}
       to={path}
@@ -49,11 +52,16 @@ const LinkItems: React.FC<LinkItemsProps> = ({
       }
     >
       <Image name={isDark ? darkIcon : icon} />
+
       {toggle && (
-        <span className="text-[14xp] leading-5 font-semibold"> {title}</span>
+        <span className="text-[14px] leading-5 font-semibold">
+          {t(titleKey)} {/* ✅ AUTO RENDER */}
+        </span>
       )}
+
       {active && toggle && <FaChevronRight />}
     </Link>
   );
 };
+
 export default LinkItems;
