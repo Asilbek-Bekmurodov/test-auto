@@ -5,7 +5,6 @@ import type { AnswerResult, QuestionStatus } from "../Test/Test";
 interface AnswerListProps {
   question: Question | null;
   sessionId: string;
-  setTimeLeft: (seconds: number) => void;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   setFinished: (finished: boolean) => void;
   currentIndex: number;
@@ -21,7 +20,6 @@ interface AnswerListProps {
 const AnswerList = ({
   question,
   sessionId,
-  setTimeLeft,
   setFinished,
   currentIndex,
   setQuestionStatus,
@@ -71,9 +69,7 @@ const AnswerList = ({
       if (
         typeof data.remaining_seconds === "number" &&
         data.remaining_seconds > 0
-      ) {
-        setTimeLeft(data.remaining_seconds);
-      }
+      ) 
 
       // Question status update
       setQuestionStatus((prev) => {

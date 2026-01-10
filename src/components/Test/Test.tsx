@@ -221,7 +221,6 @@ const Test = () => {
             <AnswerList
               question={currentQuestion}
               sessionId={sessionId}
-              setTimeLeft={setTimeLeft}
               setCurrentIndex={setCurrentIndex}
               setFinished={setFinished}
               currentIndex={currentIndex}

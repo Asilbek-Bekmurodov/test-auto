@@ -11,7 +11,7 @@ type Mouse = {
   position: Vector2;
 };
 
-const CONFIG = {
+let CONFIG = {
   DOT_COUNT: 200,
   DOT_RADIUS: 0.4,
   DOT_SPEED: 0.2,
@@ -20,7 +20,7 @@ const CONFIG = {
   BACKGROUND_COLOR: "#ffffff",
   DOT_COLOR: "#16149a",
   LINK_COLOR: "#16149a",
-} as const;
+};
 
 const TAU = Math.PI * 2;
 
@@ -30,6 +30,16 @@ const ParticlesCanvas: React.FC = () => {
   const dotsRef = useRef<Dot[]>([]);
   const mouseRef = useRef<Mouse>({ position: [0, 0] });
   const animationRef = useRef<number | null>(null);
+
+  const getResponsiveConfig = () => {
+    const isMobile = window.innerWidth < 768;
+
+    return {
+      ...CONFIG,
+      DOT_COUNT: isMobile ? 100 : 200,
+      LINK_DISTANCE_CAP: isMobile ? 100 : 200,
+    };
+  };
 
   const randomPosition = (w: number, h: number): Vector2 => [
     Math.random() * w,
@@ -92,6 +102,8 @@ const ParticlesCanvas: React.FC = () => {
     const resize = (): void => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      CONFIG = getResponsiveConfig();
       regenerateDots(canvas.width, canvas.height);
     };
 
