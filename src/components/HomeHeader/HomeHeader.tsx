@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "../Image/Image";
 import Profile from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
@@ -21,7 +21,7 @@ const Header = ({
   decreaseFont,
 }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const profileIconRef = useRef<HTMLDivElement>(null);
   return (
     <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between">
       <Link to={"/home"}>
@@ -63,7 +63,11 @@ const Header = ({
           />
         </div>
 
-        <Profile isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Profile
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          triggerRef={profileIconRef}
+        />
       </div>
     </header>
   );

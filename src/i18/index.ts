@@ -6,14 +6,15 @@ import uz from "./locales/uz.json";
 import ru from "./locales/ru.json";
 import kaa from "./locales/kaa.json";
 import krill from "./locales/krill.json";
+const savedLang = localStorage.getItem("i18nextLng") || "uz";
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: "ru", // DEFAULT TIL
-    fallbackLng: "ru",
-    supportedLngs: ["ru", "uz", 'kaa', 'krill'], // 👈 MUHIM (faqat shu tillar)
+    lng: savedLang, // DEFAULT TIL
+    fallbackLng: "uz",
+    supportedLngs: ["ru", "uz", "kaa", "krill"], // 👈 MUHIM (faqat shu tillar)
     detection: {
       order: ["localStorage"],
       caches: ["localStorage"],

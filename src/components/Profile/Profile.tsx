@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { images } from "../../assets/images";
-
 import { useEffect, useRef, useState } from "react";
 import SelectInput from "../SelectInput/SelectInput";
 
@@ -20,6 +19,7 @@ type UserData = {
 const Profile = ({ isOpen, setIsOpen, triggerRef }: Props) => {
   const profileRef = useRef<HTMLDivElement>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -27,13 +27,8 @@ const Profile = ({ isOpen, setIsOpen, triggerRef }: Props) => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // 🔹 Profile ichida bo‘lsa
       if (profileRef.current?.contains(target)) return;
-
-      // 🔹 Trigger (avatar button) bosilsa
       if (triggerRef.current?.contains(target)) return;
-
-      // 🔹 AntD Select dropdown bosilsa (MUHIM QATOR)
       if (target.closest(".ant-select-dropdown")) return;
 
       setIsOpen(false);
@@ -42,7 +37,7 @@ const Profile = ({ isOpen, setIsOpen, triggerRef }: Props) => {
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [isOpen, triggerRef, setIsOpen]);
-  /* API USER */
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -56,6 +51,12 @@ const Profile = ({ isOpen, setIsOpen, triggerRef }: Props) => {
       .then((data) => setUserData(data.user))
       .catch(console.error);
   }, [isOpen]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsOpen(false);
+    navigate("/", { replace: true });
+  };
 
   if (!isOpen) return null;
 
@@ -85,15 +86,29 @@ const Profile = ({ isOpen, setIsOpen, triggerRef }: Props) => {
         </div>
 
         <hr className="my-3" />
-        <div className="flex justify-between mb-3">
-          {/* <span>Til</span> */}
-          <SelectInput />
-        </div>
+
+        <SelectInput />
+
         <hr className="my-3" />
 
-        <Link to="" className="text-sm text-blue-500 hover:underline">
+        <Link
+          to=""
+          className="block text-sm text-blue-500 hover:underline mb-2"
+        >
           Qo‘llab-quvvatlash
         </Link>
+
+        <button
+          onClick={handleLogout}
+          className="
+            w-full py-2 rounded-xl
+            bg-red-500 hover:bg-red-600
+            text-white text-sm font-medium
+            transition
+          "
+        >
+          Chiqish
+        </button>
       </div>
     </>
   );
