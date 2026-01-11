@@ -38,8 +38,8 @@ function App() {
           {/* PROTECTED ROUTES */}
           <Route element={<ProtectedRoute />}>
             <Route path="/home/*" element={<Home />} />
-            <Route path="/result/:sessionId" element={<ResultPage />} />
           </Route>
+          <Route path="/result/:sessionId" element={<ResultPage />} />
 
           <Route path="/example" element={<Example />} />
           <Route path="*" element={<NotFound />} />

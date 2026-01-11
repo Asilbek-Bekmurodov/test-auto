@@ -34,7 +34,7 @@ const Header = ({
     <>
       <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D]">
         {/* LEFT */}
-        <div className="w-full flex items-center justify-between flex-row-reverse md:flex-row gap-3">
+        <div className=" flex items-center  md:flex-row gap-3">
           <button
             onClick={() => setIsMobileMenuOpen((p) => !p)}
             className="md:hidden text-xl dark:text-white"
