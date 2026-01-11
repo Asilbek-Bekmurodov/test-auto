@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 interface Props {
   item: {
-    number: number;
+    slug: string;
     question_count: number;
     title: string;
   };
 }
 
-export const TicketCardItem: React.FC<Props> = ({ item }) => {
+export const TopicItem: React.FC<Props> = ({ item }) => {
   const [locked] = useState(false);
   return (
     <Link
-      to={`/test/ticket/${item.number}`}
+      to={`/test/topic/${item.slug}`}
       className={`relative rounded-xl border-2 border-dashed p-4 transition
         ${
           locked

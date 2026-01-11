@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TicketCardItem } from "../TicketCard/TicketCard";
 import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
+import { TopicItem } from "../TopicItem/TopicItem";
 
 type TopicCard = {
   slug: string;
@@ -58,7 +58,7 @@ export const TopicGrid = () => {
   return (
     <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {tickets.map((item) => (
-        <TicketCardItem key={item.slug} item={item} />
+        <TopicItem key={item.slug} item={item} />
       ))}
     </div>
   );
