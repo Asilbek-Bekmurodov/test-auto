@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Question } from "../../Utilities/Services/types.ts";
 import Image from "../Image/Image.tsx";
 
@@ -6,23 +7,28 @@ interface QuestionCardProps {
 }
 
 const QuestionCard = ({ question }: QuestionCardProps) => {
+  const [loaded, setLoaded] = useState(false);
+
   if (!question) return null;
 
-  console.log(question.image_url);
-
   return (
-    <div className="w-full h-[400px] col-span-1 rounded-xl  text-white flex justify-center text-lg font-semibold dark:bg-[#050C1D]">
-      {question.image_url === null ? (
-        <Image
-          name="cobalt"
-          className="rounded-lg object-contain lg:object-cover"
-        />
-      ) : (
+    <div className="w-full h-[400px] col-span-1 rounded-xl dark:bg-[#050C1D] flex items-center justify-center relative overflow-hidden">
+      {/* Skeleton */}
+      {!loaded && (
+        <div className="absolute inset-0 animate-pulse bg-gray-700/40 rounded-xl" />
+      )}
+
+      {question.image_url ? (
         <img
           src={question.image_url}
           alt="Savol rasmi"
-          className=" rounded-lg object-contain "
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          className={`rounded-lg object-contain transition-opacity duration-500
+            ${loaded ? "opacity-100" : "opacity-0"}`}
         />
+      ) : (
+        <Image name="cobalt" className="rounded-lg object-contain" />
       )}
     </div>
   );

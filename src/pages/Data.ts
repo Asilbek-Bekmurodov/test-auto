@@ -170,7 +170,7 @@ export const cardsData: CardsData[] = [
     id: 5,
     title: "cards.topicTests",
     imgSrc: images.mavzulashtirilgan,
-    path: "/home/problems",
+    path: "/home/topics",
   },
   {
     id: 6,

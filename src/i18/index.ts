@@ -5,7 +5,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import uz from "./locales/uz.json";
 import ru from "./locales/ru.json";
 import kaa from "./locales/kaa.json";
-import krill from "./locales/krill.json";
+import uz_cyrl from "./locales/krill.json";
 const savedLang = localStorage.getItem("i18nextLng") || "uz";
 
 i18n
@@ -14,7 +14,7 @@ i18n
   .init({
     lng: savedLang, // DEFAULT TIL
     fallbackLng: "uz",
-    supportedLngs: ["ru", "uz", "kaa", "krill"], // 👈 MUHIM (faqat shu tillar)
+    supportedLngs: ["ru", "uz", "kaa", "uz_cyrl"], // 👈 MUHIM (faqat shu tillar)
     detection: {
       order: ["localStorage"],
       caches: ["localStorage"],
@@ -23,7 +23,7 @@ i18n
       uz: { translation: uz },
       ru: { translation: ru },
       kaa: { translation: kaa },
-      krill: { translation: krill },
+      uz_cyrl: { translation: uz_cyrl },
     },
     interpolation: {
       escapeValue: false,

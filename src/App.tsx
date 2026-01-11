@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound/NotFound";
 import { ThemeProvider } from "./context/ThemeProvider";
 import { getToken } from "./Utilities/auth";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
+import DemoStart from "./components/DemoStart/DemoStart";
 
 function App() {
   const token = getToken();
@@ -40,7 +41,7 @@ function App() {
             <Route path="/home/*" element={<Home />} />
           </Route>
           <Route path="/result/:sessionId" element={<ResultPage />} />
-
+          <Route path="/demostart" element={<DemoStart />} />
           <Route path="/example" element={<Example />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

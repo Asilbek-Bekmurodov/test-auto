@@ -7,6 +7,8 @@ const SelectInput: React.FC = () => {
 
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
+    console.log(value, "ozgardi");
+
     localStorage.setItem("i18nextLng", value);
   };
 
@@ -20,7 +22,7 @@ const SelectInput: React.FC = () => {
           { value: "uz", label: "O‘zbek (lotin)" },
           { value: "ru", label: "Русский" },
           { value: "kaa", label: "Qoraqalpoq" },
-          { value: "krill", label: "Krill" },
+          { value: "uz_cyrl", label: "Krill" },
           // krill, qa qo‘shilsa resource bo‘lishi shart
         ]}
       />

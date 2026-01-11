@@ -33,10 +33,15 @@ const TOTAL_DURATION = 60 * 20; // 1 soat
 const MAX_WRONG = 3;
 
 /* ================= COMPONENT ================= */
-type Language = "uz" | "ru" | "krill" | "kaa";
+type Language = "uz" | "ru" | "uz_cyrl" | "kaa";
+
+const getTestDuration = (count: number) => {
+  if (count === 20) return 60 * 25; // 25 minut
+  return count * 60; // default: 1 savol = 1 minut
+};
 
 const normalizeLanguage = (lng?: string): Language => {
-  if (lng === "ru" || lng === "ru" || lng === "krill" || lng === "kaa")
+  if (lng === "ru" || lng === "ru" || lng === "uz_cyrl" || lng === "kaa")
     return lng;
   return "uz";
 };
@@ -108,7 +113,7 @@ const Test = () => {
         );
 
         // ✅ duration bo‘lsa uni ishlat, yo‘q bo‘lsa har bir savolga 60s
-        setTimeLeft(data.duration ?? data.questions.length * 60);
+        setTimeLeft(data.duration ?? getTestDuration(data.questions.length));
       } catch (error) {
         console.error("Test start error:", error);
       } finally {
