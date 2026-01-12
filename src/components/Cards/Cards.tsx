@@ -56,7 +56,7 @@ const Cards: React.FC<CardsDataProps> = ({ data }) => {
             {isDisabled && (
               <div className="absolute inset-0 rounded-[28px] bg-black/60 flex items-center justify-center">
                 <span className="text-white text-sm sm:text-base font-semibold">
-                  🚧 Tez orada qo‘shiladi
+                  {t("soon")}
                 </span>
               </div>
             )}

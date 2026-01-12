@@ -5,6 +5,7 @@ import { images } from "../../assets/images";
 import type React from "react";
 import { useTranslation } from "react-i18next";
 
+
 interface LinkItemsProps {
   icon: keyof typeof images;
   titleKey: string;
@@ -28,6 +29,7 @@ const LinkItems: React.FC<LinkItemsProps> = ({
   darkIcon,
   toggle,
 }) => {
+  
   const { t } = useTranslation(); // ✅ SHU YERDA
 
   return (

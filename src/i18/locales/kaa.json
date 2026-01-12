@@ -62,5 +62,6 @@
     "correctAnswer": "Correct answer",
     "notFound": "Result not found",
     "error": "Error while fetching result"
-  }
+  },
+  "soon": "🚧 Tez арада qosıladı"
 }

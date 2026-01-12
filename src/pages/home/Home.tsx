@@ -1,7 +1,7 @@
 import useLocalStorage from "use-local-storage";
 import { motion, AnimatePresence } from "framer-motion";
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -16,21 +16,39 @@ import Payment from "../../components/Payment/Payment";
 import { TicketGrid } from "../../components/TickedGrid/TickedGrid";
 import { NewsGrid } from "../../components/News/NewsGrid";
 import ShowProblems from "../../components/Problems/ShowProblems";
+import NotFound from "../../components/NotFound/NotFound";
+import { TopicGrid } from "../../components/TopicGrid/TopicGrid";
 
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import NotFound from "../../components/NotFound/NotFound";
-import { TopicGrid } from "../../components/TopicGrid/TopicGrid";
 
 function Home() {
   const { isDark, setIsDark } = useTheme();
-  const [subPagesData, setSubPagesData] = useState<SubPages[]>(subPages);
   const { t } = useTranslation();
-  // sidebar holati (localStorage)
+
+  /* ================= SIDEBAR TOGGLE (LOCALSTORAGE) ================= */
   const [toggle, setToggle] = useLocalStorage<boolean>("sidebarToggle", false);
 
+  /* ================= ACTIVE INDEX (LOCALSTORAGE) ================= */
+  const [activeIndex, setActiveIndex] = useState<number>(() => {
+    const saved = localStorage.getItem("activeSidebarIndex");
+    return saved ? Number(saved) : 0;
+  });
+
+  /* ================= SUB PAGES STATE ================= */
+  const [subPagesData, setSubPagesData] = useState<SubPages[]>(() =>
+    subPages.map((page, index) => ({
+      ...page,
+      active: index === activeIndex,
+    }))
+  );
+
+  /* ================= HANDLE ACTIVE ================= */
   const handleActive = (index: number) => {
+    setActiveIndex(index);
+    localStorage.setItem("activeSidebarIndex", String(index));
+
     setSubPagesData((prev) =>
       prev.map((page, i) => ({
         ...page,
@@ -38,6 +56,17 @@ function Home() {
       }))
     );
   };
+
+  /* ================= SYNC WHEN RELOAD ================= */
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSubPagesData(
+      subPages.map((page, index) => ({
+        ...page,
+        active: index === activeIndex,
+      }))
+    );
+  }, [activeIndex]);
 
   return (
     <div
@@ -52,7 +81,7 @@ function Home() {
         className="hidden md:block relative h-[94vh] border border-[#cbc7c480] mb-5 p-[12px] md:p-[24px] rounded-[28px]
         dark:bg-[#0B142D] dark:border-[silver]"
       >
-        {/* toggle */}
+        {/* Toggle button */}
         <button
           onClick={() => setToggle(!toggle)}
           className="absolute -right-4 top-24 p-2 border border-[#cbc7c480] bg-white rounded-full dark:bg-[#040A17]"
@@ -113,7 +142,7 @@ function Home() {
         )}
       </AnimatePresence>
 
-      {/* ================= MOBILE SIDEBAR (BOTTOM) ================= */}
+      {/* ================= MOBILE SIDEBAR ================= */}
       <AnimatePresence>
         {toggle && (
           <motion.div
@@ -126,7 +155,7 @@ function Home() {
           >
             <div className="p-4">
               <h3 className="text-center mb-4 text-sm font-semibold dark:text-white">
-                Sahifalar
+                {t("menu.pages")}
               </h3>
 
               <ul className="flex flex-col gap-2">
