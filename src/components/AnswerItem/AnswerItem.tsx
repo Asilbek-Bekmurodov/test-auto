@@ -6,7 +6,7 @@ type Props = {
 };
 
 const AnswerItem = ({ text, active, correct, onClick }: Props) => {
-  let bgClass = "bg-white dark:bg-[#0B142D] dark:text-white"; // default
+  let bgClass = "bg-white dark:bg-[#050c1d84] dark:text-white"; // default
   let hoverClass = "hover:bg-blue-300"; // default hover
 
   if (active) {

@@ -17,6 +17,7 @@ import type { TestType } from "../../Utilities/Services/testConfig";
 
 import useLocalStorage from "use-local-storage";
 import { useTranslation } from "react-i18next";
+import { images } from "../../assets/images";
 
 /* ================= TYPES ================= */
 
@@ -209,8 +210,16 @@ const Test = () => {
   const currentQuestion: Question = questions[currentIndex];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start sm:items-center p-3 sm:p-6 dark:bg-[#303a52]">
-      <div className="flex flex-col gap-4">
+    <div
+      style={{
+        backgroundImage: ` url(${images.autodrom})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="min-h-screen  bg-gray-100 flex justify-center items-start sm:items-center p-3 sm:p-6 dark:bg-[#303a52]"
+    >
+      <div className="flex flex-col gap-4 w-[1200px]">
         <Header
           timeLeft={timeLeft}
           isDark={isDark}
@@ -223,8 +232,8 @@ const Test = () => {
             }
           }}
         />
-        <div className="w-full max-w-6xl bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg dark:bg-[#050C1D]">
-          <div className="dark:bg-[#0B142D] dark:border dark:border-gray-300 dark:text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#f7f7f7] mb-4 sm:mb-6">
+        <div className="w-full lg:w-[1200px]  bg-[#ffffff53] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg dark:bg-[#050c1d84]">
+          <div className="dark:bg-[#050c1d84] dark:border dark:border-gray-300 dark:text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#f7f7f7] mb-4 sm:mb-6">
             <h3 className="text-base sm:text-lg md:text-xl font-medium ">
               {currentIndex + 1}. Savol: {currentQuestion.text}
             </h3>

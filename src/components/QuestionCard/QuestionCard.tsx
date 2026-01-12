@@ -12,10 +12,10 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
   if (!question) return null;
 
   return (
-    <div className="w-full h-[400px] col-span-1 rounded-xl dark:bg-[#050C1D] flex items-center justify-center relative overflow-hidden">
+    <div className="w-full lg:h-[400px] col-span-1 rounded-xl flex items-center justify-center relative overflow-hidden">
       {/* Skeleton */}
       {!loaded && (
-        <div className="absolute inset-0 animate-pulse bg-gray-700/40 rounded-xl" />
+        <div className="absolute inset-0 animate-pulse  rounded-xl" />
       )}
 
       {question.image_url ? (

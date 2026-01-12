@@ -38,4 +38,5 @@ export const images = {
   darkTolov: new URL("./tolovDark.svg", import.meta.url).href,
   paymentImg1: new URL("./paymentImg1.png", import.meta.url).href,
   paymentImg2: new URL("./paymentImg2.svg", import.meta.url).href,
+  autodrom: new URL("./Avtodrom.jpg", import.meta.url).href,
 };

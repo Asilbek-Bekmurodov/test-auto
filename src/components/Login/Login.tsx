@@ -73,7 +73,7 @@ function Login() {
       } else {
         localStorage.setItem("token", data.access);
         toast.success(data?.detail || "Muvaffaqqiyatli tizimga kirildi");
-        navigate("/home");
+        navigate("/home/");
       }
     } catch (err) {
       toast.error(

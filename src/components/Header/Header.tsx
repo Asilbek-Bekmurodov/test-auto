@@ -32,7 +32,7 @@ const Header = ({
 
   return (
     <>
-      <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-white dark:bg-[#0B142D]">
+      <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-[#ffffff53] dark:bg-[#050c1d84]">
         {/* LEFT */}
         <div className=" flex items-center  md:flex-row gap-3">
           <button
