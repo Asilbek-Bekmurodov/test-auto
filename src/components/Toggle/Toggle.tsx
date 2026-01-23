@@ -7,7 +7,7 @@ interface ToggleProps {
 
 export const Toggle: React.FC<ToggleProps> = ({ handleChange, isChecked }) => {
   return (
-    <div className="toggle-container">
+    <div className="toggle-container ">
       <input
         type="checkbox"
         id="check"
@@ -16,7 +16,7 @@ export const Toggle: React.FC<ToggleProps> = ({ handleChange, isChecked }) => {
         onChange={handleChange}
         checked={isChecked}
       />
-      <label htmlFor="check" className="relative"></label>
+      <label htmlFor="check" className="relative hidden md:block"></label>
     </div>
   );
 };

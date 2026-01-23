@@ -35,13 +35,6 @@ const Header = ({
       <header className="relative border rounded-[20px] p-4 border-[#cbc7c480] flex items-center justify-between bg-[#ffffff53] dark:bg-[#050c1d84]">
         {/* LEFT */}
         <div className=" flex items-center  md:flex-row gap-3">
-          <button
-            onClick={() => setIsMobileMenuOpen((p) => !p)}
-            className="md:hidden text-xl dark:text-white"
-          >
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-
           <Link to="/home" className="w-28">
             <Image name={isDark ? "logoWhite" : "darkLogo"} />
           </Link>
@@ -51,7 +44,8 @@ const Header = ({
         <div className="flex items-center gap-3">
           {timeLeft !== undefined && (
             <div className="font-semibold dark:text-white">
-              ⏱ {Math.floor(timeLeft / 60)}:
+              ⏱ {String(Math.floor(timeLeft / 3600)).padStart(2, "0")}:
+              {String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0")}:
               {String(timeLeft % 60).padStart(2, "0")}
             </div>
           )}
@@ -59,7 +53,7 @@ const Header = ({
           {onFinish && (
             <button
               onClick={onFinish}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold"
+              className="text-[10px] md:text-sm  bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-semibold"
             >
               Yakunlash
             </button>
@@ -67,9 +61,9 @@ const Header = ({
         </div>
 
         {/* RIGHT (DESKTOP) */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className=" hidden md:flex  flex items-center gap-3">
           {increaseFont && decreaseFont && (
-            <div className="flex gap-2 dark:text-white">
+            <div className=" gap-2 dark:text-white">
               <button
                 onClick={decreaseFont}
                 className="px-2 py-1 border rounded"
@@ -96,6 +90,12 @@ const Header = ({
             />
           </div>
         </div>
+        <button
+          onClick={() => setIsMobileMenuOpen((p) => !p)}
+          className="md:hidden text-xl dark:text-white"
+        >
+          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </header>
 
       {/* MOBILE MENU */}

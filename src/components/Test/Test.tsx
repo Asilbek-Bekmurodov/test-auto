@@ -83,7 +83,7 @@ const Test = () => {
   const [finished, setFinished] = useState<boolean>(false);
   const [questionStatus, setQuestionStatus] = useState<QuestionStatus[]>([]);
   const [answersMap, setAnswersMap] = useState<Record<number, AnswerResult>>(
-    {}
+    {},
   );
   const [fontScale, setFontScale] = useLocalStorage<number>("fontScale", 1);
 
@@ -110,7 +110,7 @@ const Test = () => {
         setQuestions(data.questions);
         setSessionId(data.session.id);
         setQuestionStatus(
-          Array<QuestionStatus>(data.questions.length).fill("unanswered")
+          Array<QuestionStatus>(data.questions.length).fill("unanswered"),
         );
 
         // ✅ duration bo‘lsa uni ishlat, yo‘q bo‘lsa har bir savolga 60s
@@ -155,7 +155,7 @@ const Test = () => {
     if (testType !== "real") return;
 
     const wrongCount = Object.values(answersMap).filter(
-      (a) => !a.isCorrect
+      (a) => !a.isCorrect,
     ).length;
     if (wrongCount >= MAX_WRONG && !finished) {
       alert("❌ 3 ta xato qilindi. Real imtihon yakunlandi!");
