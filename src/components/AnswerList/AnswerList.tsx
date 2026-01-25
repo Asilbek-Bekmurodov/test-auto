@@ -65,7 +65,7 @@ const AnswerList = ({
             question_id: question.id,
             selected_option: key,
           }),
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Answer submit failed");
@@ -133,7 +133,7 @@ const AnswerList = ({
   if (!question || !question.options) return null;
 
   return (
-    <div className="w-full col-span-2 flex flex-col gap-4">
+    <div className="w-full min-h-[400px] col-span-2 flex flex-col gap-4">
       {optionsArray.map(([key, text]) => {
         const isSelected = savedAnswer?.selectedKey === key;
         const correctness = isSelected ? savedAnswer.isCorrect : undefined;
