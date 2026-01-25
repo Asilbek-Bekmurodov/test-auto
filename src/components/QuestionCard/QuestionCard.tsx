@@ -12,7 +12,7 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
   if (!question) return null;
 
   return (
-    <div className="w-full lg:h-[400px] col-span-1 rounded-xl relative overflow-hidden">
+    <div className="w-full aspect-auto col-span-1 rounded-xl relative overflow-hidden">
       {/* Skeleton */}
       {!loaded && (
         <div className="absolute inset-0 animate-pulse  rounded-xl" />
