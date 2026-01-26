@@ -48,7 +48,7 @@ const normalizeLanguage = (lng?: string): Language => {
 };
 const Test = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const params = useParams<{
     type?: string;
@@ -235,7 +235,7 @@ const Test = () => {
         <div className="w-full lg:w-[1200px]  bg-[#ffffff53] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg dark:bg-[#050c1d84]">
           <div className="dark:bg-[#050c1d84] dark:border dark:border-gray-300 dark:text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#f7f7f7] mb-4 sm:mb-6">
             <h3 className="text-base sm:text-lg md:text-xl font-medium ">
-              {currentIndex + 1}. Savol: {currentQuestion.text}
+              {currentIndex + 1}. {t("test.title")}: {currentQuestion.text}
             </h3>
           </div>
 

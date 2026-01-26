@@ -63,5 +63,8 @@
     "notFound": "Natija topilmadi",
     "error": "Natijani olishda xatolik"
   },
-  "soon": "🚧 Tez orada qo‘shiladi"
+  "soon": "🚧 Tez orada qo‘shiladi",
+  "test": {
+    "title": "Test"
+  }
 }

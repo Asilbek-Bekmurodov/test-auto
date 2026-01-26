@@ -63,5 +63,9 @@
     "notFound": "Result not found",
     "error": "Error while fetching result"
   },
-  "soon": "🚧 Tez арада qosıladı"
+  "soon": "🚧 Tez арада qosıladı",
+
+  "test": {
+    "title": "тест"
+  }
 }
