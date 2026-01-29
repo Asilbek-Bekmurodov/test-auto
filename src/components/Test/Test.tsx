@@ -24,6 +24,7 @@ import { images } from "../../assets/images";
 export type AnswerResult = {
   selectedKey: string;
   isCorrect: boolean;
+  correctOption: string; 
 };
 
 export type QuestionStatus = "unanswered" | "correct" | "wrong";

@@ -71,6 +71,7 @@ const AnswerList = ({
       if (!res.ok) throw new Error("Answer submit failed");
 
       const data = await res.json();
+      console.log(data);
 
       // status update
       setQuestionStatus((prev) => {
@@ -85,6 +86,7 @@ const AnswerList = ({
         [currentIndex]: {
           selectedKey: key,
           isCorrect: data.is_correct,
+          correctOption: data.correct_option,
         },
       }));
 
@@ -135,15 +137,27 @@ const AnswerList = ({
   return (
     <div className="w-full min-h-[400px] col-span-2 flex flex-col gap-4">
       {optionsArray.map(([key, text]) => {
-        const isSelected = savedAnswer?.selectedKey === key;
-        const correctness = isSelected ? savedAnswer.isCorrect : undefined;
+        const answer = savedAnswer;
+
+        const isSelected = answer?.selectedKey === key;
+
+        // 👇 agar bu to‘g‘ri javob bo‘lsa
+        const isCorrectOption = answer?.correctOption === key;
+
+        let correctProp: boolean | null = null;
+
+        if (isCorrectOption) {
+          correctProp = true; // yashil
+        } else if (isSelected && answer && !answer.isCorrect) {
+          correctProp = false; // qizil
+        }
 
         return (
           <AnswerItem
             key={key}
             text={`${key}: ${text}`}
             active={isSelected}
-            correct={correctness}
+            correct={correctProp}
             onClick={() => handleClick(key)}
           />
         );

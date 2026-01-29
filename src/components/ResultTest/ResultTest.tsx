@@ -46,7 +46,7 @@ const ResultTest = () => {
 
         const res = await fetch(
           `https://imtihongatayyorlov.pythonanywhere.com/tests/sessions/${sessionId}/result/`,
-          { headers }
+          { headers },
         );
 
         if (!res.ok) throw new Error(t("resultTest.error"));
@@ -81,6 +81,8 @@ const ResultTest = () => {
 
   const { total, correct, wrong, unanswered, percent, spent_time, questions } =
     result;
+
+  console.log(questions);
 
   return (
     <div className="dark:bg-[#050C1D] min-h-screen flex items-center justify-center bg-gray-100 p-6">
