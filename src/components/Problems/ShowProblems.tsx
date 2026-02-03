@@ -7,44 +7,14 @@ import BoxLoader from "../Loaders/BoxLoader/BoxLoader";
    TYPES
 ======================= */
 
-type LangText = {
-  uz?: string;
-  uz_cyrl?: string;
-  kaa?: string;
-  ru?: string;
-};
-
 type MistakeQuestion = {
   id: number;
   mistake_count: number;
   last_mistake_at: string;
-  text: LangText;
-  image: string | null;
-  options: Record<string, LangText>;
+  text: string;
+  image_url: string | null;
+  options: Record<string, string>;
   correct_option: string;
-};
-
-/* =======================
-   HELPERS
-======================= */
-
-const getLangText = (obj: LangText | undefined, lang: string) => {
-  if (!obj) return "";
-
-  switch (lang) {
-    case "uz":
-      return obj.uz || obj.uz_cyrl || obj.ru || obj.kaa || "";
-    case "krill":
-    case "uz_cyrl":
-      return obj.uz_cyrl || obj.uz || obj.ru || obj.kaa || "";
-    case "ru":
-      return obj.ru || obj.uz || obj.uz_cyrl || obj.kaa || "";
-    case "qa":
-    case "kaa":
-      return obj.kaa || obj.uz || obj.uz_cyrl || obj.ru || "";
-    default:
-      return obj.uz || obj.ru || "";
-  }
 };
 
 /* =======================
@@ -53,13 +23,11 @@ const getLangText = (obj: LangText | undefined, lang: string) => {
 
 const ShowProblems = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [questions, setQuestions] = useState<MistakeQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
-
-  const lang = i18n.resolvedLanguage; // 👈 HOZIRGI TIL
 
   /* =======================
      FETCH
@@ -73,16 +41,18 @@ const ShowProblems = () => {
         const res = await fetch(
           "https://imtihongatayyorlov.pythonanywhere.com/tests/mistakes/read/",
           {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         );
 
         if (!res.ok) throw new Error("Mistakes fetch error");
 
         const data = await res.json();
         setQuestions(data.questions || data);
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -124,7 +94,7 @@ const ShowProblems = () => {
           onClick={() => setShow((p) => !p)}
           className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition"
         >
-          {show ? t("common.close") : t("problems.view")}
+          {show ? t("problems.close") : t("problems.view")}
         </button>
 
         <button
@@ -142,27 +112,49 @@ const ShowProblems = () => {
           {questions.map((q, index) => (
             <div
               key={q.id}
-              className="p-4 rounded-lg border border-red-400 bg-red-50 dark:bg-red-800"
+              className="p-4 rounded-lg border border-red-400bg-[#0B142D]"
             >
-              <p className="font-medium mb-1">
-                {index + 1}. {getLangText(q.text, lang as string)}
+              {/* QUESTION */}
+              <p className="font-medium mb-2">
+                {index + 1}. {q.text}
               </p>
 
-              {q.image && (
+              {/* IMAGE */}
+              {q.image_url && (
                 <img
-                  src={q.image}
+                  src={q.image_url}
                   alt={`question-${q.id}`}
-                  className="my-2 max-h-40 object-contain rounded"
+                  className="my-3 max-h-40 object-contain rounded"
                 />
               )}
 
-              <p className="mt-1">
-                {t("problems.correctAnswer")}{" "}
-                <b className="text-green-700 dark:text-green-200">
-                  {q.correct_option} —{" "}
-                  {getLangText(q.options[q.correct_option], lang as string)}
-                </b>
-              </p>
+              {/* OPTIONS */}
+              <div className="mt-3 flex flex-col gap-2">
+                {Object.entries(q.options).map(([key, value]) => {
+                  const isCorrect = key === q.correct_option;
+
+                  return (
+                    <div
+                      key={key}
+                      className={`p-2 rounded-lg border text-sm font-medium
+                        ${
+                          isCorrect
+                            ? "bg-green-100 border-green-500 text-green-800 dark:bg-green-800 dark:text-green-200"
+                            : "bg-white border-gray-300 text-gray-800 dark:bg-[#0B142D] dark:border-gray-600 dark:text-gray-200"
+                        }`}
+                    >
+                      <span className="font-bold mr-2">{key}.</span>
+                      {value}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* INFO */}
+              {/* <p className="mt-3 text-xs text-gray-600 dark:text-gray-300">
+                ❌ Xato soni: <b>{q.mistake_count}</b> · Oxirgi xato:{" "}
+                {new Date(q.last_mistake_at).toLocaleDateString()}
+              </p> */}
             </div>
           ))}
         </div>

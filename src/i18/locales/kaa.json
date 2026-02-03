@@ -26,7 +26,8 @@
     "title": "Qátelikler",
     "description": "Sizde {{count}} dana qáte isleńgen soraw bar",
     "view": "Qáteliklerdi kóriw",
-    "retry": "Qayta islew"
+    "retry": "Qayta islew",
+    "close": "Jabıw"
   },
   "payment": {
     "phone": "+998 Telefon nomeri",

@@ -48,6 +48,8 @@ const Problems = () => {
 
         const data = await res.json();
         setMistakes(data.questions || data);
+        console.log(data);
+        
       } catch (e) {
         console.error(e);
       } finally {

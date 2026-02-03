@@ -26,7 +26,8 @@
     "title": "Xatoliklar",
     "description": "Sizda {{count}} ta xato ishlangan savol mavjud",
     "view": "Xatolarni ko‘rish",
-    "retry": "Qayta ishlash"
+    "retry": "Qayta ishlash",
+    "close": "Yopish"
   },
   "payment": {
     "phone": "+998 Telefon raqam",
