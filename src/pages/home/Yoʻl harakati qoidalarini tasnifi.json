@@ -1,0 +1,146 @@
+[
+  {
+    "atam": "avariya holatini yuzaga keltirish",
+    "izoh": "yoʻl harakatining boshqa ishtirokchilarini harakat yoʻnalishi yoki tezligini keskin oʻzgartirishga, shuningdek, oʻz xavfsizligini yoxud boshqa fuqarolar xavfsizligini taʼminlash uchun oʻzga choralarni koʻrishga majbur qilish"
+  },
+  {
+    "atam": "avtomagistral",
+    "izoh": "5.1. yoʻl belgisi bilan belgilangan, har bir yoʻnalishning qatnov qismlari ajratuvchi mintaqa bilan ajratilgan (u boʻlmaganda, yoʻl toʻsiqlari bilan) hamda boshqa yoʻllar, tramvay va temir yoʻllar, piyoda va velosiped yoʻlkalari bilan bir sathda kesishmaydigan yoʻl"
+  },
+  {
+    "atam": "avtopoyezd",
+    "izoh": "ulagich moslamalari bilan ulangan egarli shatakka oluvchi va yarim tirkama yoki yuk avtomobili hamda tirkama (tirkamalar)dan iborat transport vositasi tarkibi"
+  },
+  {
+    "atam": "ajratuvchi mintaqa",
+    "izoh": "yoʻlning yonma-yon joylashgan qatnov qismlarini ajratuvchi, transport vositalari harakatlanishi yoki toʻxtashi uchun moʻljallanmagan, yoʻl sathidan koʻtarilgan yoki maysazor, ariq, maxsus toʻsiqlar bilan ajratilgan baland qismi"
+  },
+  {
+    "atam": "arava",
+    "izoh": "otga (yoki boshqa hayvonlarga) qoʻshib tortiladigan yoki odam mushak kuchi bilan harakatga keltiriladigan dvigatel bilan jihozlanmagan, yuk tashishga moʻljallangan qurilma"
+  },
+  {
+    "atam": "asosiy yoʻl",
+    "izoh": "tuproqli yoki shagʻalli yoʻlga nisbatan qattiq qoplamali (asfalt, sement-betonli va shunga oʻxshashlar yotqizilgan), kesishayotgan yoki tutashgan yoʻlga nisbatan 2.1, 2.3.1 — 2.3.3 yoki 5.1 yoʻl belgilari bilan belgilangan yoxud yondosh hududdan chiqadigan yoʻlga nisbatan har qanday yoʻl. Ikkinchi darajali yoʻlning bevosita chorrahaga tutash qismining qoplamali boʻlishi uni asosiy yoʻl bilan teng huquqli qilmaydi"
+  },
+  {
+    "atam": "aholi punkti",
+    "izoh": "kirish va chiqish yoʻllari 5.22 — 5.25 yoʻl belgilari bilan belgilangan hudud"
+  },
+  {
+    "atam": "bolalar guruhini tashkiliy tashish",
+    "izoh": "yoʻnalishli transport vositalariga daxli boʻlmagan avtobuslarda sakkiz va undan ortiq bolalarning tashkil etilgan tartibda tashilishi"
+  },
+  {
+    "atam": "velosiped",
+    "izoh": "kamida ikkita gʻildirakka ega boʻlgan va odatda minib olgan shaxs(lar)ning muskul kuchi bilan, xususan, tepkilar yoki dastaklar yordamida harakatlantiriladigan transport vositasi (nogironligi boʻlgan shaxslar kajavasidan tashqari). Velosiped nominal (belgilangan) quvvati 0,25 kilovattdan, tezligi soatiga 25 kilometrdan oshmaydigan dvigatelga ega boʻlishi mumkin"
+  },
+  {
+    "atam": "velosipedchi",
+    "izoh": "velosipedni boshqaradigan shaxs"
+  },
+  {
+    "atam": "velosiped yoʻlkasi",
+    "izoh": "alohida yoʻl yoki konstruktiv jihatdan qatnov qismi va trotuardan ajratilgan yoʻlning tarkibiy qismi boʻlib, tegishli yoʻl belgisi bilan belgilanadi"
+  },
+  {
+    "atam": "velosipedchilar uchun tasma",
+    "izoh": "yoʻlning boshqa qismlaridan yoʻl chizigʻi bilan ajratilgan, tegishli yoʻl belgilari bilan belgilangan yoʻl qismi boʻlib, faqat velosiped va individual harakatlanish vositalari harakatlanishi uchun moʻljallangan"
+  },
+  {
+    "atam": "gibrid avtomobil",
+    "izoh": "ichki yonuv dvigateli va (yoki) tashqi elektr manbai orqali zaryadlanuvchi elektr motor yordamida harakatlanuvchi transport vositasi"
+  },
+  {
+    "atam": "yetarlicha koʻrinmaslik",
+    "izoh": "yomgʻir, qor yogʻishi, tuman tushishi va shunga oʻxshash sharoitlarda, shuningdek, kunning gʻira-shira vaqtida yoʻlning koʻrinish masofasi 300 metrdan kam boʻlishi"
+  },
+  {
+    "atam": "yondosh hudud",
+    "izoh": "bevosita yoʻlga tutashgan va transport vositalari oʻtib ketishi uchun moʻljallanmagan hudud (hovlilar, mahallalar, turar joy dahalari, transport vositasi toʻxtab turish joylari, yonilgʻi quyish shoxobchalari, korxona va shunga oʻxshashlar). Yondosh hududdan chiqayotgan transport vositalari barcha yoʻl harakati ishtirokchilariga yoʻl berishi shart"
+  },
+  {
+    "atam": "imtiyoz",
+    "izoh": "moʻljallangan yoʻnalishda boshqa yoʻl harakati ishtirokchilariga nisbatan oldin harakatlanish huquqi"
+  },
+  {
+    "atam": "individual harakatlanish vositalari",
+    "izoh": "dvigatel (dvigatellar) (elektrosamokat, elektr skeytbordlar, segveylar, unitsikllar, monogʻildirak va boshqa shunga oʻxshash vositalar) yordamida odamning individual harakatlanishi uchun moʻljallangan bir yoki bir nechta gʻildiraklari (roliklari) boʻlgan transport vositasi"
+  },
+  {
+    "atam": "yoʻl",
+    "izoh": "transport vositalari va piyodalar harakatlanishi uchun jihozlangan, moslashtirilgan hamda transport vositalari va piyodalarning harakat xavfsizligini taʼminlashga moʻljallangan, yoʻl obyektlari majmuasini joylashtirish uchun ajratilgan yer uchastkalari hamda yer uchastkalari ustidagi boʻshliq yoʻl. Yoʻllar umumiy foydalanishdagi avtomobil yoʻllariga, koʻchalarga, xoʻjalik yoʻllariga, shahar elektr transporti yoʻllariga, velosiped va piyodalar yoʻlkalariga ajratiladi."
+  },
+  {
+    "atam": "yoʻlovchi",
+    "izoh": "transport vositasidagi (haydovchidan tashqari) shaxs, shuningdek, transport vositasiga kirayotgan (unga chiqib oʻtirayotgan) yoki transport vositasidan chiqayotgan (undan tushayotgan) shaxs"
+  },
+  {
+    "atam": "yoʻl berish (toʻsqinlik qilmaslik)",
+    "izoh": "yoʻl harakati ishtirokchilariga nisbatan imtiyozi boʻlgan boshqa yoʻl harakati ishtirokchisining harakat yoʻnalishi yoki tezligini oʻzgartirishga majbur etishi mumkin boʻlgan hollarda, harakatni davom ettirmasligini yoki boshlamasligini, biror-bir manyovr bajarishi mumkin emasligini bildiruvchi talab"
+  },
+  {
+    "atam": "yoʻl yoqasi",
+    "izoh": "yoʻlning qatnov qismiga u bilan bir sathda bevosita tutashgan, qoplama turi bilan farq qiladigan yoki 1.1 yoʻl chizigʻi yordamida ajratilgan, ushbu Qoidalarga muvofiq harakatlanish, toʻxtash va toʻxtab turish uchun moʻljallangan boʻlagi"
+  },
+  {
+    "atam": "yoʻnalishli transport vositasi",
+    "izoh": "belgilangan yoʻnalishi va bekatlari boʻlgan, yoʻlovchi tashish uchun moʻljallangan umumiy foydalanishdagi transport vositalari (trolleybus, tramvay, avtobus, yoʻnalishli taksi)"
+  },
+  {
+    "atam": "yoʻl-transport hodisasi",
+    "izoh": "transport vositasining yoʻlda harakatlanish jarayonida va uning ishtirokida sodir boʻlgan, fuqarolar vafot etgan yoki ularning sogʻligʻiga zarar yetkazilgan, transport vositalari, inshootlar, yuklar shikastlangan yoxud boshqa moddiy zarar yetkazilgan hodisa"
+  },
+  {
+    "atam": "yoʻl harakati ishtirokchisi",
+    "izoh": "yoʻl harakati jarayonida transport vositasining haydovchisi, yoʻlovchisi yoki piyoda sifatida bevosita ishtirok etayotgan shaxs"
+  },
+  {
+    "atam": "koʻrinishi cheklangan joylar",
+    "izoh": "joylardagi past-balandliklar, burilishlar, oʻsimliklar, daraxtlar, qurilishlar, inshootlar yoki boshqa obyektlar, shu jumladan, transport vositalari tufayli harakatlanish yoʻnalishida yoʻl koʻrinishining cheklanishi"
+  },
+  {
+    "atam": "majburiy toʻxtash",
+    "izoh": "texnik nuqson, tashilayotgan yuk, haydovchi va yoʻlovchining holati, yoʻldagi biror toʻsiq tufayli xavf yuzaga kelganda yoxud ob-havo sharoitiga bogʻliq holda transport vositasi harakatini toʻxtatish"
+  },
+  {
+    "atam": "mexanik transport vositasi",
+    "izoh": "dvigatel bilan harakatga keltiriladigan transport vositasi. Bu atama barcha traktor va oʻzi yurar moslamalarga ham taalluqlidir"
+  },
+  {
+    "atam": "moped",
+    "izoh": "dvigatelining ish hajmi 25 sm3 va undan ortiq, lekin 50 sm3dan oshmaydigan, konstruktiv tezligi soatiga 25 kilometrdan 50 kilometrgacha boʻlgan ikki yoki uch (toʻrt) gʻildirakli transport vositasi"
+  },
+  {
+    "atam": "mototsikl",
+    "izoh": "dvigatelining ish hajmi 50 sm3 va undan oshadigan, konstruktiv tezligi soatiga 50 kilometr va undan oshadigan ikki yoxud uch (toʻrt) gʻildirakli transport vositasi"
+  },
+  {
+    "atam": "piyoda",
+    "izoh": "transport vositasidan tashqarida boʻlgan va yoʻlda biror-bir yumush bilan band boʻlmagan shaxs. Nogironlar aravachasi, velosiped, moped yetaklagan shaxslar ham piyodalarga tenglashtiriladi"
+  },
+  {
+    "atam": "piyodalar oʻtish joyi",
+    "izoh": "qatnov qismidagi maxsus belgilar va chiziqlar bilan belgilangan, piyodalar yoʻlni kesib oʻtishlari uchun ajratilgan joy"
+  },
+  {
+    "atam": "toʻxtab turish",
+    "izoh": "transport vositasiga yoʻlovchilarni chiqarish yoki tushirish, yuk ortish yoki tushirish bilan bogʻliq boʻlmagan hollarda harakatni 10 daqiqadan koʻproq vaqtga atayin toʻxtatish"
+  },
+  {
+    "atam": "toʻxtash",
+    "izoh": "transport vositasi harakatini 10 daqiqagacha boʻlgan muddatga toʻxtatish (harakatsiz holatga keltirish)"
+  },
+  {
+    "atam": "chorraha",
+    "izoh": "yoʻllarning oʻzaro bir sathda kesishadigan, tutashadigan va ayriladigan joyi. Yondosh hududlardan chiqish joylari chorraha hisoblanmaydi"
+  },
+  {
+    "atam": "quvib oʻtish",
+    "izoh": "bir yoki bir nechta transport vositalarini qarama-qarshi yoʻnalishda harakatlanish uchun moʻljallangan tasmaga chiqib, soʻngra ilgari egallagan qatoriga qaytib oʻtish bilan bogʻliq boʻlgan oʻzib ketish"
+  },
+  {
+    "atam": "haydovchi",
+    "izoh": "transport vositasini boshqaruvchi shaxs. Oʻrgatuvchi shaxs va ot aravani boshqarayotganlar ham haydovchiga tenglashtiriladi"
+  }
+]

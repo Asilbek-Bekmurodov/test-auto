@@ -1,0 +1,36 @@
+{
+  "imgs": [
+    {
+      "id": 4,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/RU_road_sign_4.1.1.svg"
+    },
+    {
+      "id": 2,
+      "image": "https://uz.wikipedia.org/wiki/O%CA%BBzbekiston_yo%CA%BBl_belgilari#/media/Fayl:RU_road_sign_2.1.svg"
+    },
+    {
+      "id": 5,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/RU_road_sign_5.15.3_A.svg"
+    },
+    {
+      "id": 1,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/RU_road_sign_1.10.svg"
+    },
+    {
+      "id": 7,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/7.1.1_Uzbekistan_road_sign.svg"
+    },
+    {
+      "id": 6,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/RU_road_sign_7.1.svg"
+    },
+    {
+      "id": 8,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/BY_road_sign_1.18.4.svg"
+    },
+    {
+      "id": 3,
+      "image": "https://uz.wikipedia.org/wiki/Special:FilePath/RU_road_sign_3.1.svg"
+    }
+  ]
+}

@@ -22,6 +22,9 @@ import { TopicGrid } from "../../components/TopicGrid/TopicGrid";
 import { cardsData, EducationCard, subPages, type SubPages } from "../Data";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import EducationRules from "../../components/EducationRules/EducationRules";
+import Signs from "../../components/SignsCategory/SignCategories";
+import Atamalar from "./Atamalar";
 
 function Home() {
   const { isDark, setIsDark } = useTheme();
@@ -41,7 +44,7 @@ function Home() {
     subPages.map((page, index) => ({
       ...page,
       active: index === activeIndex,
-    }))
+    })),
   );
 
   /* ================= HANDLE ACTIVE ================= */
@@ -53,7 +56,7 @@ function Home() {
       prev.map((page, i) => ({
         ...page,
         active: i === index,
-      }))
+      })),
     );
   };
 
@@ -64,7 +67,7 @@ function Home() {
       subPages.map((page, index) => ({
         ...page,
         active: index === activeIndex,
-      }))
+      })),
     );
   }, [activeIndex]);
 
@@ -125,6 +128,13 @@ function Home() {
           <Route path="/biletlar" element={<TicketGrid />} />
           <Route path="/topics" element={<TopicGrid />} />
           <Route path="/news" element={<NewsGrid />} />
+          <Route
+            path="/education/education/rules"
+            element={<EducationRules />}
+          />
+          <Route path="/education/signs/*" element={<Signs />} />
+          <Route path="/education/atamalar" element={<Atamalar />} />
+
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>

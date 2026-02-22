@@ -39,10 +39,11 @@ function App() {
           {/* PROTECTED ROUTES */}
           <Route element={<ProtectedRoute />}>
             <Route path="/home/*" element={<Home />} />
+
+            <Route path="/result/:sessionId" element={<ResultPage />} />
+            <Route path="/demostart" element={<DemoStart />} />
+            <Route path="/example" element={<Example />} />
           </Route>
-          <Route path="/result/:sessionId" element={<ResultPage />} />
-          <Route path="/demostart" element={<DemoStart />} />
-          <Route path="/example" element={<Example />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

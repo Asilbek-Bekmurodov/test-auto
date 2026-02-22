@@ -74,8 +74,6 @@ const Test = () => {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage<boolean>("isdark", preference);
 
-  /* ================= STATE ================= */
-
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(TOTAL_DURATION);

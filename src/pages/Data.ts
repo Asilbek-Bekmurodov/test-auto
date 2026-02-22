@@ -43,8 +43,8 @@ export type HowItWorksItem = {
   description: string;
   icon: keyof typeof images; // icon component
   iconBg: string; // tailwind bg color
-  align?: "left" | "right"; // dizayndagi joylashuv
-  highlighted?: boolean; // active / borderli holat
+  align?: "left" | "right";
+  highlighted?: boolean;
 };
 
 export type StatItem = {
@@ -197,19 +197,19 @@ export const EducationCard: CardsData[] = [
     id: 1,
     title: "education.rules",
     imgSrc: images.belgilar,
-    path: "",
+    path: "education/rules",
   },
   {
     id: 2,
     title: "education.signs",
     imgSrc: images.tayyorlov,
-    path: "",
+    path: "signs",
   },
   {
     id: 3,
     title: "education.terms",
     imgSrc: images.real,
-    path: "",
+    path: "atamalar",
   },
 ];
 
